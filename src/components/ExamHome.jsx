@@ -165,7 +165,7 @@ export default function ExamHome({
                   </div>
                   <div className="flex items-center gap-1.5">
                     <HelpCircle className="w-4 h-4 text-emerald-500" />
-                    <span>문항: <strong className="text-slate-900 dark:text-white">20문항/회</strong></span>
+                    <span>문항: <strong className="text-slate-900 dark:text-white">총 105문항 (연도별 15제)</strong></span>
                   </div>
                   <div className="col-span-2 text-slate-700 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-slate-700 text-xs truncate">
                     기준: <strong className="text-slate-900 dark:text-white">{exam.fail_criteria_description}</strong>

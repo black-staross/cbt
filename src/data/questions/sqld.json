@@ -1,13 +1,8 @@
 [
   {
-    "id": "sqld-001",
-    "year": 2026,
-    "session": "2026년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 1,
     "chapter": "1과목 데이터 모델링의 이해",
-    "question": "다음 중 엔터티(Entity)의 일반적인 특징으로 가장 부적절한 것은?",
-    "code_snippet": null,
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
     "options": [
       "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
       "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
@@ -15,408 +10,2611 @@
       "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
     ],
     "answer": 3,
-    "accepted_answers": null,
-    "explanation": "엔터티는 영속적으로 존재하는 두 개 이상의 인스턴스(Instance)의 집합이어야 합니다. 인스턴스가 1개뿐인 것은 엔터티의 성립 요건에 어긋납니다.",
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-001",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
     "correct_answer": 3,
-    "subject_name": "1과목 데이터 모델링의 이해"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-002",
-    "year": 2025,
-    "session": "2025년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 1,
     "chapter": "1과목 데이터 모델링의 이해",
-    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 충족 조건으로 가장 올바른 것은?",
-    "code_snippet": null,
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
     "options": [
-      "모든 도메인이 원자값(Atomic Value)으로만 구성된다.",
-      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 이룬다.",
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
       "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
       "결정자가 모두 후보키인 상태를 만족한다."
     ],
     "answer": 2,
-    "accepted_answers": null,
-    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-002",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
     "correct_answer": 2,
-    "subject_name": "1과목 데이터 모델링의 이해"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-003",
-    "year": 2024,
-    "session": "2024년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 1,
     "chapter": "1과목 데이터 모델링의 이해",
-    "question": "엔터티의 특징 중 발생시점에 따라 분류할 때, 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티로 가장 적절한 것은?",
-    "code_snippet": null,
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
     "options": [
-      "기본 엔터티 (Fundamental Entity)",
-      "중심 엔터티 (Main Entity)",
-      "행위 엔터티 (Action Entity)",
-      "개념 엔터티 (Conceptual Entity)"
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
     ],
     "answer": 3,
-    "accepted_answers": null,
-    "explanation": "발생시점에 따른 분류: 1. 기본 엔터티(사원, 부서, 고객 등 원래 존재), 2. 중심 엔터티(주문, 매출, 접수 등 업무의 중심), 3. 행위 엔터티(주문목록, 배송이력 등 2개 이상의 부모 엔터티로부터 빈번히 발생)",
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-003",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
     "correct_answer": 3,
-    "subject_name": "1과목 데이터 모델링의 이해"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-004",
-    "year": 2023,
-    "session": "2023년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 1,
     "chapter": "1과목 데이터 모델링의 이해",
-    "question": "식별자(Identifier)의 분류 중, 엔터티 내에서 대표성을 가지며 다른 엔터티와 참조 관계를 형성할 수 있는 식별자는?",
-    "code_snippet": null,
-    "options": [
-      "주식별자 (Primary Identifier)",
-      "보조식별자 (Alternate Identifier)",
-      "내부식별자 (Internal Identifier)",
-      "대리식별자 (Surrogate Identifier)"
-    ],
-    "answer": 1,
-    "accepted_answers": null,
-    "explanation": "주식별자는 엔터티를 대표하는 유일한 식별자로, 참조 무결성을 위해 외래키로 참조될 수 있습니다.",
-    "correct_answer": 1,
-    "subject_name": "1과목 데이터 모델링의 이해"
-  },
-  {
-    "id": "sqld-005",
-    "year": 2022,
-    "session": "2022년 기출복원",
-    "type": "multiple_choice",
     "subject_id": 1,
-    "chapter": "1과목 데이터 모델링의 이해",
-    "question": "성능 향상을 위한 반정규화(De-normalization) 기법 중, 빈번하게 발생하는 조인(Join) 연산의 부하를 줄이기 위해 사용하는 방법이 아닌 것은?",
-    "code_snippet": null,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
     "options": [
-      "중복 컬럼 추가 (추가적인 조인 경로 단축)",
-      "파생 컬럼 추가 (총합, 평균 등 미리 계산된 칼럼 유지)",
-      "테이블의 수평 분할 (Partitioning)",
-      "제3정규형을 적용하여 이행적 함수 종속성 제거"
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
     ],
     "answer": 4,
-    "accepted_answers": null,
-    "explanation": "제3정규형 적용은 정규화(Normalization) 과정이며, 반정규화는 성능을 위해 정규화된 모델을 의도적으로 중복·통합·분할하는 작업입니다.",
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-004",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
     "correct_answer": 4,
-    "subject_name": "1과목 데이터 모델링의 이해"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-005",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
     "id": "sqld-006",
-    "year": 2021,
-    "session": "2021년 기출복원",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 EMP 테이블에서 수행된 SQL의 실행 결과 출력되는 행(Row)의 개수로 올바른 것은?",
-    "code_snippet": "SELECT DEPTNO, AVG(SAL) AS AVG_SAL\nFROM EMP\nGROUP BY DEPTNO\nHAVING AVG(SAL) >= 3000\nORDER BY AVG_SAL DESC;",
-    "options": [
-      "1개 행",
-      "2개 행",
-      "3개 행",
-      "5개 행"
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "부서별 평균 급여 계산 시 DEPTNO 10은 3500, DEPTNO 20은 2500, DEPTNO 30은 5000입니다. HAVING 조건 AVG(SAL) >= 3000에 의해 30번과 10번 부서 2개 행만 반환됩니다.",
     "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
     "id": "sqld-007",
-    "year": 2020,
-    "session": "2020년 기출복원",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 SQL에서 NULL 값에 대한 설명으로 가장 옳지 않은 것은?",
-    "code_snippet": "SELECT COL1 + 10, COUNT(*), COUNT(COL1) FROM TBL;",
-    "options": [
-      "NULL과의 산술 연산 결과는 항상 NULL이다.",
-      "집계 함수(SUM, AVG 등)는 NULL 값을 0으로 자동 변환한 후 연산한다.",
-      "COUNT(*) 함수는 NULL을 포함한 전체 행 수를 반환한다.",
-      "WHERE COL1 = NULL 연산은 참을 반환하지 않으며, IS NULL을 사용해야 한다."
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "집계 함수는 NULL을 0으로 치환하지 않고 연산 대상에서 '완전히 제외(무시)'하고 나머지 행들로만 계산합니다.",
-    "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
     "id": "sqld-008",
     "year": 2026,
-    "session": "2026년 기출복원",
+    "session": "2026년 신유형 출제기준",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 윈도우 함수 중 동일한 순위가 있을 경우 다음 순위를 건너뛰지 않고 연속된 순위를 부여하는 함수는?",
-    "code_snippet": "SELECT ENAME, SAL,\n       [ 함수 ] OVER (ORDER BY SAL DESC) AS RNK\nFROM EMP;",
-    "options": [
-      "RANK",
-      "DENSE_RANK",
-      "ROW_NUMBER",
-      "NTILE"
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "DENSE_RANK는 동순위가 발생해도 다음 순위를 건너뛰지 않고 1, 2, 2, 3 처럼 연속된 순위를 부여합니다. (RANK는 1, 2, 2, 4)",
     "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-009",
-    "year": 2025,
-    "session": "2025년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
     "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 SQL 문장에서 사용된 집합 연산자 중 두 테이블의 결과 집합에서 공통으로 존재하는 교집합(Intersection)만을 반환하는 연산자는?",
-    "code_snippet": null,
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-009",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-010",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-011",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-012",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
     "options": [
       "UNION",
       "UNION ALL",
       "INTERSECT",
-      "MINUS (또는 EXCEPT)"
-    ],
-    "answer": 3,
-    "accepted_answers": null,
-    "explanation": "INTERSECT는 두 쿼리의 공통된 결과(교집합)를 중복 제거 후 반환합니다. UNION은 합집합, MINUS는 차집합입니다.",
-    "correct_answer": 3,
-    "subject_name": "2과목 SQL 기본 및 활용"
-  },
-  {
-    "id": "sqld-010",
-    "year": 2024,
-    "session": "2024년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 다중 행 서브쿼리(Multi-Row Subquery) 연산자로 사용할 수 없는 것은?",
-    "code_snippet": null,
-    "options": [
-      "IN",
-      "ANY (또는 SOME)",
-      "ALL",
-      "= (단일 등호)"
-    ],
-    "answer": 4,
-    "accepted_answers": null,
-    "explanation": "단일 등호(=)는 서브쿼리의 반환 결과가 반드시 1행이어야 하는 단일 행 비교 연산자입니다. 반환 행이 2개 이상이면 에러가 발생합니다.",
-    "correct_answer": 4,
-    "subject_name": "2과목 SQL 기본 및 활용"
-  },
-  {
-    "id": "sqld-011",
-    "year": 2023,
-    "session": "2023년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 그룹 함수(Group Function) 중 소계와 총계를 계층적으로 생성해주는 함수는?",
-    "code_snippet": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM EMP\nGROUP BY ROLLUP(DEPTNO, JOB);",
-    "options": [
-      "ROLLUP",
-      "CUBE",
-      "GROUPING SETS",
-      "PIVOT"
-    ],
-    "answer": 1,
-    "accepted_answers": null,
-    "explanation": "ROLLUP은 인수로 전달된 컬럼의 오른쪽에서 왼쪽 방향으로 계층적인 소계와 총계를 산출합니다. CUBE는 가능한 모든 조합의 다차원 집계를 산출합니다.",
-    "correct_answer": 1,
-    "subject_name": "2과목 SQL 기본 및 활용"
-  },
-  {
-    "id": "sqld-012",
-    "year": 2022,
-    "session": "2022년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 SQL 중 조인(Join) 수행 시 조인 조건을 만족하지 않는 왼쪽 테이블의 모든 행도 함께 결과에 포함하는 조인 구문은?",
-    "code_snippet": null,
-    "options": [
-      "INNER JOIN",
-      "LEFT OUTER JOIN",
-      "RIGHT OUTER JOIN",
-      "CROSS JOIN"
+      "MINUS"
     ],
     "answer": 2,
-    "accepted_answers": null,
-    "explanation": "LEFT OUTER JOIN(왼쪽 외부 조인)은 왼쪽 테이블의 모든 행을 출력하며, 오른쪽 테이블과 일치하는 행이 없으면 오른쪽 컬럼 값은 NULL로 채워집니다.",
-    "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
-  },
-  {
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
     "id": "sqld-013",
-    "year": 2021,
-    "session": "2021년 기출복원",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 트랜잭션의 제어어(TCL)에 해당하지 않는 명령어는?",
-    "code_snippet": null,
-    "options": [
-      "COMMIT",
-      "ROLLBACK",
-      "SAVEPOINT",
-      "GRANT"
-    ],
-    "answer": 4,
-    "accepted_answers": null,
-    "explanation": "GRANT와 REVOKE는 권한을 부여하고 회수하는 DCL(데이터 제어어)입니다. COMMIT, ROLLBACK, SAVEPOINT는 TCL입니다.",
-    "correct_answer": 4,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-014",
-    "year": 2020,
-    "session": "2020년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
     "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 오라클(Oracle)에서 NULL 값을 다른 기본값으로 치환하기 위해 사용하는 내장 함수는?",
-    "code_snippet": null,
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
     "options": [
-      "NVL",
-      "ISNULL",
-      "IFNULL",
-      "NULLIF"
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
     ],
     "answer": 1,
-    "accepted_answers": null,
-    "explanation": "오라클에서는 NVL(컬럼, 대체값) 또는 표준 COALESCE를 사용합니다. ISNULL은 SQL Server, IFNULL은 MySQL 함수입니다.",
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-014",
+    "year": 2026,
+    "session": "2026년 신유형 출제기준",
+    "type": "multiple_choice",
     "correct_answer": 1,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
   },
   {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
     "id": "sqld-015",
     "year": 2026,
-    "session": "2026년 기출복원",
+    "session": "2026년 신유형 출제기준",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 SQL 문장 실행 시 최종적으로 적용되는 정렬 순서로 올바른 것은?",
-    "code_snippet": "SELECT ENAME, DEPTNO, SAL\nFROM EMP\nORDER BY DEPTNO ASC, SAL DESC;",
-    "options": [
-      "부서번호 내림차순 정렬 후 급여 오름차순",
-      "부서번호 오름차순 정렬 후 급여 내림차순",
-      "급여 내림차순 정렬 후 부서번호 오름차순",
-      "부서번호와 급여 모두 오름차순"
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "ORDER BY 절에 나열된 순서대로 정렬됩니다. 먼저 DEPTNO 기준 오름차순(ASC)으로 정렬되고, DEPTNO가 동일한 행들 내에서 SAL 기준 내림차순(DESC)으로 정렬됩니다.",
-    "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
   },
   {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
     "id": "sqld-016",
     "year": 2025,
-    "session": "2025년 기출복원",
+    "session": "2025년 최신 기출복원",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "윈도우 함수 중 현재 행을 기준으로 이전 N번째 행의 값을 가져오는 함수는?",
-    "code_snippet": "SELECT ENAME, SAL,\n       LAG(SAL, 1) OVER (ORDER BY HIREDATE) AS PREV_SAL\nFROM EMP;",
-    "options": [
-      "LEAD",
-      "LAG",
-      "FIRST_VALUE",
-      "RATIO_TO_REPORT"
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "LAG는 이전 행의 값을 참조하며, LEAD는 이후(다음) 행의 값을 참조합니다.",
-    "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
     "id": "sqld-017",
-    "year": 2024,
-    "session": "2024년 기출복원",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 DDL(데이터 정의어) 명령어 중 테이블의 모든 행을 즉시 삭제하고 용량을 초기화하며, ROLLBACK이 불가능한 명령어는?",
-    "code_snippet": null,
-    "options": [
-      "DELETE",
-      "TRUNCATE",
-      "DROP",
-      "ALTER"
-    ],
-    "answer": 2,
-    "accepted_answers": null,
-    "explanation": "TRUNCATE TABLE은 테이블 구조는 남겨두고 데이터 전체를 빠르게 삭제하며 로그를 최소화하여 ROLLBACK이 불가합니다. DELETE는 DML로 롤백이 가능합니다.",
     "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
     "id": "sqld-018",
-    "year": 2023,
-    "session": "2023년 기출복원",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
     "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 계층형 질의(Hierarchical Query) 구문 중 루트 노드(최상위 계층)를 지정하기 위해 사용하는 키워드는?",
-    "code_snippet": "SELECT LEVEL, ENAME, MGR\nFROM EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;",
-    "options": [
-      "START WITH",
-      "CONNECT BY",
-      "PRIOR",
-      "ORDER SIBLINGS BY"
-    ],
-    "answer": 1,
-    "accepted_answers": null,
-    "explanation": "계층형 질의에서 전개의 시작점(루트 노드)을 지정하는 키워드는 START WITH 절입니다.",
-    "correct_answer": 1,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-019",
-    "year": 2022,
-    "session": "2022년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "서브쿼리가 반환하는 결과가 존재하는지 여부만을 확인하여 불필요한 전체 검색을 방지하는 연산자는?",
-    "code_snippet": null,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
     "options": [
-      "IN",
-      "EXISTS",
-      "BETWEEN",
-      "LIKE"
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-019",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-020",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
     ],
     "answer": 2,
-    "accepted_answers": null,
-    "explanation": "EXISTS 연산자는 조건에 일치하는 행이 최소 1건이라도 발견되는 즉시 TRUE를 반환하고 검색을 중단하므로 대용량 데이터에서 성능이 매우 우수합니다.",
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-021",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
     "correct_answer": 2,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
   },
   {
-    "id": "sqld-020",
-    "year": 2021,
-    "session": "2021년 기출복원",
-    "type": "multiple_choice",
-    "subject_id": 2,
-    "chapter": "2과목 SQL 기본 및 활용",
-    "question": "다음 중 문자열 함수 중 문자열의 길이를 바이트(Byte) 단위가 아닌 글자 수 단위로 반환하는 표준 함수는?",
-    "code_snippet": null,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
     "options": [
-      "LENGTH",
-      "LENGTHB",
-      "SUBSTRB",
-      "INSTRB"
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-022",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-023",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-024",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-025",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-026",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-027",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-028",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
     ],
     "answer": 1,
-    "accepted_answers": null,
-    "explanation": "LENGTH는 문자열의 순수 글자 수를 반환하며, LENGTHB는 저장 공간의 바이트(Byte) 길이를 반환합니다.",
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-029",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
     "correct_answer": 1,
-    "subject_name": "2과목 SQL 기본 및 활용"
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-030",
+    "year": 2025,
+    "session": "2025년 최신 기출복원",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-031",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-032",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-033",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
+    "options": [
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-034",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-035",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-036",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-037",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-038",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-039",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-040",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-041",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-042",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-043",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
+    ],
+    "answer": 1,
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-044",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-045",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-046",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-047",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-048",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
+    "options": [
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-049",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-050",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-051",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-052",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-053",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-054",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-055",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-056",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-057",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-058",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
+    ],
+    "answer": 1,
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-059",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-060",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-061",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-062",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-063",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
+    "options": [
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-064",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-065",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-066",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-067",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-068",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-069",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-070",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-071",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-072",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-073",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
+    ],
+    "answer": 1,
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-074",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-075",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-076",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-077",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-078",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
+    "options": [
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-079",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-080",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-081",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-082",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-083",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-084",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-085",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-086",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-087",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-088",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
+    ],
+    "answer": 1,
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-089",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-090",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 엔터티(Entity)의 특징으로 가장 부적절한 것은?",
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "explanation": "엔터티는 2개 이상의 인스턴스를 가져야 하며, 1개의 인스턴스만 갖는 것은 엔터티로 성립되지 않습니다.",
+    "trap_avoidance": "인스턴스 수(2개 이상)와 속성 수(2개 이상)의 조건을 혼동하지 않도록 주의하세요.",
+    "id": "sqld-091",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 정의로 가장 올바른 것은?",
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 만족한다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행적 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "trap_avoidance": "2NF는 '부분 함수 종속 제거', 3NF는 '이행적 함수 종속 제거'입니다.",
+    "id": "sqld-092",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "엔터티의 발생 시점에 따른 분류 중 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티는?",
+    "options": [
+      "기본 엔터티(Fundamental Entity)",
+      "중심 엔터티(Main Entity)",
+      "행위 엔터티(Action Entity)",
+      "개념 엔터티(Conceptual Entity)"
+    ],
+    "answer": 3,
+    "explanation": "행위 엔터티(주문, 매출, 입고 등)는 두 개 이상의 부모 엔터티로부터 발생하며 내용이 빈번히 추가/변경됩니다.",
+    "trap_avoidance": "중심 엔터티는 기본 엔터티로부터 발생해 업무의 중심축 역할을 하며(접수, 계약), 행위 엔터티는 그로 인해 계속 발생하는 실적입니다.",
+    "id": "sqld-093",
+    "year": 2020,
+    "session": "2020년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "데이터 모델링의 3대 요소에 해당하지 않는 것은?",
+    "options": [
+      "사물(Things - 어떤 것)",
+      "속성(Attributes - 사물의 성격)",
+      "관계(Relationships - 사물 간의 연관)",
+      "도메인(Domain - 데이터 물리 저장소)"
+    ],
+    "answer": 4,
+    "explanation": "데이터 모델링 3대 요소는 사물(Things/Entity), 속성(Attributes), 관계(Relationships)입니다.",
+    "trap_avoidance": "도메인은 속성이 가질 수 있는 값의 범위입니다.",
+    "id": "sqld-094",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별자의 분류 중 엔터티 내에서 대표성을 가지며 참조 관계의 연결고리가 되는 식별자는?",
+    "options": [
+      "주식별자(Primary Identifier)",
+      "보조식별자(Alternate Identifier)",
+      "외부식별자(Foreign Identifier)",
+      "대리식별자(Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "explanation": "주식별자는 유일성, 최소성, 불변성, 존재성을 만족하는 대표 식별자입니다.",
+    "trap_avoidance": "보조식별자는 유일성을 만족하지만 대표성을 띄지 못합니다.",
+    "id": "sqld-095",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "반정규화(De-normalization)를 수행하는 주된 목적으로 가장 적절한 것은?",
+    "options": [
+      "데이터 무결성을 엄격하게 유지하기 위해",
+      "조회 성능을 향상시키고 디스크 I/O를 줄이기 위해",
+      "데이터 중복 저장을 완전히 제거하기 위해",
+      "테이블의 수를 최대한 증가시키기 위해"
+    ],
+    "answer": 2,
+    "explanation": "반정규화는 조회(SELECT) 성능 향상을 위해 의도적으로 중복, 통합, 분리를 수행하는 기법입니다.",
+    "trap_avoidance": "반정규화는 데이터 무결성이 저하될 위험을 감수하고 성능을 얻는 것입니다.",
+    "id": "sqld-096",
+    "year": 2020,
+    "session": "2020년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "1과목 데이터 모델링의 이해",
+    "subject_id": 1,
+    "question": "식별 관계(Identifying Relationship)와 비식별 관계(Non-Identifying Relationship)에 대한 설명으로 올바른 것은?",
+    "options": [
+      "식별 관계는 부모의 주식별자가 자식의 일반 속성으로 상속된다.",
+      "비식별 관계는 ERD에서 실선으로 표기된다.",
+      "식별 관계는 부모의 주식별자가 자식의 주식별자의 일부분으로 상속된다.",
+      "비식별 관계는 자식 엔터티의 단독 존재가 불가능하다."
+    ],
+    "answer": 3,
+    "explanation": "식별 관계는 부모의 주식별자가 자식의 주식별자에 포함되며 실선으로 표기됩니다. 비식별 관계는 점선으로 표기되며 일반 속성으로 상속됩니다.",
+    "trap_avoidance": "식별 관계 = 실선 = PK 상속 / 비식별 관계 = 점선 = FK 일반속성 상속",
+    "id": "sqld-097",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL 실행 결과로 올바른 출력값은?",
+    "code_snippet": "SELECT NULLIF(100, 100), COALESCE(NULL, NULL, 50, 100) FROM DUAL;",
+    "options": [
+      "100, 50",
+      "NULL, 50",
+      "0, 100",
+      "NULL, 100"
+    ],
+    "answer": 2,
+    "explanation": "NULLIF(A, B)는 두 값이 같으면 NULL을 반환합니다. COALESCE는 나열된 인수 중 첫 번째로 NULL이 아닌 값을 반환하므로 50이 반환됩니다.",
+    "trap_avoidance": "NULLIF(100, 100)은 0이 아니라 NULL입니다.",
+    "id": "sqld-098",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "아래 테이블에서 쿼리를 실행했을 때 반환되는 총 건수는?",
+    "code_snippet": "/* EMPLOYEES: 사원번호, 급여, 커미션 */\nSELECT COUNT(*) FROM EMPLOYEES WHERE COMM IS NULL OR SAL >= 3000;",
+    "table_data": {
+      "title": "EMPLOYEES",
+      "headers": [
+        "EMPNO",
+        "SAL",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "101",
+          "2500",
+          "300"
+        ],
+        [
+          "102",
+          "3200",
+          "NULL"
+        ],
+        [
+          "103",
+          "1800",
+          "NULL"
+        ],
+        [
+          "104",
+          "4000",
+          "500"
+        ]
+      ]
+    },
+    "options": [
+      "1건",
+      "2건",
+      "3건",
+      "4건"
+    ],
+    "answer": 3,
+    "explanation": "COMM IS NULL인 사원: 102, 103 (2건). SAL >= 3000인 사원: 102, 104 (2건). OR 연산이므로 102, 103, 104 총 3건이 해당됩니다.",
+    "trap_avoidance": "102번 사원은 두 조건 모두 만족하므로 중복 카운트되지 않고 1건으로 처리됩니다.",
+    "id": "sqld-099",
+    "year": 2020,
+    "session": "2020년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "윈도우 함수 중 동일한 값에 대해 같은 순위를 부여하되, 다음 순위는 건너뛰지 않고 연속된 숫자를 부여하는 함수는?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "NTILE()"
+    ],
+    "answer": 2,
+    "explanation": "예를 들어 공동 2위가 2명일 때, RANK는 1, 2, 2, 4 순서지만 DENSE_RANK는 1, 2, 2, 3 순서로 순위를 건너뛰지 않습니다.",
+    "trap_avoidance": "ROW_NUMBER()는 동일 값이어도 고유한 순위(1, 2, 3, 4)를 부여합니다.",
+    "id": "sqld-100",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집계 함수와 쿼리에 대한 결과로 올바른 것은?",
+    "code_snippet": "SELECT COUNT(COMM), AVG(NVL(COMM, 0)) FROM EMP;",
+    "table_data": {
+      "title": "EMP",
+      "headers": [
+        "EMPNO",
+        "COMM"
+      ],
+      "rows": [
+        [
+          "1",
+          "100"
+        ],
+        [
+          "2",
+          "200"
+        ],
+        [
+          "3",
+          "NULL"
+        ],
+        [
+          "4",
+          "NULL"
+        ]
+      ]
+    },
+    "options": [
+      "COUNT: 4, AVG: 150",
+      "COUNT: 2, AVG: 75",
+      "COUNT: 2, AVG: 150",
+      "COUNT: 4, AVG: 75"
+    ],
+    "answer": 2,
+    "explanation": "COUNT(컬럼명)은 NULL을 제외하므로 2건입니다. AVG(NVL(COMM, 0))은 4개 행 전체(100+200+0+0)/4 = 75가 됩니다.",
+    "trap_avoidance": "AVG(COMM)은 NULL을 제외해 (100+200)/2=150이지만, NVL(COMM, 0)을 씌우면 분모가 전체 행(4)이 됩니다!",
+    "id": "sqld-101",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 계층형 쿼리(Hierarchical Query) 구문에 대한 설명으로 가장 부적절한 것은?",
+    "code_snippet": "SELECT LEVEL, EMP_NAME, MGR_ID\nFROM EMP\nSTART WITH MGR_ID IS NULL\nCONNECT BY PRIOR EMP_ID = MGR_ID;",
+    "options": [
+      "START WITH절은 계층 전개의 시작점(루트 노드)을 지정한다.",
+      "CONNECT BY PRIOR 자식 = 부모 형태이므로 역방향(Bottom-Up) 전개이다.",
+      "LEVEL은 루트 노드일 때 1이며 하위로 갈수록 1씩 증가한다.",
+      "ORDER SIBLINGS BY를 사용하면 동일 레벨(형제 노드) 사이에서만 정렬할 수 있다."
+    ],
+    "answer": 2,
+    "explanation": "CONNECT BY PRIOR EMP_ID = MGR_ID는 직전(PRIOR) 사원이 현재 사원의 관리자(MGR_ID)라는 뜻이므로 부모 -> 자식으로 내려가는 순방향(Top-Down) 전개입니다.",
+    "trap_avoidance": "PRIOR 키워드가 붙은 쪽이 부모 노드인지 자식 노드인지 정확히 확인하세요.",
+    "id": "sqld-102",
+    "year": 2020,
+    "session": "2020년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 집합 연산자 중 중복된 행을 제거하지 않고 모든 결과를 단순히 합쳐서 반환하는 것은?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "answer": 2,
+    "explanation": "UNION ALL은 정렬과 중복 제거 작업을 거치지 않고 단순 결합하므로 가장 실행 속도가 빠릅니다.",
+    "trap_avoidance": "UNION은 정렬(Sort)을 수행하여 중복을 제거합니다.",
+    "id": "sqld-103",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 중 트랜잭션의 특성 중 '원자성(Atomicity)'의 의미로 가장 올바른 것은?",
+    "options": [
+      "트랜잭션 내의 모든 연산은 반드시 모두 실행되거나(All) 모두 취소되어야(Nothing) 한다.",
+      "트랜잭션 실행 전후에 데이터베이스의 일관성이 항상 유지되어야 한다.",
+      "동시에 실행되는 여러 트랜잭션이 서로 영향을 미치지 않아야 한다.",
+      "완료된 트랜잭션의 결과는 시스템 장애가 발생해도 영구 보존되어야 한다."
+    ],
+    "answer": 1,
+    "explanation": "All or Nothing 원칙이 원자성(Atomicity)입니다. 2번은 일관성(Consistency), 3번은 고립성(Isolation), 4번은 지속성(Durability)입니다.",
+    "trap_avoidance": "ACID 4대 특징의 영문 명칭과 정의를 연결해 기억하세요.",
+    "id": "sqld-104",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
+  },
+  {
+    "chapter": "2과목 SQL 기본 및 활용",
+    "subject_id": 2,
+    "question": "다음 SQL문 중 DDL(데이터 정의어)에 해당하는 명령어들로만 묶인 것은?",
+    "options": [
+      "CREATE, ALTER, DROP, TRUNCATE",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE, DENY",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "answer": 1,
+    "explanation": "1번은 DDL, 2번은 DML, 3번은 DCL, 4번은 TCL입니다.",
+    "trap_avoidance": "TRUNCATE는 DML이 아니라 테이블 구조만 남기고 데이터를 초기화하는 DDL입니다. (자동 COMMIT)",
+    "id": "sqld-105",
+    "year": 2020,
+    "session": "2020년 제3회 정기기출",
+    "type": "multiple_choice",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용",
+    "accepted_answers": null
   }
 ]
