@@ -1,0 +1,422 @@
+[
+  {
+    "id": "com-study-001",
+    "year": 2026,
+    "session": "2026년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "중앙처리장치(CPU)와 주기억장치(RAM) 사이의 속도 차이를 줄여 컴퓨터의 처리 효율을 높이기 위해 사용되는 고속 메모리는?",
+    "code_snippet": null,
+    "options": [
+      "캐시 메모리 (Cache Memory)",
+      "가상 메모리 (Virtual Memory)",
+      "플래시 메모리 (Flash Memory)",
+      "연관 메모리 (Associative Memory)"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "CPU와 RAM 간의 병목현상을 완화하는 초고속 버퍼 메모리는 캐시 메모리(SRAM)입니다. 가상 메모리는 보조기억장치를 주기억장치처럼 활용하는 메모리 관리 기법입니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-002",
+    "year": 2025,
+    "session": "2025년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "다음 Excel 수식 중 =INDEX(A1:C5, 3, 2)를 실행했을 때 참조되는 셀의 위치로 가장 올바른 것은?",
+    "code_snippet": null,
+    "options": [
+      "B3 셀",
+      "C2 셀",
+      "B2 셀",
+      "A3 셀"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "INDEX(범위, 행, 열) 함수는 지정된 범위에서 행 번호와 열 번호가 교차하는 위치의 값을 반환합니다. A1:C5 범위에서 3행과 2열(B열)이 교차하므로 B3 셀입니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-003",
+    "year": 2024,
+    "session": "2024년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "OSI 7계층 참조 모델에서 종단 간(End-to-End)의 신뢰성 있고 투명한 데이터 전송을 제공하며 오류 제어, 흐름 제어를 담당하는 계층은?",
+    "code_snippet": null,
+    "options": [
+      "물리 계층 (Physical Layer)",
+      "데이터 링크 계층 (Data Link Layer)",
+      "전송 계층 (Transport Layer)",
+      "네트워크 계층 (Network Layer)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "종단 간 연결을 제어하고 흐름 제어, 오류 복구, 포트 번호 다중화를 지원하는 TCP/UDP 프로토콜 계층은 '전송 계층(Transport Layer)'입니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-004",
+    "year": 2023,
+    "session": "2023년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "관계형 데이터베이스에서 두 테이블 간의 관계를 1:N으로 설정하려고 할 때, 'N' 쪽에 위치하는 외래키가 갖추어야 할 특징으로 가장 올바른 것은?",
+    "code_snippet": null,
+    "options": [
+      "반드시 유일성(Unique)을 만족해야 한다.",
+      "기본키(Primary Key)와 반드시 같은 필드명이어야 한다.",
+      "기본키 테이블의 데이터 형식과 호환되어야 한다.",
+      "인덱스를 설정할 수 없다."
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "관계를 맺는 두 테이블의 기본키와 외래키는 필드명이 서로 달라도 무방하지만, 데이터 형식(Data Type)과 필드 크기는 반드시 호환되어야 합니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-005",
+    "year": 2022,
+    "session": "2022년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "다음 중 엑셀에서 절대 참조(Absolute Reference)를 지정하기 위해 사용하는 기호는?",
+    "code_snippet": null,
+    "options": [
+      "%",
+      "$",
+      "#",
+      "&"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "수식을 복사할 때 특정 셀의 행이나 열 위치가 변하지 않도록 고정하는 절대 참조 기호는 달러($) 기호입니다. (예: $A$1)",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-006",
+    "year": 2021,
+    "session": "2021년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "다음 중 그래픽 데이터의 표현 방식 중 비트맵(Bitmap, 래스터) 방식의 특징으로 가장 옳은 것은?",
+    "code_snippet": null,
+    "options": [
+      "점과 선의 수학적 연산 공식으로 이미지를 표현한다.",
+      "이미지를 아무리 확대해도 테두리가 깨지지 않고 매끄럽다.",
+      "사진과 같이 풍부하고 정밀한 색상을 사실적으로 표현하기에 적합하다.",
+      "AI, WMF, SVG 포맷이 대표적인 비트맵 포맷이다."
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "비트맵은 픽셀(화소)의 집합으로 고해상도 사실적 사진 표현에 적합하지만, 확대 시 계단 현상(깨짐)이 발생합니다. 1, 2, 4번은 벡터(Vector)의 특징입니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-007",
+    "year": 2020,
+    "session": "2020년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "컴퓨터 바이러스 및 악성코드 중 사용자의 컴퓨터에 잠입하여 키보드 입력값을 몰래 가로채 아이디나 비밀번호를 탈취하는 프로그램은?",
+    "code_snippet": null,
+    "options": [
+      "트로이 목마 (Trojan)",
+      "웜 (Worm)",
+      "키로거 (Keylogger)",
+      "랜섬웨어 (Ransomware)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "키로거(Keylogger)는 키보드로 입력되는 모든 타건 정보를 몰래 가로채 기록하고 전송하는 악성 스파이웨어 프로그램입니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-008",
+    "year": 2026,
+    "session": "2026년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel에서 수식 오류 메시지 중 유효하지 않은 셀 참조가 포함되어 있거나, 참조하던 행/열이 삭제되었을 때 나타나는 오류는?",
+    "code_snippet": null,
+    "options": [
+      "#DIV/0!",
+      "#VALUE!",
+      "#REF!",
+      "#NAME?"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "#REF! (Reference Error)는 참조하던 셀이나 영역이 삭제되거나 이동되어 참조 대상을 찾을 수 없을 때 발생하는 에러입니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-009",
+    "year": 2025,
+    "session": "2025년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel에서 =VLOOKUP(찾을값, 참조범위, 열번호, [찾을방법]) 함수 사용 시 정확하게 일치하는 값을 찾기 위해 '찾을방법'에 지정해야 하는 값은?",
+    "code_snippet": null,
+    "options": [
+      "TRUE (또는 1)",
+      "FALSE (또는 0)",
+      "-1",
+      "생략"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "정확히 일치하는 값을 검색할 때는 FALSE 또는 0을 지정해야 합니다. TRUE나 생략은 근사치(오름차순 정렬 전제)를 검색합니다.",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-010",
+    "year": 2024,
+    "session": "2024년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel에서 여러 셀의 조건을 동시에 만족하는 합계를 계산할 때 사용하는 함수는?",
+    "code_snippet": null,
+    "options": [
+      "SUMIF",
+      "SUMIFS",
+      "COUNTIF",
+      "AVERAGEIF"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "다중 조건(2개 이상의 조건)을 모두 만족하는 행들의 합계를 구할 때는 SUMIFS(합계범위, 조건범위1, 조건1, 조건범위2, 조건2...)를 사용합니다.",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-011",
+    "year": 2023,
+    "session": "2023년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel의 피벗 테이블(Pivot Table) 기능에 대한 설명으로 가장 옳지 않은 것은?",
+    "code_snippet": null,
+    "options": [
+      "원본 데이터의 내용을 변경하면 피벗 테이블에 즉시 실시간으로 자동 반영된다.",
+      "대량의 원본 데이터를 손쉽게 요약하고 필드별 집계를 다각도로 분석할 수 있다.",
+      "행 레이블, 열 레이블, 값, 필터 영역으로 필드를 드래그하여 레이아웃을 구성한다.",
+      "피벗 테이블을 기반으로 피벗 차트를 생성할 수 있다."
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "피벗 테이블은 원본 데이터가 변경되어도 즉시 자동 반영되지 않으며, 반드시 [새로 고침(Refresh)] 버튼을 눌러야 업데이트됩니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-012",
+    "year": 2022,
+    "session": "2022년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel의 조건부 서식(Conditional Formatting)에 대한 설명으로 옳은 것은?",
+    "code_snippet": null,
+    "options": [
+      "규칙에 만족하는 셀에만 서식을 지정할 수 있으며, 수식을 사용한 조건 설정은 불가능하다.",
+      "조건에 따라 셀의 배경색, 글꼴 색, 테두리 등을 자동으로 변경할 수 있다.",
+      "한 셀에는 오직 하나의 조건부 서식 규칙만 적용할 수 있다.",
+      "조건부 서식을 적용하면 원본 셀의 값 자체가 영구히 변경된다."
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "조건부 서식은 설정한 조건 만족 여부에 따라 스타일 서식만 동적으로 변경하며, 수식 조건 지정 및 다중 규칙 우선순위 적용이 가능합니다.",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-013",
+    "year": 2021,
+    "session": "2021년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Access에서 폼(Form)의 컨트롤(Control) 중 다른 테이블이나 쿼리의 필드와 직접 연결되어 데이터를 표시하거나 편집하는 컨트롤은?",
+    "code_snippet": null,
+    "options": [
+      "바운드 컨트롤 (Bound Control)",
+      "언바운드 컨트롤 (Unbound Control)",
+      "계산 컨트롤 (Calculated Control)",
+      "라벨 컨트롤 (Label Control)"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "테이블이나 쿼리의 레코드 원본과 결합되어 데이터를 실시간으로 주고받는 컨트롤을 '바운드 컨트롤'이라고 합니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-014",
+    "year": 2020,
+    "session": "2020년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Access에서 테이블 필드의 속성 중 반드시 값을 입력해야만 레코드가 저장되도록 강제하는 속성은?",
+    "code_snippet": null,
+    "options": [
+      "기본값 (Default Value)",
+      "필수 (Required)",
+      "인덱스 (Indexed)",
+      "유효성 검사 규칙 (Validation Rule)"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "'필수(Required)' 속성을 '예(Yes)'로 설정하면 해당 필드에 NULL 값이 입력되는 것을 차단하고 반드시 값을 입력하도록 강제합니다.",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-015",
+    "year": 2026,
+    "session": "2026년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Access에서 특정 조건을 만족하는 레코드의 개수를 구하기 위해 사용하는 도메인 집계 함수는?",
+    "code_snippet": null,
+    "options": [
+      "DSum",
+      "DCount",
+      "DLookup",
+      "DAvg"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "도메인 집계 함수 중 특정 테이블/쿼리에서 조건에 일치하는 레코드 수를 반환하는 함수는 DCount(\"필드\", \"테이블\", \"조건\") 입니다.",
+    "correct_answer": 2,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-016",
+    "year": 2025,
+    "session": "2025년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "컴퓨터에서 사용하는 USB 3.0 포트의 표준 식별 색상으로 주로 채택되는 색상은?",
+    "code_snippet": null,
+    "options": [
+      "흰색 (White)",
+      "검은색 (Black)",
+      "파란색 (Blue)",
+      "빨간색 (Red)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "USB 1.1은 흰색, USB 2.0은 검은색, 고속 전송(5Gbps)을 지원하는 USB 3.0은 파란색(Blue) 단자로 표준 시각화되어 있습니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-017",
+    "year": 2024,
+    "session": "2024년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "웹 브라우저가 웹 서버와 통신할 때 사용하는 기본 통신 포트 번호의 연결로 가장 올바른 것은?",
+    "code_snippet": null,
+    "options": [
+      "HTTP : 80, HTTPS : 443",
+      "HTTP : 21, HTTPS : 22",
+      "HTTP : 25, HTTPS : 110",
+      "HTTP : 53, HTTPS : 8080"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "표준 HTTP는 80번 포트를, SSL/TLS 암호화가 적용된 보안 HTTPS는 443번 포트를 기본으로 사용합니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-018",
+    "year": 2023,
+    "session": "2023년 제3회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Excel에서 `=MOD(10, 3)` 수식의 결과값으로 올바른 것은?",
+    "code_snippet": null,
+    "options": [
+      "1",
+      "3",
+      "0",
+      "3.33"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "MOD(숫자, 나눌수) 함수는 나눗셈의 나머지를 반환합니다. 10을 3으로 나눈 몫은 3이고 나머지는 1입니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-019",
+    "year": 2022,
+    "session": "2022년 제1회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "Access의 보고서(Report)에서 보고서의 맨 첫 페이지 상단에 단 한 번만 인쇄되는 구역은?",
+    "code_snippet": null,
+    "options": [
+      "본문 (Detail)",
+      "페이지 머리글 (Page Header)",
+      "보고서 머리글 (Report Header)",
+      "그룹 머리글 (Group Header)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "보고서 머리글은 보고서의 첫 페이지 맨 위에 1회만 출력되며(제목, 로고 등), 페이지 머리글은 모든 페이지의 상단에 반복 인쇄됩니다.",
+    "correct_answer": 3,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  },
+  {
+    "id": "com-study-020",
+    "year": 2021,
+    "session": "2021년 제2회 정기기출",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "컴퓨터 일반 및 스프레드시트",
+    "question": "인터넷에서 동적 호스트 구성 프로토콜로, 네트워크에 접속한 단말기에 IP 주소와 게이트웨이, DNS 주소를 자동으로 할당해주는 프로토콜은?",
+    "code_snippet": null,
+    "options": [
+      "DHCP",
+      "DNS",
+      "FTP",
+      "SNMP"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "DHCP(Dynamic Host Configuration Protocol)는 클라이언트 PC가 부팅될 때 IP 대역 풀에서 유효한 IP를 자동으로 대여해 주는 프로토콜입니다.",
+    "correct_answer": 1,
+    "subject_name": "컴퓨터 일반 및 스프레드시트"
+  }
+]

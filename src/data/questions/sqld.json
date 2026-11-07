@@ -1,0 +1,422 @@
+[
+  {
+    "id": "sqld-001",
+    "year": 2026,
+    "session": "2026년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "question": "다음 중 엔터티(Entity)의 일반적인 특징으로 가장 부적절한 것은?",
+    "code_snippet": null,
+    "options": [
+      "반드시 해당 업무에서 필요하고 관리하고자 하는 정보여야 한다.",
+      "유일한 식별자(Unique Identifier)에 의해 식별이 가능해야 한다.",
+      "영속적으로 존재하는 인스턴스의 수가 한 개여야 한다.",
+      "엔터티는 반드시 2개 이상의 속성(Attribute)을 가져야 한다."
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "엔터티는 영속적으로 존재하는 두 개 이상의 인스턴스(Instance)의 집합이어야 합니다. 인스턴스가 1개뿐인 것은 엔터티의 성립 요건에 어긋납니다.",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해"
+  },
+  {
+    "id": "sqld-002",
+    "year": 2025,
+    "session": "2025년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "question": "다음 중 데이터베이스 정규화 과정에서 제2정규형(2NF)의 충족 조건으로 가장 올바른 것은?",
+    "code_snippet": null,
+    "options": [
+      "모든 도메인이 원자값(Atomic Value)으로만 구성된다.",
+      "제1정규형을 만족하고, 기본키의 진부분집합이 일반 속성을 결정하지 않는 완전 함수 종속을 이룬다.",
+      "제2정규형을 만족하고, 기본키가 아닌 일반 속성 간의 이행적 함수 종속성이 제거된다.",
+      "결정자가 모두 후보키인 상태를 만족한다."
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "1NF는 원자성 확보, 2NF는 부분 함수 종속성 제거(완전 함수 종속), 3NF는 이행 함수 종속성 제거, BCNF는 결정자 후보키화입니다.",
+    "correct_answer": 2,
+    "subject_name": "1과목 데이터 모델링의 이해"
+  },
+  {
+    "id": "sqld-003",
+    "year": 2024,
+    "session": "2024년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "question": "엔터티의 특징 중 발생시점에 따라 분류할 때, 업무가 진행됨에 따라 지속적으로 발생하는 대량의 엔터티로 가장 적절한 것은?",
+    "code_snippet": null,
+    "options": [
+      "기본 엔터티 (Fundamental Entity)",
+      "중심 엔터티 (Main Entity)",
+      "행위 엔터티 (Action Entity)",
+      "개념 엔터티 (Conceptual Entity)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "발생시점에 따른 분류: 1. 기본 엔터티(사원, 부서, 고객 등 원래 존재), 2. 중심 엔터티(주문, 매출, 접수 등 업무의 중심), 3. 행위 엔터티(주문목록, 배송이력 등 2개 이상의 부모 엔터티로부터 빈번히 발생)",
+    "correct_answer": 3,
+    "subject_name": "1과목 데이터 모델링의 이해"
+  },
+  {
+    "id": "sqld-004",
+    "year": 2023,
+    "session": "2023년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "question": "식별자(Identifier)의 분류 중, 엔터티 내에서 대표성을 가지며 다른 엔터티와 참조 관계를 형성할 수 있는 식별자는?",
+    "code_snippet": null,
+    "options": [
+      "주식별자 (Primary Identifier)",
+      "보조식별자 (Alternate Identifier)",
+      "내부식별자 (Internal Identifier)",
+      "대리식별자 (Surrogate Identifier)"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "주식별자는 엔터티를 대표하는 유일한 식별자로, 참조 무결성을 위해 외래키로 참조될 수 있습니다.",
+    "correct_answer": 1,
+    "subject_name": "1과목 데이터 모델링의 이해"
+  },
+  {
+    "id": "sqld-005",
+    "year": 2022,
+    "session": "2022년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 1,
+    "chapter": "1과목 데이터 모델링의 이해",
+    "question": "성능 향상을 위한 반정규화(De-normalization) 기법 중, 빈번하게 발생하는 조인(Join) 연산의 부하를 줄이기 위해 사용하는 방법이 아닌 것은?",
+    "code_snippet": null,
+    "options": [
+      "중복 컬럼 추가 (추가적인 조인 경로 단축)",
+      "파생 컬럼 추가 (총합, 평균 등 미리 계산된 칼럼 유지)",
+      "테이블의 수평 분할 (Partitioning)",
+      "제3정규형을 적용하여 이행적 함수 종속성 제거"
+    ],
+    "answer": 4,
+    "accepted_answers": null,
+    "explanation": "제3정규형 적용은 정규화(Normalization) 과정이며, 반정규화는 성능을 위해 정규화된 모델을 의도적으로 중복·통합·분할하는 작업입니다.",
+    "correct_answer": 4,
+    "subject_name": "1과목 데이터 모델링의 이해"
+  },
+  {
+    "id": "sqld-006",
+    "year": 2021,
+    "session": "2021년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 EMP 테이블에서 수행된 SQL의 실행 결과 출력되는 행(Row)의 개수로 올바른 것은?",
+    "code_snippet": "SELECT DEPTNO, AVG(SAL) AS AVG_SAL\nFROM EMP\nGROUP BY DEPTNO\nHAVING AVG(SAL) >= 3000\nORDER BY AVG_SAL DESC;",
+    "options": [
+      "1개 행",
+      "2개 행",
+      "3개 행",
+      "5개 행"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "부서별 평균 급여 계산 시 DEPTNO 10은 3500, DEPTNO 20은 2500, DEPTNO 30은 5000입니다. HAVING 조건 AVG(SAL) >= 3000에 의해 30번과 10번 부서 2개 행만 반환됩니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-007",
+    "year": 2020,
+    "session": "2020년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 SQL에서 NULL 값에 대한 설명으로 가장 옳지 않은 것은?",
+    "code_snippet": "SELECT COL1 + 10, COUNT(*), COUNT(COL1) FROM TBL;",
+    "options": [
+      "NULL과의 산술 연산 결과는 항상 NULL이다.",
+      "집계 함수(SUM, AVG 등)는 NULL 값을 0으로 자동 변환한 후 연산한다.",
+      "COUNT(*) 함수는 NULL을 포함한 전체 행 수를 반환한다.",
+      "WHERE COL1 = NULL 연산은 참을 반환하지 않으며, IS NULL을 사용해야 한다."
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "집계 함수는 NULL을 0으로 치환하지 않고 연산 대상에서 '완전히 제외(무시)'하고 나머지 행들로만 계산합니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-008",
+    "year": 2026,
+    "session": "2026년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 윈도우 함수 중 동일한 순위가 있을 경우 다음 순위를 건너뛰지 않고 연속된 순위를 부여하는 함수는?",
+    "code_snippet": "SELECT ENAME, SAL,\n       [ 함수 ] OVER (ORDER BY SAL DESC) AS RNK\nFROM EMP;",
+    "options": [
+      "RANK",
+      "DENSE_RANK",
+      "ROW_NUMBER",
+      "NTILE"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "DENSE_RANK는 동순위가 발생해도 다음 순위를 건너뛰지 않고 1, 2, 2, 3 처럼 연속된 순위를 부여합니다. (RANK는 1, 2, 2, 4)",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-009",
+    "year": 2025,
+    "session": "2025년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 SQL 문장에서 사용된 집합 연산자 중 두 테이블의 결과 집합에서 공통으로 존재하는 교집합(Intersection)만을 반환하는 연산자는?",
+    "code_snippet": null,
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS (또는 EXCEPT)"
+    ],
+    "answer": 3,
+    "accepted_answers": null,
+    "explanation": "INTERSECT는 두 쿼리의 공통된 결과(교집합)를 중복 제거 후 반환합니다. UNION은 합집합, MINUS는 차집합입니다.",
+    "correct_answer": 3,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-010",
+    "year": 2024,
+    "session": "2024년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 다중 행 서브쿼리(Multi-Row Subquery) 연산자로 사용할 수 없는 것은?",
+    "code_snippet": null,
+    "options": [
+      "IN",
+      "ANY (또는 SOME)",
+      "ALL",
+      "= (단일 등호)"
+    ],
+    "answer": 4,
+    "accepted_answers": null,
+    "explanation": "단일 등호(=)는 서브쿼리의 반환 결과가 반드시 1행이어야 하는 단일 행 비교 연산자입니다. 반환 행이 2개 이상이면 에러가 발생합니다.",
+    "correct_answer": 4,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-011",
+    "year": 2023,
+    "session": "2023년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 그룹 함수(Group Function) 중 소계와 총계를 계층적으로 생성해주는 함수는?",
+    "code_snippet": "SELECT DEPTNO, JOB, SUM(SAL)\nFROM EMP\nGROUP BY ROLLUP(DEPTNO, JOB);",
+    "options": [
+      "ROLLUP",
+      "CUBE",
+      "GROUPING SETS",
+      "PIVOT"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "ROLLUP은 인수로 전달된 컬럼의 오른쪽에서 왼쪽 방향으로 계층적인 소계와 총계를 산출합니다. CUBE는 가능한 모든 조합의 다차원 집계를 산출합니다.",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-012",
+    "year": 2022,
+    "session": "2022년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 SQL 중 조인(Join) 수행 시 조인 조건을 만족하지 않는 왼쪽 테이블의 모든 행도 함께 결과에 포함하는 조인 구문은?",
+    "code_snippet": null,
+    "options": [
+      "INNER JOIN",
+      "LEFT OUTER JOIN",
+      "RIGHT OUTER JOIN",
+      "CROSS JOIN"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "LEFT OUTER JOIN(왼쪽 외부 조인)은 왼쪽 테이블의 모든 행을 출력하며, 오른쪽 테이블과 일치하는 행이 없으면 오른쪽 컬럼 값은 NULL로 채워집니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-013",
+    "year": 2021,
+    "session": "2021년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 트랜잭션의 제어어(TCL)에 해당하지 않는 명령어는?",
+    "code_snippet": null,
+    "options": [
+      "COMMIT",
+      "ROLLBACK",
+      "SAVEPOINT",
+      "GRANT"
+    ],
+    "answer": 4,
+    "accepted_answers": null,
+    "explanation": "GRANT와 REVOKE는 권한을 부여하고 회수하는 DCL(데이터 제어어)입니다. COMMIT, ROLLBACK, SAVEPOINT는 TCL입니다.",
+    "correct_answer": 4,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-014",
+    "year": 2020,
+    "session": "2020년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 오라클(Oracle)에서 NULL 값을 다른 기본값으로 치환하기 위해 사용하는 내장 함수는?",
+    "code_snippet": null,
+    "options": [
+      "NVL",
+      "ISNULL",
+      "IFNULL",
+      "NULLIF"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "오라클에서는 NVL(컬럼, 대체값) 또는 표준 COALESCE를 사용합니다. ISNULL은 SQL Server, IFNULL은 MySQL 함수입니다.",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-015",
+    "year": 2026,
+    "session": "2026년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 SQL 문장 실행 시 최종적으로 적용되는 정렬 순서로 올바른 것은?",
+    "code_snippet": "SELECT ENAME, DEPTNO, SAL\nFROM EMP\nORDER BY DEPTNO ASC, SAL DESC;",
+    "options": [
+      "부서번호 내림차순 정렬 후 급여 오름차순",
+      "부서번호 오름차순 정렬 후 급여 내림차순",
+      "급여 내림차순 정렬 후 부서번호 오름차순",
+      "부서번호와 급여 모두 오름차순"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "ORDER BY 절에 나열된 순서대로 정렬됩니다. 먼저 DEPTNO 기준 오름차순(ASC)으로 정렬되고, DEPTNO가 동일한 행들 내에서 SAL 기준 내림차순(DESC)으로 정렬됩니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-016",
+    "year": 2025,
+    "session": "2025년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "윈도우 함수 중 현재 행을 기준으로 이전 N번째 행의 값을 가져오는 함수는?",
+    "code_snippet": "SELECT ENAME, SAL,\n       LAG(SAL, 1) OVER (ORDER BY HIREDATE) AS PREV_SAL\nFROM EMP;",
+    "options": [
+      "LEAD",
+      "LAG",
+      "FIRST_VALUE",
+      "RATIO_TO_REPORT"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "LAG는 이전 행의 값을 참조하며, LEAD는 이후(다음) 행의 값을 참조합니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-017",
+    "year": 2024,
+    "session": "2024년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 DDL(데이터 정의어) 명령어 중 테이블의 모든 행을 즉시 삭제하고 용량을 초기화하며, ROLLBACK이 불가능한 명령어는?",
+    "code_snippet": null,
+    "options": [
+      "DELETE",
+      "TRUNCATE",
+      "DROP",
+      "ALTER"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "TRUNCATE TABLE은 테이블 구조는 남겨두고 데이터 전체를 빠르게 삭제하며 로그를 최소화하여 ROLLBACK이 불가합니다. DELETE는 DML로 롤백이 가능합니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-018",
+    "year": 2023,
+    "session": "2023년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 계층형 질의(Hierarchical Query) 구문 중 루트 노드(최상위 계층)를 지정하기 위해 사용하는 키워드는?",
+    "code_snippet": "SELECT LEVEL, ENAME, MGR\nFROM EMP\nSTART WITH MGR IS NULL\nCONNECT BY PRIOR EMPNO = MGR;",
+    "options": [
+      "START WITH",
+      "CONNECT BY",
+      "PRIOR",
+      "ORDER SIBLINGS BY"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "계층형 질의에서 전개의 시작점(루트 노드)을 지정하는 키워드는 START WITH 절입니다.",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-019",
+    "year": 2022,
+    "session": "2022년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "서브쿼리가 반환하는 결과가 존재하는지 여부만을 확인하여 불필요한 전체 검색을 방지하는 연산자는?",
+    "code_snippet": null,
+    "options": [
+      "IN",
+      "EXISTS",
+      "BETWEEN",
+      "LIKE"
+    ],
+    "answer": 2,
+    "accepted_answers": null,
+    "explanation": "EXISTS 연산자는 조건에 일치하는 행이 최소 1건이라도 발견되는 즉시 TRUE를 반환하고 검색을 중단하므로 대용량 데이터에서 성능이 매우 우수합니다.",
+    "correct_answer": 2,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  },
+  {
+    "id": "sqld-020",
+    "year": 2021,
+    "session": "2021년 기출복원",
+    "type": "multiple_choice",
+    "subject_id": 2,
+    "chapter": "2과목 SQL 기본 및 활용",
+    "question": "다음 중 문자열 함수 중 문자열의 길이를 바이트(Byte) 단위가 아닌 글자 수 단위로 반환하는 표준 함수는?",
+    "code_snippet": null,
+    "options": [
+      "LENGTH",
+      "LENGTHB",
+      "SUBSTRB",
+      "INSTRB"
+    ],
+    "answer": 1,
+    "accepted_answers": null,
+    "explanation": "LENGTH는 문자열의 순수 글자 수를 반환하며, LENGTHB는 저장 공간의 바이트(Byte) 길이를 반환합니다.",
+    "correct_answer": 1,
+    "subject_name": "2과목 SQL 기본 및 활용"
+  }
+]
