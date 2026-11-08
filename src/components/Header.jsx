@@ -32,33 +32,22 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/10 transition-colors duration-300 select-none">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-        {/* 좌측 CBT 로고 및 '언제나 CBT' 브랜딩 */}
+        {/* 좌측: 간결한 '언제나 CBT' 메인 제목 (클릭 시 첫 화면 전체 자격증으로 복귀) */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             type="button"
             onClick={onGoHome}
-            title="언제나 CBT 홈으로 이동"
-            className="flex items-center gap-2 text-slate-900 dark:text-white transition-opacity hover:opacity-85 cursor-pointer group shrink-0"
+            title="첫 화면(전체 자격증)으로 이동"
+            className="text-slate-900 dark:text-white hover:opacity-70 transition-opacity cursor-pointer shrink-0 py-1"
           >
-            {/* 유러피안 미니멀 CBT 배지 */}
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-slate-950 flex items-center justify-center font-black tracking-tighter text-[11px] sm:text-xs shadow-md shadow-slate-900/10 dark:shadow-white/10 group-hover:scale-105 transition-transform border border-white/20 dark:border-transparent shrink-0">
-              CBT
-            </div>
-            
-            {/* 언제나 CBT 메인 타이틀 (시험 응시 중 모바일 좁은 화면에서는 아이콘 배지에 공간 집중) */}
-            <div className={`text-left flex-col ${currentExam ? 'hidden sm:flex' : 'flex'}`}>
-              <span className="font-black text-sm sm:text-base tracking-tight text-slate-900 dark:text-white leading-tight">
-                언제나 CBT
-              </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-wider">
-                국가공인 자격검정
-              </span>
-            </div>
+            <span className="font-black text-base sm:text-lg tracking-tight leading-none">
+              언제나 CBT
+            </span>
           </button>
 
           {currentExam && (
-            <div className="flex items-center gap-1.5 sm:gap-2 pl-2 sm:pl-3 border-l border-slate-300/80 dark:border-white/15 min-w-0">
-              <span className="font-extrabold text-slate-900 dark:text-slate-100 text-xs sm:text-sm truncate max-w-[100px] xs:max-w-[130px] sm:max-w-[200px]">
+            <div className="flex items-center gap-1.5 sm:gap-2 pl-2 sm:pl-3 border-l border-slate-300 dark:border-white/15 min-w-0">
+              <span className="font-extrabold text-slate-900 dark:text-slate-100 text-xs sm:text-sm truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[220px]">
                 {currentExam.name}
               </span>
               <span className={`text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full border hidden md:inline shrink-0 ${modeInfo.color}`}>

@@ -47,9 +47,10 @@ export default function App() {
   // 현재 선택된 시험 및 모드 상태
   const [currentExamId, setCurrentExamId] = useState(null);
   const [currentMode, setCurrentMode] = useState('home'); // 'home' | 'exam' | 'practice' | 'review'
-  const [selectedYear, setSelectedYear] = useState('2024');
+  const [selectedYear, setSelectedYear] = useState('2026');
   const [selectedSessionNumber, setSelectedSessionNumber] = useState(1);
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
+  const [homeResetKey, setHomeResetKey] = useState(0); // 홈 복귀 시 첫 화면(전체 자격증) 리셋 키
   
   // 시험 문제 및 진행 상태
   const [questions, setQuestions] = useState([]);
@@ -99,7 +100,7 @@ export default function App() {
   const handleStartExam = (
     examId, 
     mode = 'exam', 
-    year = '2024', 
+    year = '2026', 
     subjectId = null, 
     sessionNumber = 1
   ) => {
@@ -166,7 +167,7 @@ export default function App() {
     }
   };
 
-  // 홈으로 이동 핸들러
+  // 홈으로 이동 핸들러 (첫 화면 전체 자격증 상태로 초기화)
   const handleGoHome = () => {
     if (currentMode === 'exam' && !showResultModal) {
       if (!window.confirm('현재 진행 중인 실전 시험이 종료됩니다. 홈으로 이동하시겠습니까?')) {
@@ -179,6 +180,7 @@ export default function App() {
     setQuestions([]);
     setUserAnswers({});
     setShowResultModal(false);
+    setHomeResetKey(prev => prev + 1); // 첫 화면(전체 자격증 리스트)으로 초기화
     refreshStorageStats();
   };
 
@@ -370,6 +372,7 @@ export default function App() {
         ) : currentMode === 'home' || !currentExam ? (
           // 홈 화면 (자격증 이름 목록 아코디언)
           <ExamHome
+            key={homeResetKey}
             exams={examsData}
             onStartExam={handleStartExam}
             wrongNotesCountByExam={wrongNotesCountByExam}
