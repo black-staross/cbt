@@ -67,7 +67,7 @@ export default function Header({
             className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl text-slate-700 dark:text-slate-200 bg-slate-100/80 dark:bg-white/5 hover:bg-slate-200/80 dark:hover:bg-white/10 transition-all cursor-pointer border border-slate-200/80 dark:border-white/10 flex items-center justify-center min-w-[34px] min-h-[34px] sm:min-w-[38px] sm:min-h-[38px]"
           >
             {isDarkMode ? (
-              <Sun className="w-4 h-4 text-amber-400 fill-amber-400/20" />
+              <Sun className="w-4 h-4 text-blue-500 fill-blue-500/20" />
             ) : (
               <Moon className="w-4 h-4 text-slate-700" />
             )}

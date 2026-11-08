@@ -82,7 +82,7 @@ export default function ExamHome({
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-5">
+    <div className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-4 overflow-x-hidden box-border">
       {/* 상단 유형별 필터 바 (간결하고 심플한 플랫 탭) */}
       <div className="w-full overflow-x-auto no-scrollbar flex justify-start sm:justify-center py-1">
         <div className="inline-flex p-1 rounded-xl sm:rounded-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xs shrink-0">
@@ -185,16 +185,16 @@ export default function ExamHome({
                 </div>
               </button>
 
-              {/* 누르면 아래로 펼쳐지는 상세 정보 영역 */}
+              {/* 누르면 아래로 펼쳐지는 상세 정보 영역 (화면 폭 100% 고정, 흔들림 방지) */}
               {isExpanded && (
-                <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-1 border-t border-slate-100 dark:border-white/10 space-y-4 animate-in fade-in duration-150">
+                <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-1 border-t border-slate-100 dark:border-white/10 space-y-4 w-full max-w-full box-border">
                   {/* 시험 소개 */}
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal break-keep">
                     {exam.description}
                   </p>
 
-                  {/* 1단계: 기출연도 (파란글씨 삭제 & 선택 시 파란 테두리선만 적용) */}
-                  <div className="space-y-1.5">
+                  {/* 1단계: 기출연도 */}
+                  <div className="space-y-1.5 w-full">
                     <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                       <span className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -202,7 +202,7 @@ export default function ExamHome({
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-1.5 w-full">
                       {availableYears.map((yr) => {
                         const isSelected = currentYear === yr;
                         return (
@@ -210,29 +210,29 @@ export default function ExamHome({
                             key={yr}
                             type="button"
                             onClick={() => handleYearChange(exam.id, yr)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[34px] shrink-0 border ${
+                            className={`py-2 px-1 rounded-xl text-xs font-bold text-center transition-colors cursor-pointer min-h-[34px] w-full flex items-center justify-center border ${
                               isSelected
                                 ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
                             }`}
                           >
-                            {yr}년
+                            <span>{yr}년</span>
                           </button>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* 2단계: 시험회차 (선택 시 파란 테두리선만 적용) */}
-                  <div className="space-y-1.5">
+                  {/* 2단계: 시험회차 (시계 아이콘 파란색 통일) */}
+                  <div className="space-y-1.5 w-full">
                     <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                       <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                        <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
                         <span>시험회차</span>
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
                       {sessions.map((sess) => {
                         const isSessSelected = currentSession === sess.num;
                         return (
@@ -240,7 +240,7 @@ export default function ExamHome({
                             key={sess.num}
                             type="button"
                             onClick={() => handleSessionChange(exam.id, sess.num)}
-                            className={`p-2.5 rounded-xl text-xs font-bold transition-colors text-center cursor-pointer break-keep leading-snug min-h-[38px] flex items-center justify-center border ${
+                            className={`p-2.5 rounded-xl text-xs font-bold transition-colors text-center cursor-pointer break-keep leading-snug min-h-[38px] w-full flex items-center justify-center border ${
                               isSessSelected
                                 ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
@@ -253,8 +253,8 @@ export default function ExamHome({
                     </div>
                   </div>
 
-                  {/* 3단계: 시험 과목 (과목 옆에 전체 버튼 배치 & 선택 시 파란 테두리선만 적용) */}
-                  <div className="space-y-1.5">
+                  {/* 3단계: 시험 과목 (과목 옆에 '전체' 버튼 배치 & 그리드 반응형 고정) */}
+                  <div className="space-y-1.5 w-full">
                     <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                       <span className="flex items-center gap-1.5">
                         <BookOpen className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -262,19 +262,19 @@ export default function ExamHome({
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar flex-wrap sm:flex-nowrap">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full">
                       {/* '전체' 버튼 */}
                       <button
                         type="button"
                         onClick={() => handleSubjectChange(exam.id, 'all')}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] shrink-0 flex items-center gap-1.5 border ${
+                        className={`p-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer min-h-[38px] w-full flex items-center justify-between border ${
                           currentSubject === 'all'
                             ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                             : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
                         }`}
                       >
-                        <span>전체</span>
-                        <span className="font-mono text-[11px] opacity-75">({exam.question_count}제)</span>
+                        <span className="font-bold">전체 과목</span>
+                        <span className="font-mono text-[11px] opacity-75">{exam.question_count}제</span>
                       </button>
 
                       {/* 개별 과목 버튼들 */}
@@ -285,14 +285,14 @@ export default function ExamHome({
                             key={sub.id}
                             type="button"
                             onClick={() => handleSubjectChange(exam.id, sub.id)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] shrink-0 flex items-center gap-1.5 border ${
+                            className={`p-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer min-h-[38px] w-full flex items-center justify-between border ${
                               isSubSelected
                                 ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
                             }`}
                           >
-                            <span>{sIdx + 1}과목. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}</span>
-                            <span className="font-mono text-[11px] opacity-75">({sub.question_count}제)</span>
+                            <span className="truncate pr-1 break-keep text-left">{sIdx + 1}. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}</span>
+                            <span className="font-mono text-[11px] opacity-75 shrink-0">{sub.question_count}제</span>
                           </button>
                         );
                       })}

@@ -326,7 +326,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 relative transition-colors duration-300 font-sans antialiased selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 relative transition-colors duration-300 font-sans antialiased selection:bg-blue-500 selection:text-white box-border">
       {/* 유러피안 리퀴드 글래스 앰비언트 글로우 오브젝트 */}
       <div className="fixed -top-48 -left-48 w-[500px] h-[500px] bg-gradient-to-br from-indigo-500/12 to-blue-500/10 dark:from-indigo-600/10 dark:to-blue-600/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="fixed top-1/4 -right-48 w-[550px] h-[550px] bg-gradient-to-bl from-teal-500/10 to-emerald-500/8 dark:from-teal-600/8 dark:to-emerald-600/6 rounded-full blur-[120px] pointer-events-none" />
@@ -346,8 +346,8 @@ export default function App() {
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
       />
 
-      {/* 상단 과목 탭 바 (시험 진행 모드에서 과목 2개 이상일 때) */}
-      {currentExam && questions.length > 0 && currentExam.subjects?.length > 1 && (
+      {/* 상단 과목 탭 바: 실전 모의고사(exam) 모드일 때만 표시 (연습하기 모드는 하단 햄버거 메뉴로 통합) */}
+      {currentMode === 'exam' && currentExam && questions.length > 0 && currentExam.subjects?.length > 1 && (
         <SubjectTabBar
           subjects={currentExam.subjects}
           questions={questions}
@@ -360,8 +360,8 @@ export default function App() {
         />
       )}
 
-      {/* 메인 뷰 */}
-      <main className="flex-1 flex flex-col relative z-10">
+      {/* 메인 뷰 (가로 넘침 방지 고정) */}
+      <main className="flex-1 flex flex-col relative z-10 w-full max-w-full overflow-x-hidden">
         {isLoading ? (
           <div className="flex-1 flex items-center justify-center p-12 text-slate-400 font-medium text-sm">
             <div className="flex items-center gap-2.5">
@@ -411,7 +411,7 @@ export default function App() {
           <div className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col">
             <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 min-h-[640px]">
               {/* 좌측 65%: 문제 카드 */}
-              <div className="md:col-span-8 flex flex-col h-full">
+              <div className="md:col-span-8 flex flex-col h-full w-full max-w-full">
                 <QuestionCard
                   question={questions[currentIndex]}
                   index={currentIndex}
@@ -427,6 +427,11 @@ export default function App() {
                   hasNext={currentIndex < questions.length - 1}
                   selfGraded={selfGraded[questions[currentIndex]?.id]}
                   onToggleSelfGraded={handleToggleSelfGraded}
+                  subjects={currentExam?.subjects || []}
+                  questions={questions}
+                  onSelectIndex={(newIdx) => setCurrentIndex(newIdx)}
+                  onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId, selectedSessionNumber)}
+                  activeSubjectId={selectedSubjectId}
                 />
               </div>
 
