@@ -132,7 +132,7 @@ export default function App() {
       }
 
       // 2. 과목별 필터링 (특정 과목만 골라서 학습 시)
-      if (subjectId !== null && subjectId !== undefined) {
+      if (subjectId !== null && subjectId !== undefined && subjectId !== 'all') {
         const filteredBySubject = targetQuestions.filter(q => q.subject_id === subjectId);
         if (filteredBySubject.length > 0) {
           targetQuestions = filteredBySubject;
@@ -147,7 +147,7 @@ export default function App() {
 
       setCurrentExamId(examId);
       setCurrentMode(mode);
-      setSelectedYear(year || '2024');
+      setSelectedYear(year || '2026');
       setSelectedSessionNumber(sessionNumber || 1);
       setSelectedSubjectId(subjectId);
       setQuestions(targetQuestions);

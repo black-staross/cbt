@@ -31,6 +31,8 @@ export default function ExamHome({
   const [selectedYears, setSelectedYears] = useState({});
   // 각 자격증별 선택된 회차 상태 (기본 1회)
   const [selectedSessions, setSelectedSessions] = useState({});
+  // 각 자격증별 선택된 과목 상태 (기본 'all' 전체)
+  const [selectedSubjects, setSelectedSubjects] = useState({});
 
   const categories = [
     { id: 'all', label: '전체 자격증 (6)', icon: Sparkles },
@@ -56,6 +58,10 @@ export default function ExamHome({
 
   const handleSessionChange = (examId, sessNum) => {
     setSelectedSessions(prev => ({ ...prev, [examId]: sessNum }));
+  };
+
+  const handleSubjectChange = (examId, subId) => {
+    setSelectedSubjects(prev => ({ ...prev, [examId]: subId }));
   };
 
   // 각 시험별 연간 회차 목록 반환 (연도별 복수 시험 일정)
@@ -110,6 +116,7 @@ export default function ExamHome({
           const bookmarkCount = bookmarksCountByExam[exam.id] || 0;
           const currentYear = selectedYears[exam.id] || '2026';
           const currentSession = selectedSessions[exam.id] || 1;
+          const currentSubject = selectedSubjects[exam.id] || 'all';
           const sessions = getExamSessions(exam.id);
           const isSubjective = exam.question_type === 'subjective';
 
@@ -186,15 +193,12 @@ export default function ExamHome({
                     {exam.description}
                   </p>
 
-                  {/* 1단계: 기출연도 */}
+                  {/* 1단계: 기출연도 (파란글씨 삭제 & 선택 시 파란 테두리선만 적용) */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
+                    <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                       <span className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
                         <span>기출연도</span>
-                      </span>
-                      <span className="font-mono text-blue-600 dark:text-blue-400 font-bold">
-                        {currentYear}년
                       </span>
                     </div>
 
@@ -206,9 +210,9 @@ export default function ExamHome({
                             key={yr}
                             type="button"
                             onClick={() => handleYearChange(exam.id, yr)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[32px] sm:min-h-[34px] border shrink-0 ${
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[34px] shrink-0 border ${
                               isSelected
-                                ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-xs'
+                                ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
                             }`}
                           >
@@ -219,15 +223,12 @@ export default function ExamHome({
                     </div>
                   </div>
 
-                  {/* 2단계: 시험회차 */}
+                  {/* 2단계: 시험회차 (선택 시 파란 테두리선만 적용) */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
+                    <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                       <span className="flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                         <span>시험회차</span>
-                      </span>
-                      <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-                        제{currentSession}회
                       </span>
                     </div>
 
@@ -239,9 +240,9 @@ export default function ExamHome({
                             key={sess.num}
                             type="button"
                             onClick={() => handleSessionChange(exam.id, sess.num)}
-                            className={`p-2.5 rounded-xl text-xs font-bold transition-colors text-center border cursor-pointer break-keep leading-snug min-h-[38px] flex items-center justify-center ${
+                            className={`p-2.5 rounded-xl text-xs font-bold transition-colors text-center cursor-pointer break-keep leading-snug min-h-[38px] flex items-center justify-center border ${
                               isSessSelected
-                                ? 'bg-emerald-600 text-white border-emerald-600 font-bold'
+                                ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
                                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
                             }`}
                           >
@@ -252,63 +253,103 @@ export default function ExamHome({
                     </div>
                   </div>
 
-                  {/* 3단계: 응시 방식 & 시험 과목 */}
-                  <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-white/10">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                      {/* 전체 실전 시험 응시 */}
+                  {/* 3단계: 시험 과목 (과목 옆에 전체 버튼 배치 & 선택 시 파란 테두리선만 적용) */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <span className="flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                        <span>시험 과목</span>
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar flex-wrap sm:flex-nowrap">
+                      {/* '전체' 버튼 */}
                       <button
                         type="button"
-                        onClick={() => onStartExam(exam.id, 'exam', currentYear, null, currentSession)}
-                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] break-keep text-center"
+                        onClick={() => handleSubjectChange(exam.id, 'all')}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] shrink-0 flex items-center gap-1.5 border ${
+                          currentSubject === 'all'
+                            ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
+                            : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
+                        }`}
                       >
-                        <Play className="w-4 h-4 fill-current shrink-0" />
-                        <span>{currentYear}년 제{currentSession}회 전체 시험 ({exam.question_count}제)</span>
+                        <span>전체</span>
+                        <span className="font-mono text-[11px] opacity-75">({exam.question_count}제)</span>
                       </button>
 
-                      {/* 오답 & 북마크 복습 */}
+                      {/* 개별 과목 버튼들 */}
+                      {exam.subjects && exam.subjects.map((sub, sIdx) => {
+                        const isSubSelected = currentSubject === sub.id;
+                        return (
+                          <button
+                            key={sub.id}
+                            type="button"
+                            onClick={() => handleSubjectChange(exam.id, sub.id)}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] shrink-0 flex items-center gap-1.5 border ${
+                              isSubSelected
+                                ? 'bg-transparent border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black'
+                                : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-slate-300'
+                            }`}
+                          >
+                            <span>{sIdx + 1}과목. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}</span>
+                            <span className="font-mono text-[11px] opacity-75">({sub.question_count}제)</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 4단계: 과목 아래로 시험보기 / 연습하기 액션 버튼 */}
+                  <div className="space-y-2.5 pt-3 border-t border-slate-100 dark:border-white/10">
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                      {/* 시험보기 버튼 (타이머 자동 시작) */}
                       <button
                         type="button"
-                        onClick={() => onStartExam(exam.id, 'review')}
-                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-slate-100 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold transition-all border border-slate-200 dark:border-white/10 flex items-center justify-between cursor-pointer min-h-[46px] break-keep"
+                        onClick={() => onStartExam(
+                          exam.id, 
+                          'exam', 
+                          currentYear, 
+                          currentSubject === 'all' ? null : currentSubject, 
+                          currentSession
+                        )}
+                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] break-keep text-center"
                       >
-                        <div className="flex items-center gap-2">
-                          <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
-                          <span>오답 및 북마크</span>
-                        </div>
-                        <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0">
-                          {wrongCount + bookmarkCount}문항
-                        </span>
+                        <Play className="w-4 h-4 fill-current shrink-0" />
+                        <span>시험보기</span>
+                      </button>
+
+                      {/* 연습하기 버튼 (타이머 없는 버전) */}
+                      <button
+                        type="button"
+                        onClick={() => onStartExam(
+                          exam.id, 
+                          'practice', 
+                          currentYear, 
+                          currentSubject === 'all' ? null : currentSubject, 
+                          currentSession
+                        )}
+                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] break-keep text-center"
+                      >
+                        <BookOpen className="w-4 h-4 shrink-0" />
+                        <span>연습하기</span>
                       </button>
                     </div>
 
-                    {/* 시험 과목 섹션 (기존 '과목별 집중학습' -> '시험 과목'으로 심플화) */}
-                    {exam.subjects && exam.subjects.length > 1 && (
-                      <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-2">
-                        <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
-                          <span className="flex items-center gap-1.5">
-                            <BookOpen className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                            <span>시험 과목</span>
-                          </span>
+                    {/* 오답 및 북마크 복습 */}
+                    {(wrongCount > 0 || bookmarkCount > 0) && (
+                      <button
+                        type="button"
+                        onClick={() => onStartExam(exam.id, 'review')}
+                        className="w-full py-2.5 px-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200/70 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-colors flex items-center justify-between cursor-pointer min-h-[38px]"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Bookmark className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />
+                          <span>오답 및 북마크 복습</span>
                         </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                          {exam.subjects.map((sub, sIdx) => (
-                            <button
-                              key={sub.id}
-                              type="button"
-                              onClick={() => onStartExam(exam.id, 'practice', currentYear, sub.id, currentSession)}
-                              className="px-3 py-2 rounded-lg sm:rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors text-left flex items-center justify-between cursor-pointer group min-h-[38px]"
-                            >
-                              <span className="truncate pr-2 break-keep">
-                                {sIdx + 1}. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}
-                              </span>
-                              <span className="font-mono text-[11px] font-bold text-blue-600 dark:text-blue-400 shrink-0">
-                                {sub.question_count}제
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                        <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400">
+                          {wrongCount + bookmarkCount}문항
+                        </span>
+                      </button>
                     )}
                   </div>
                 </div>

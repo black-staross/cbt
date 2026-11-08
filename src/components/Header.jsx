@@ -75,14 +75,16 @@ export default function Header({
 
           {currentExam && (
             <>
-              {/* 타이머 */}
-              <ExamTimer
-                initialMinutes={currentExam.time_limit}
-                onTimeUp={onTimeUp}
-                isExamMode={currentMode === 'exam'}
-                isPaused={isPaused}
-                onTogglePause={onTogglePause}
-              />
+              {/* 타이머: 시험보기(exam) 모드일 때만 자동 실행 및 노출, 연습하기 모드는 타이머 없는 버전 */}
+              {currentMode === 'exam' && (
+                <ExamTimer
+                  initialMinutes={currentExam.time_limit}
+                  onTimeUp={onTimeUp}
+                  isExamMode={true}
+                  isPaused={isPaused}
+                  onTogglePause={onTogglePause}
+                />
+              )}
 
               {/* 모바일 OMR 토글 버튼 */}
               <button

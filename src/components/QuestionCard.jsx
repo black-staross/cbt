@@ -14,7 +14,9 @@ import {
   RotateCcw,
   Volume2,
   VolumeX,
-  Headphones
+  Headphones,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 
 export default function QuestionCard({
@@ -34,6 +36,7 @@ export default function QuestionCard({
   onToggleSelfGraded
 }) {
   const [showExplanation, setShowExplanation] = useState(mode === 'practice' || mode === 'review');
+  const [showAnswerNumberOnly, setShowAnswerNumberOnly] = useState(false);
   const [subjectiveInput, setSubjectiveInput] = useState(userAnswer || '');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isContinuousPlay, setIsContinuousPlay] = useState(false);
@@ -199,6 +202,23 @@ export default function QuestionCard({
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* 연습하기 모드 전용: 정답 번호만 확인하는 정답보기 버튼 */}
+          {mode === 'practice' && (
+            <button
+              type="button"
+              onClick={() => setShowAnswerNumberOnly(prev => !prev)}
+              title={showAnswerNumberOnly ? "정답 표시 끄기" : "정답 번호만 칠하기"}
+              className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[34px] sm:min-h-[38px] cursor-pointer ${
+                showAnswerNumberOnly
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-white/80 dark:bg-slate-800/80 text-blue-600 dark:text-blue-400 border border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-950/40'
+              }`}
+            >
+              {showAnswerNumberOnly ? <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" /> : <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400" />}
+              <span>{showAnswerNumberOnly ? '정답숨김' : '정답보기'}</span>
+            </button>
+          )}
+
           {/* TTS 음성 듣기 버튼 */}
           <button
             type="button"
@@ -350,6 +370,7 @@ export default function QuestionCard({
               const optionNumber = optIdx + 1;
               const isSelected = userAnswer === optionNumber;
               const isCorrectOpt = optionNumber === question.correct_answer;
+              const isAnswerPeeking = mode === 'practice' && showAnswerNumberOnly && isCorrectOpt;
 
               // 학습 모드 또는 채점 완료 후 정오답 시각화 (리퀴드 글래스 및 고대비 다크모드)
               let stateStyle = 'border-slate-300/90 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 backdrop-blur-md shadow-xs';
@@ -382,10 +403,12 @@ export default function QuestionCard({
                   }}
                   className={`w-full flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5 rounded-2xl border text-left text-sm sm:text-lg transition-all cursor-pointer min-h-[50px] sm:min-h-[56px] ${stateStyle}`}
                 >
-                  <span className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-black shrink-0 transition-colors mt-0.5 ${
+                  <span className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-black shrink-0 transition-all mt-0.5 ${
                     isSelected
                       ? 'bg-blue-600 text-white shadow-xs'
-                      : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80'
+                      : isAnswerPeeking
+                        ? 'bg-blue-600 text-white border-2 border-blue-600 ring-4 ring-blue-500/25 shadow-md font-black'
+                        : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80'
                   }`}>
                     {optionNumber}
                   </span>
@@ -424,6 +447,14 @@ export default function QuestionCard({
                 </button>
               </div>
             </form>
+
+            {/* 연습하기 모드 정답보기 활성화 시 주관식 표준 정답 번호/텍스트 표시 */}
+            {mode === 'practice' && showAnswerNumberOnly && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-950/60 border border-blue-300 dark:border-blue-800 rounded-xl text-xs sm:text-sm text-blue-900 dark:text-blue-200 font-mono font-bold flex items-center gap-2">
+                <Check className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span>정답: {question.correct_answer || question.answer}</span>
+              </div>
+            )}
 
             {/* 정답 확인 및 사용자 '자가 채점(맞음/틀림)' 토글 (학습/검토 모드) */}
             {(showExplanation || mode !== 'exam') && isAnswered && (
