@@ -6,9 +6,9 @@ import QuestionCard from './components/QuestionCard';
 import OMRCard from './components/OMRCard';
 import ResultModal from './components/ResultModal';
 import SubjectTabBar from './components/SubjectTabBar';
-import { BookOpen, AlertCircle, ArrowLeft } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
-// 6종 문제 데이터 정적 import (2020~2026년 대규모 문제 은행)
+// 6종 문제 데이터 정적 import (2020~2026년 다중 회차 대규모 문제 은행)
 import sqldQuestions from './data/questions/sqld.json';
 import adspQuestions from './data/questions/adsp.json';
 import eipWrittenQuestions from './data/questions/eip_written.json';
@@ -31,7 +31,7 @@ export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('cbt_theme');
     if (saved) return saved === 'dark';
-    return true; // 기본 다크모드 선호
+    return true; // 기본 다크모드
   });
 
   useEffect(() => {
@@ -47,8 +47,9 @@ export default function App() {
   // 현재 선택된 시험 및 모드 상태
   const [currentExamId, setCurrentExamId] = useState(null);
   const [currentMode, setCurrentMode] = useState('home'); // 'home' | 'exam' | 'practice' | 'review'
-  const [selectedYear, setSelectedYear] = useState('2024'); // 기본 2024년 선택
-  const [selectedSubjectId, setSelectedSubjectId] = useState(null); // 특정 과목 필터링
+  const [selectedYear, setSelectedYear] = useState('2024');
+  const [selectedSessionNumber, setSelectedSessionNumber] = useState(1);
+  const [selectedSubjectId, setSelectedSubjectId] = useState(null);
   
   // 시험 문제 및 진행 상태
   const [questions, setQuestions] = useState([]);
@@ -94,8 +95,14 @@ export default function App() {
   // 현재 선택된 시험 메타데이터
   const currentExam = examsData.find(e => e.id === currentExamId) || null;
 
-  // 시험 시작 핸들러 (연도 및 과목 필터링 완벽 지원)
-  const handleStartExam = (examId, mode = 'exam', year = '2024', subjectId = null) => {
+  // 시험 시작 핸들러 (연도, 회차, 과목별 필터링 완벽 지원)
+  const handleStartExam = (
+    examId, 
+    mode = 'exam', 
+    year = '2024', 
+    subjectId = null, 
+    sessionNumber = 1
+  ) => {
     setIsLoading(true);
     try {
       const allQuestions = QUESTIONS_MAP[examId] || [];
@@ -106,15 +113,24 @@ export default function App() {
 
       let targetQuestions = allQuestions;
 
-      // 1. 연도별 필터링
+      // 1. 연도 및 회차 필터링
       if (year && year !== 'all') {
-        const filteredByYear = allQuestions.filter(q => String(q.year) === String(year));
-        if (filteredByYear.length > 0) {
-          targetQuestions = filteredByYear;
+        const filteredByYearSess = allQuestions.filter(q => 
+          String(q.year) === String(year) && 
+          Number(q.session_number || 1) === Number(sessionNumber || 1)
+        );
+        if (filteredByYearSess.length > 0) {
+          targetQuestions = filteredByYearSess;
+        } else {
+          // 연도만 일치하는 경우 fallback
+          const filteredByYear = allQuestions.filter(q => String(q.year) === String(year));
+          if (filteredByYear.length > 0) {
+            targetQuestions = filteredByYear;
+          }
         }
       }
 
-      // 2. 과목별 필터링 (과목별 나눠보기 선택 시)
+      // 2. 과목별 필터링 (특정 과목만 골라서 학습 시)
       if (subjectId !== null && subjectId !== undefined) {
         const filteredBySubject = targetQuestions.filter(q => q.subject_id === subjectId);
         if (filteredBySubject.length > 0) {
@@ -131,6 +147,7 @@ export default function App() {
       setCurrentExamId(examId);
       setCurrentMode(mode);
       setSelectedYear(year || '2024');
+      setSelectedSessionNumber(sessionNumber || 1);
       setSelectedSubjectId(subjectId);
       setQuestions(targetQuestions);
       setCurrentIndex(0);
@@ -186,7 +203,6 @@ export default function App() {
           isCorrect = answer === q.correct_answer;
         }
 
-        // 오답이면 로컬스토리지에 추가, 정답이면 기존 오답에서 제거
         try {
           const key = `${currentExamId}_wrong`;
           let wrongList = JSON.parse(localStorage.getItem(key) || '[]');
@@ -213,7 +229,6 @@ export default function App() {
       [questionId]: isCorrect
     }));
 
-    // 오답노트 동기화
     if (currentExamId) {
       try {
         const key = `${currentExamId}_wrong`;
@@ -233,7 +248,7 @@ export default function App() {
     }
   };
 
-  // 북마크 토글 핸들러 (localStorage 동기화)
+  // 북마크 토글 핸들러
   const handleToggleBookmark = (questionId) => {
     if (!currentExamId) return;
     const key = `${currentExamId}_bookmarks`;
@@ -251,9 +266,8 @@ export default function App() {
     }
   };
 
-  // 시험 제출 핸들러 (모의고사 종료 및 채점)
+  // 시험 제출 핸들러
   const handleSubmitExam = () => {
-    // 미표기 문항 확인
     const unansweredCount = questions.filter(q => {
       const a = userAnswers[q.id];
       if (a === undefined || a === null) return true;
@@ -262,12 +276,11 @@ export default function App() {
     }).length;
 
     if (unansweredCount > 0) {
-      if (!window.confirm(`미표기된 문항이 ${unansweredCount}개 있습니다. 그래도 최종 제출하시겠습니까?`)) {
+      if (!window.confirm(`미표기된 문항이 ${unansweredCount}개 남아있습니다. 그래도 최종 제출하시겠습니까?`)) {
         return;
       }
     }
 
-    // 오답들을 시험 오답노트 로컬스토리지에 저장
     if (currentExamId) {
       try {
         const key = `${currentExamId}_wrong`;
@@ -304,20 +317,20 @@ export default function App() {
     setIsMobileOmrOpen(false);
   };
 
-  // 모의고사 제한시간 만료 시 자동 제출
+  // 제한시간 만료 시 자동 제출
   const handleTimeUp = () => {
     alert('시험 제한시간이 종료되어 답안이 자동으로 최종 제출됩니다.');
     handleSubmitExam();
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 relative transition-colors duration-200">
-      {/* 프리미엄 iOS 리퀴드 글래스 앰비언트 글로우 레이어 */}
-      <div className="fixed -top-40 -left-40 w-96 h-96 bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed top-1/3 -right-40 w-96 h-96 bg-indigo-500/15 dark:bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed -bottom-40 left-1/3 w-96 h-96 bg-teal-500/10 dark:bg-teal-600/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 relative transition-colors duration-300 font-sans antialiased selection:bg-blue-500 selection:text-white">
+      {/* 유러피안 리퀴드 글래스 앰비언트 글로우 오브젝트 */}
+      <div className="fixed -top-48 -left-48 w-[500px] h-[500px] bg-gradient-to-br from-indigo-500/12 to-blue-500/10 dark:from-indigo-600/10 dark:to-blue-600/8 rounded-full blur-[100px] pointer-events-none" />
+      <div className="fixed top-1/4 -right-48 w-[550px] h-[550px] bg-gradient-to-bl from-teal-500/10 to-emerald-500/8 dark:from-teal-600/8 dark:to-emerald-600/6 rounded-full blur-[120px] pointer-events-none" />
+      <div className="fixed -bottom-48 left-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-amber-500/8 to-rose-500/6 dark:from-amber-600/5 dark:to-rose-600/5 rounded-full blur-[130px] pointer-events-none" />
 
-      {/* 글로벌 상단 헤더 */}
+      {/* 헤더 */}
       <Header
         currentExam={currentExam}
         currentMode={currentMode}
@@ -331,7 +344,7 @@ export default function App() {
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
       />
 
-      {/* CBT 과목 바로가기 탭 바 (시험 진행 모드에서 과목이 2개 이상일 때) */}
+      {/* 상단 과목 탭 바 (시험 진행 모드에서 과목 2개 이상일 때) */}
       {currentExam && questions.length > 0 && currentExam.subjects?.length > 1 && (
         <SubjectTabBar
           subjects={currentExam.subjects}
@@ -341,59 +354,60 @@ export default function App() {
           answers={userAnswers}
           selectedYear={selectedYear}
           activeFilterSubjectId={selectedSubjectId}
-          onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId)}
+          onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId, selectedSessionNumber)}
         />
       )}
 
-      {/* 메인 뷰 분기 */}
+      {/* 메인 뷰 */}
       <main className="flex-1 flex flex-col relative z-10">
         {isLoading ? (
-          <div className="flex-1 flex items-center justify-center p-12 text-slate-500 dark:text-slate-400 font-semibold text-sm">
-            CBT 시험 데이터를 준비 중입니다...
+          <div className="flex-1 flex items-center justify-center p-12 text-slate-400 font-medium text-sm">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span>
+              <span>CBT 시험 데이터를 준비하고 있습니다...</span>
+            </div>
           </div>
         ) : currentMode === 'home' || !currentExam ? (
-          // 1. 홈 화면 (연도별 선택 및 과목별 나눠보기 카드)
+          // 홈 화면 (자격증 이름 목록 아코디언)
           <ExamHome
             exams={examsData}
             onStartExam={handleStartExam}
             wrongNotesCountByExam={wrongNotesCountByExam}
             bookmarksCountByExam={bookmarksCountByExam}
-            selectedYear={selectedYear}
-            onSelectYear={(yr) => setSelectedYear(yr)}
           />
         ) : questions.length === 0 ? (
           // Empty State
           <div className="flex-1 flex flex-col items-center justify-center p-8 max-w-md mx-auto text-center space-y-4">
-            <div className="w-16 h-16 rounded-3xl glass-pill flex items-center justify-center text-slate-400">
+            <div className="w-16 h-16 rounded-3xl bg-white/60 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 backdrop-blur-xl">
               <BookOpen className="w-8 h-8 text-blue-500" />
             </div>
-            <h3 className="text-lg font-bold text-slate-800 dark:text-white">저장된 문제가 없습니다</h3>
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">저장된 문제가 없습니다</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               현재 [{currentExam.name}]의 저장된 오답 또는 북마크가 비어 있습니다.<br />
-              단원별 학습이나 실전 모의고사를 진행하여 오답과 북마크를 수집해 보세요.
+              실전 모의고사나 과목별 학습을 진행하여 문제를 수집해 보세요.
             </p>
             <div className="flex gap-2 pt-2">
               <button
                 type="button"
-                onClick={() => handleStartExam(currentExam.id, 'practice', selectedYear, null)}
-                className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-blue-500/25"
+                onClick={() => handleStartExam(currentExam.id, 'practice', selectedYear, null, selectedSessionNumber)}
+                className="px-4 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-xs font-bold transition-all shadow-md"
               >
-                단원별 학습 시작
+                전체 문제 학습
               </button>
               <button
                 type="button"
                 onClick={handleGoHome}
-                className="px-4 py-2.5 glass-pill hover:bg-slate-200/60 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-all"
+                className="px-4 py-2.5 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-all border border-slate-200 dark:border-white/10"
               >
                 홈으로 돌아가기
               </button>
             </div>
           </div>
         ) : (
-          // 2. CBT 시험장 화면: 좌측 65% 문제 카드 + 우측 35% OMR 카드 분할 레이아웃
+          // CBT 시험장 화면
           <div className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col">
             <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 min-h-[640px]">
-              {/* 좌측 65% (8/12 컬럼): 문제 영역 */}
+              {/* 좌측 65%: 문제 카드 */}
               <div className="md:col-span-8 flex flex-col h-full">
                 <QuestionCard
                   question={questions[currentIndex]}
@@ -413,7 +427,7 @@ export default function App() {
                 />
               </div>
 
-              {/* 우측 35% (4/12 컬럼): OMR 답안지 영역 */}
+              {/* 우측 35%: OMR 답안지 */}
               <div className="hidden md:flex md:col-span-4 flex-col h-full">
                 <OMRCard
                   questions={questions}
@@ -427,7 +441,7 @@ export default function App() {
                 />
               </div>
 
-              {/* 모바일 전용 OMR 바텀시트 / 모달 */}
+              {/* 모바일 OMR 바텀시트 */}
               {isMobileOmrOpen && (
                 <div className="md:hidden">
                   <OMRCard
@@ -451,7 +465,7 @@ export default function App() {
         )}
       </main>
 
-      {/* 결과 분석 및 채점 모달 (모의고사 제출 시) */}
+      {/* 채점 결과 모달 */}
       {showResultModal && (
         <ResultModal
           examMeta={currentExam}
@@ -460,7 +474,7 @@ export default function App() {
           selfGraded={selfGraded}
           onReviewExam={() => {
             setShowResultModal(false);
-            setCurrentMode('practice'); // 검토를 위해 학습/해설 모드로 전환
+            setCurrentMode('practice');
             setCurrentIndex(0);
           }}
           onGoToWrongNotes={() => {
