@@ -43,22 +43,22 @@ export default function SubjectTabBar({
   });
 
   return (
-    <div className="w-full bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 backdrop-blur-md px-3 sm:px-4 py-2 select-none sticky top-16 z-30 transition-colors">
+    <div className="w-full bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 backdrop-blur-md px-2.5 sm:px-4 py-1.5 sm:py-2 select-none sticky top-14 sm:top-16 z-30 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         {/* 과목 바로가기 탭 리스트 */}
-        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth flex-1">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth flex-1 py-0.5">
           {/* 전체 보기 탭 (전체 문항 모드일 때) */}
           {onFilterSubject && (
             <button
               type="button"
               onClick={() => onFilterSubject(null)}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap transition-all cursor-pointer min-h-[34px] shrink-0 border ${
+              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap transition-all cursor-pointer min-h-[32px] sm:min-h-[34px] shrink-0 border ${
                 activeFilterSubjectId === null
                   ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-sm'
                   : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200/60 dark:hover:bg-slate-700'
               }`}
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-3.5 h-3.5 shrink-0" />
               <span>전체 풀세트 ({questions.length}제)</span>
             </button>
           )}
@@ -73,7 +73,6 @@ export default function SubjectTabBar({
                 type="button"
                 onClick={() => {
                   if (onFilterSubject) {
-                    // 과목별 필터 또는 점프
                     if (sub.firstIndex >= 0) {
                       onSelectIndex(sub.firstIndex);
                     }
@@ -82,15 +81,15 @@ export default function SubjectTabBar({
                   }
                 }}
                 title={`${sub.name} (클릭 시 해당 과목으로 이동)`}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap transition-all cursor-pointer min-h-[34px] shrink-0 border ${
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap transition-all cursor-pointer min-h-[32px] sm:min-h-[34px] shrink-0 border ${
                   isCurrentActive || isFilterActive
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/25 scale-[1.02]'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/25 scale-[1.01]'
                     : sub.isComplete
                       ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/60'
                       : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200/70 dark:hover:bg-slate-700'
                 }`}
               >
-                <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-mono font-black ${
+                <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-mono font-black shrink-0 ${
                   isCurrentActive || isFilterActive
                     ? 'bg-white text-blue-600' 
                     : sub.isComplete
@@ -99,8 +98,8 @@ export default function SubjectTabBar({
                 }`}>
                   {idx + 1}
                 </span>
-                <span className="truncate max-w-[120px] sm:max-w-[180px]">{sub.name}</span>
-                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md ${
+                <span className="truncate max-w-[100px] xs:max-w-[130px] sm:max-w-[180px]">{sub.name}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md shrink-0 ${
                   isCurrentActive || isFilterActive
                     ? 'bg-blue-700/80 text-white' 
                     : sub.isComplete

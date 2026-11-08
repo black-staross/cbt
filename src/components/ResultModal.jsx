@@ -82,86 +82,86 @@ export default function ResultModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl overflow-y-auto">
       <div className="w-full max-w-2xl glass-card rounded-3xl shadow-2xl border border-white/20 dark:border-white/10 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
         {/* 상단 결과 배너 */}
-        <div className={`p-8 text-center text-white relative ${
+        <div className={`p-6 sm:p-8 text-center text-white relative ${
           isFinalPassed 
             ? 'bg-gradient-to-br from-emerald-600/90 to-teal-700/90' 
             : 'bg-gradient-to-br from-slate-800/90 to-rose-900/90'
         }`}>
-          <div className="inline-flex p-3 rounded-2xl bg-white/15 backdrop-blur-md mb-3 border border-white/20 shadow-md">
+          <div className="inline-flex p-2.5 sm:p-3 rounded-2xl bg-white/15 backdrop-blur-md mb-2.5 sm:mb-3 border border-white/20 shadow-md">
             {isFinalPassed ? (
-              <Trophy className="w-10 h-10 text-amber-300" />
+              <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-amber-300" />
             ) : (
-              <AlertOctagon className="w-10 h-10 text-rose-300" />
+              <AlertOctagon className="w-8 h-8 sm:w-10 sm:h-10 text-rose-300" />
             )}
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-black tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight break-keep">
             {isFinalPassed ? '축하합니다! 시험에 합격하셨습니다' : '아쉽지만 불합격하셨습니다'}
           </h2>
 
-          <p className="text-white/80 text-xs md:text-sm mt-1.5 font-medium">
+          <p className="text-white/80 text-xs md:text-sm mt-1 sm:mt-1.5 font-medium break-keep">
             {examMeta.name} • 기준: {examMeta.fail_criteria_description}
           </p>
 
           {/* 총점 뱃지 */}
-          <div className="mt-5 inline-flex items-baseline gap-1 px-6 py-2 rounded-2xl bg-black/30 backdrop-blur-md border border-white/15 font-mono shadow-inner">
-            <span className="text-4xl md:text-5xl font-black">{totalScore}</span>
-            <span className="text-xl text-white/70 font-semibold">/ 100점</span>
+          <div className="mt-4 sm:mt-5 inline-flex items-baseline gap-1 px-5 sm:px-6 py-1.5 sm:py-2 rounded-2xl bg-black/30 backdrop-blur-md border border-white/15 font-mono shadow-inner">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-black">{totalScore}</span>
+            <span className="text-lg sm:text-xl text-white/70 font-semibold">/ 100점</span>
           </div>
 
           {/* 과락 안내 문구 */}
           {!isFinalPassed && hasSubjectFail && (
-            <div className="mt-3 inline-block px-3 py-1 rounded-full bg-rose-500/40 border border-rose-300/40 text-xs font-bold text-rose-100">
+            <div className="mt-2.5 sm:mt-3 inline-block px-3 py-1 rounded-full bg-rose-500/40 border border-rose-300/40 text-[11px] sm:text-xs font-bold text-rose-100 break-keep">
               ⚠️ 과목 과락 발생 (40점 미만 과목 존재)
             </div>
           )}
         </div>
 
         {/* 세부 점수 통계 본문 */}
-        <div className="p-5 sm:p-7 md:p-8 space-y-6">
+        <div className="p-4 sm:p-7 md:p-8 space-y-5 sm:space-y-6">
           {/* 전체 요약 그리드 */}
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 backdrop-blur-md">
-              <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bold block">총 응시 문항</span>
-              <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-mono">{totalQuestions}문항</span>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+            <div className="p-2.5 sm:p-4 rounded-2xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 backdrop-blur-md">
+              <span className="text-[11px] sm:text-sm text-slate-600 dark:text-slate-300 font-bold block break-keep">총 응시 문항</span>
+              <span className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white font-mono">{totalQuestions}문항</span>
             </div>
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 backdrop-blur-md">
-              <span className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 font-bold block">정답 문항</span>
-              <span className="text-xl sm:text-2xl font-black text-emerald-700 dark:text-emerald-300 font-mono">{correctCount}문항</span>
+            <div className="p-2.5 sm:p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 backdrop-blur-md">
+              <span className="text-[11px] sm:text-sm text-emerald-700 dark:text-emerald-300 font-bold block break-keep">정답 문항</span>
+              <span className="text-lg sm:text-2xl font-black text-emerald-700 dark:text-emerald-300 font-mono">{correctCount}문항</span>
             </div>
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 backdrop-blur-md">
-              <span className="text-xs sm:text-sm text-rose-700 dark:text-rose-300 font-bold block">오답 / 미표기</span>
-              <span className="text-xl sm:text-2xl font-black text-rose-700 dark:text-rose-300 font-mono">{totalQuestions - correctCount}문항</span>
+            <div className="p-2.5 sm:p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 backdrop-blur-md">
+              <span className="text-[11px] sm:text-sm text-rose-700 dark:text-rose-300 font-bold block break-keep">오답 / 미표기</span>
+              <span className="text-lg sm:text-2xl font-black text-rose-700 dark:text-rose-300 font-mono">{totalQuestions - correctCount}문항</span>
             </div>
           </div>
 
           {/* 과목별 성적 및 과락 현황 테이블 */}
-          <div className="space-y-2.5">
+          <div className="space-y-2">
             <h4 className="text-xs sm:text-sm font-black text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               과목별 성적 및 과락 여부
             </h4>
 
             <div className="border border-slate-300 dark:border-slate-700 rounded-2xl overflow-hidden divide-y divide-slate-200 dark:divide-slate-800 bg-white/90 dark:bg-slate-800/60 backdrop-blur-md">
               {subjectStats.map((sub) => (
-                <div key={sub.id} className="p-4 flex items-center justify-between text-sm sm:text-base">
-                  <div className="space-y-1">
-                    <span className="font-black text-slate-900 dark:text-slate-100">{sub.name}</span>
-                    <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                <div key={sub.id} className="p-3 sm:p-4 flex items-center justify-between text-xs sm:text-base gap-2">
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="font-black text-slate-900 dark:text-slate-100 truncate block max-w-[140px] xs:max-w-[200px] sm:max-w-none">{sub.name}</span>
+                    <div className="text-[11px] sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
                       맞힌 문항: <strong className="text-slate-800 dark:text-slate-200">{sub.correctCount}</strong> / {sub.actualCount}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono font-black text-lg sm:text-xl text-slate-900 dark:text-slate-100">
+                  <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <span className="font-mono font-black text-base sm:text-xl text-slate-900 dark:text-slate-100">
                       {sub.score}점
                     </span>
                     {examMeta.has_fail_criteria && (
-                      <span className={`px-2.5 py-1 rounded-lg text-xs font-black ${
+                      <span className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-black shrink-0 ${
                         sub.isFailed 
                           ? 'bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/40' 
                           : 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40'
                       }`}>
-                        {sub.isFailed ? '과락 (불합격)' : '통과'}
+                        {sub.isFailed ? '과락' : '통과'}
                       </span>
                     )}
                   </div>
@@ -171,31 +171,31 @@ export default function ResultModal({
           </div>
 
           {/* 하단 액션 버튼 (손가락으로 탭하기 쉬운 넉넉한 터치 타겟) */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-2">
             <button
               type="button"
               onClick={onReviewExam}
-              className="py-3.5 px-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-black text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs min-h-[50px]"
+              className="py-3 sm:py-3.5 px-3.5 sm:px-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-black text-xs sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs min-h-[46px] sm:min-h-[50px]"
             >
-              <RotateCcw className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 dark:text-slate-400 shrink-0" />
               <span>문제/해설 검토</span>
             </button>
 
             <button
               type="button"
               onClick={onGoToWrongNotes}
-              className="py-3.5 px-4 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 hover:bg-indigo-500/25 text-indigo-700 dark:text-indigo-300 font-black text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs min-h-[50px]"
+              className="py-3 sm:py-3.5 px-3.5 sm:px-4 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 hover:bg-indigo-500/25 text-indigo-700 dark:text-indigo-300 font-black text-xs sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs min-h-[46px] sm:min-h-[50px]"
             >
-              <BookOpen className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400 shrink-0" />
               <span>오답노트 복습</span>
             </button>
 
             <button
               type="button"
               onClick={onGoHome}
-              className="py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-sm sm:text-base transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer min-h-[50px]"
+              className="py-3 sm:py-3.5 px-3.5 sm:px-4 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-xs sm:text-base transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer min-h-[46px] sm:min-h-[50px]"
             >
-              <Home className="w-5 h-5" />
+              <Home className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
               <span>홈으로 이동</span>
             </button>
           </div>

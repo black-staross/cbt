@@ -77,9 +77,9 @@ export default function ExamHome({
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
-      {/* 요구사항 1: 상단에는 오직 유형별(카테고리) 필터 바만 깔끔하게 남김 */}
-      <div className="flex items-center justify-center">
-        <div className="inline-flex p-1.5 rounded-2xl bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] overflow-x-auto max-w-full no-scrollbar">
+      {/* 요구사항 1: 상단 유형별(카테고리) 필터 바 (모바일 가로 스크롤 및 잘림 방지 최적화) */}
+      <div className="w-full overflow-x-auto no-scrollbar flex justify-start sm:justify-center py-1">
+        <div className="inline-flex p-1.5 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] shrink-0">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isActive = selectedCategory === cat.id;
@@ -88,13 +88,13 @@ export default function ExamHome({
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer min-h-[38px] ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer min-h-[36px] sm:min-h-[38px] break-keep ${
                   isActive
-                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 shadow-sm font-extrabold scale-[1.02]'
+                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 shadow-sm font-black scale-[1.02]'
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400 dark:text-blue-600' : 'text-slate-400'}`} />
+                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-amber-400 dark:text-blue-600' : 'text-slate-400'}`} />
                 <span>{cat.label}</span>
               </button>
             );
@@ -140,8 +140,8 @@ export default function ExamHome({
 
                   {/* 자격증 이름 및 메타 태그 */}
                   <div className="min-w-0 flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                    <div>
-                      <h3 className={`text-base sm:text-lg font-black tracking-tight truncate transition-colors ${
+                    <div className="min-w-0">
+                      <h3 className={`text-base sm:text-lg font-black tracking-tight truncate break-keep transition-colors ${
                         isExpanded 
                           ? 'text-blue-600 dark:text-blue-400' 
                           : 'text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400'
@@ -154,7 +154,7 @@ export default function ExamHome({
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-tight ${
+                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-tight whitespace-nowrap ${
                         isSubjective
                           ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20'
                           : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10'
@@ -162,7 +162,7 @@ export default function ExamHome({
                         {isSubjective ? '주관식·실기' : '4지선다'}
                       </span>
                       {wrongCount > 0 && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 whitespace-nowrap">
                           오답 {wrongCount}
                         </span>
                       )}
@@ -180,9 +180,9 @@ export default function ExamHome({
 
               {/* 누르면 아래로 펼쳐지는 상세 정보 영역 */}
               {isExpanded && (
-                <div className="px-5 sm:px-7 pb-6 sm:pb-7 pt-2 border-t border-slate-100 dark:border-white/10 space-y-5 animate-in fade-in duration-200">
+                <div className="px-4 sm:px-7 pb-5 sm:pb-7 pt-2 border-t border-slate-100 dark:border-white/10 space-y-4 sm:space-y-5 animate-in fade-in duration-200">
                   {/* 시험 소개 */}
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal break-keep">
                     {exam.description}
                   </p>
 
@@ -190,10 +190,10 @@ export default function ExamHome({
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs font-black text-slate-700 dark:text-slate-200">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-blue-500" />
-                        기출 연도 선택:
+                        <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                        <span>기출 연도 선택:</span>
                       </span>
-                      <span className="font-mono text-blue-600 dark:text-blue-400">
+                      <span className="font-mono text-blue-600 dark:text-blue-400 font-bold">
                         {currentYear}년도
                       </span>
                     </div>
@@ -206,7 +206,7 @@ export default function ExamHome({
                             key={yr}
                             type="button"
                             onClick={() => handleYearChange(exam.id, yr)}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all cursor-pointer min-h-[34px] border ${
+                            className={`px-3 py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all cursor-pointer min-h-[34px] border shrink-0 ${
                               isSelected
                                 ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 border-slate-900 dark:border-white shadow-md'
                                 : 'bg-slate-100/80 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-white/10 hover:border-slate-300'
@@ -219,14 +219,14 @@ export default function ExamHome({
                     </div>
                   </div>
 
-                  {/* 2단계: 시험 회차 일정 선택 (요구사항 3: 연도별 다중 시험 회차) */}
+                  {/* 2단계: 시험 회차 일정 선택 */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs font-black text-slate-700 dark:text-slate-200">
                       <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-emerald-500" />
-                        정규 시험 회차(일정) 선택:
+                        <Clock className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                        <span>정규 시험 회차 선택:</span>
                       </span>
-                      <span className="font-mono text-emerald-600 dark:text-emerald-400">
+                      <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                         제{currentSession}회차
                       </span>
                     </div>
@@ -239,43 +239,43 @@ export default function ExamHome({
                             key={sess.num}
                             type="button"
                             onClick={() => handleSessionChange(exam.id, sess.num)}
-                            className={`p-2.5 rounded-xl text-xs font-bold transition-all text-center border cursor-pointer ${
+                            className={`p-2.5 rounded-xl text-xs font-bold transition-all text-center border cursor-pointer break-keep leading-snug min-h-[40px] flex items-center justify-center ${
                               isSessSelected
-                                ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/25 font-black scale-[1.02]'
+                                ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/25 font-black scale-[1.01]'
                                 : 'bg-slate-100/60 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-white/10 hover:border-emerald-500/50'
                             }`}
                           >
-                            {sess.label}
+                            <span>{sess.label}</span>
                           </button>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* 3단계: 응시 방식 선택 버튼들 (풀세트 전체 시험 vs 과목별 나눠보기) */}
+                  {/* 3단계: 응시 방식 선택 버튼들 */}
                   <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-white/10">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                       {/* 전체 실전 시험 응시 */}
                       <button
                         type="button"
                         onClick={() => onStartExam(exam.id, 'exam', currentYear, null, currentSession)}
-                        className="py-3.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:scale-[0.99] text-white rounded-2xl text-xs sm:text-sm font-black transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer min-h-[48px]"
+                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:scale-[0.99] text-white rounded-2xl text-xs sm:text-sm font-black transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer min-h-[48px] break-keep text-center leading-tight"
                       >
-                        <Play className="w-4 h-4 fill-current" />
-                        <span>{currentYear}년 제{currentSession}회 전체 시험 응시 ({exam.question_count}제)</span>
+                        <Play className="w-4 h-4 fill-current shrink-0" />
+                        <span>{currentYear}년 제{currentSession}회 전체 시험 ({exam.question_count}제)</span>
                       </button>
 
                       {/* 오답 & 북마크 복습 */}
                       <button
                         type="button"
                         onClick={() => onStartExam(exam.id, 'review')}
-                        className="py-3.5 px-4 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-slate-100 rounded-2xl text-xs sm:text-sm font-bold transition-all border border-slate-200 dark:border-white/10 flex items-center justify-between cursor-pointer min-h-[48px]"
+                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-slate-100 rounded-2xl text-xs sm:text-sm font-bold transition-all border border-slate-200 dark:border-white/10 flex items-center justify-between cursor-pointer min-h-[48px] break-keep"
                       >
                         <div className="flex items-center gap-2">
-                          <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500" />
+                          <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
                           <span>오답 및 북마크 복습</span>
                         </div>
-                        <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400">
+                        <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0">
                           {wrongCount + bookmarkCount}문항
                         </span>
                       </button>
@@ -283,11 +283,11 @@ export default function ExamHome({
 
                     {/* 과목별 나눠보기 섹션 */}
                     {exam.subjects && exam.subjects.length > 1 && (
-                      <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-2.5">
-                        <div className="flex items-center justify-between text-xs font-black text-slate-700 dark:text-slate-200">
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-2.5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-black text-slate-700 dark:text-slate-200">
                           <span className="flex items-center gap-1.5">
-                            <BookOpen className="w-3.5 h-3.5 text-blue-500" />
-                            과목별로 나눠서 집중 학습:
+                            <BookOpen className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                            <span>과목별 집중 학습:</span>
                           </span>
                           <span className="text-[11px] font-normal text-slate-400">
                             원하는 과목만 즉시 풀이 및 정답 확인
@@ -300,9 +300,9 @@ export default function ExamHome({
                               key={sub.id}
                               type="button"
                               onClick={() => onStartExam(exam.id, 'practice', currentYear, sub.id, currentSession)}
-                              className="px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/30 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer group"
+                              className="px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/30 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer group min-h-[40px]"
                             >
-                              <span className="truncate">
+                              <span className="truncate pr-2 break-keep">
                                 {sIdx + 1}. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}
                               </span>
                               <span className="font-mono text-[11px] font-black text-blue-600 dark:text-blue-400 shrink-0">

@@ -179,39 +179,39 @@ export default function QuestionCard({
 
   return (
     <div className="flex flex-col h-full glass-card rounded-3xl shadow-xl overflow-hidden transition-colors">
-      {/* 상단 문항 정보 바 */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 bg-slate-50/80 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 backdrop-blur-md">
-        <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
-          <span className="font-mono text-base sm:text-lg font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 px-2.5 py-1 rounded-xl border border-blue-200 dark:border-blue-800 shadow-xs">
+      {/* 상단 문항 정보 바 (모바일 반응형 컴팩트 레이아웃) */}
+      <div className="flex items-center justify-between px-3.5 sm:px-6 py-2.5 sm:py-3.5 bg-slate-50/80 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 backdrop-blur-md gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0 flex-wrap">
+          <span className="font-mono text-sm sm:text-lg font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-xl border border-blue-200 dark:border-blue-800 shadow-xs shrink-0">
             Q. {String(index + 1).padStart(2, '0')}
           </span>
           {question.session && (
-            <span className="text-xs sm:text-sm font-extrabold px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+            <span className="text-[11px] sm:text-sm font-extrabold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shrink-0">
               {question.session}
             </span>
           )}
-          <span className="text-xs sm:text-sm font-bold px-2.5 py-1 bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-lg border border-slate-300/60 dark:border-slate-700">
+          <span className="text-[11px] sm:text-sm font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-lg border border-slate-300/60 dark:border-slate-700 truncate max-w-[120px] xs:max-w-[160px] sm:max-w-none">
             {question.chapter || question.subject_name || '기본 과목'}
           </span>
-          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold hidden lg:inline">
+          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold hidden xl:inline">
             전체 {totalCount}문항 중 {index + 1}번째
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* TTS 음성 듣기 버튼 */}
           <button
             type="button"
             onClick={() => handleSpeakCurrent(false)}
             title="현재 문제 음성으로 듣기"
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[38px] cursor-pointer ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[34px] sm:min-h-[38px] cursor-pointer ${
               isSpeaking
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                 : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
             }`}
           >
-            {isSpeaking ? <VolumeX className="w-4 h-4 text-white" /> : <Volume2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />}
-            <span className="hidden xs:inline">{isSpeaking ? '중지' : '듣기'}</span>
+            {isSpeaking ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400" />}
+            <span className="hidden sm:inline">{isSpeaking ? '중지' : '듣기'}</span>
           </button>
 
           {/* 연속 오디오 학습 모드 (핸즈프리) */}
@@ -226,37 +226,38 @@ export default function QuestionCard({
                 handleSpeakCurrent(true);
               }
             }}
-            title="이동 중 에어팟으로 연속 듣기 (해설 후 다음 문제 자동 이동)"
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[38px] cursor-pointer ${
+            title="연속 듣기 (해설 후 다음 문제 자동 이동)"
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[34px] sm:min-h-[38px] cursor-pointer ${
               isContinuousPlay
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20'
                 : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
             }`}
           >
-            <Headphones className={`w-4 h-4 ${isContinuousPlay ? 'text-white' : 'text-emerald-600 dark:text-emerald-400'}`} />
-            <span className="hidden sm:inline">{isContinuousPlay ? '연속재생 중' : '연속오디오'}</span>
+            <Headphones className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isContinuousPlay ? 'text-white' : 'text-emerald-600 dark:text-emerald-400'}`} />
+            <span className="hidden sm:inline">{isContinuousPlay ? '재생 중' : '연속듣기'}</span>
           </button>
 
           {/* 북마크 버튼 */}
           <button
             type="button"
             onClick={() => onToggleBookmark(question.id)}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[38px] cursor-pointer ${
+            title="문항 북마크"
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[34px] sm:min-h-[38px] cursor-pointer ${
               isBookmarked
                 ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700'
                 : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
             }`}
           >
-            <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-500 text-amber-500' : 'text-slate-500 dark:text-slate-400'}`} />
-            <span className="hidden xs:inline">{isBookmarked ? '북마크됨' : '북마크'}</span>
+            <Bookmark className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isBookmarked ? 'fill-amber-500 text-amber-500' : 'text-slate-500 dark:text-slate-400'}`} />
+            <span className="hidden sm:inline">{isBookmarked ? '북마크됨' : '북마크'}</span>
           </button>
         </div>
       </div>
 
       {/* 문항 본문 (스크롤 영역) */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6">
-        {/* 지문 텍스트 (모바일에서도 시원하고 큼직하게) */}
-        <div className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
+        {/* 지문 텍스트 (어절 단위 break-keep으로 모바일에서 자연스러운 줄바꿈 보장) */}
+        <div className="text-base sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
           {question.question}
         </div>
 
@@ -379,20 +380,20 @@ export default function QuestionCard({
                       setShowExplanation(true);
                     }
                   }}
-                  className={`w-full flex items-start gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl border text-left text-base sm:text-lg transition-all cursor-pointer min-h-[56px] ${stateStyle}`}
+                  className={`w-full flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5 rounded-2xl border text-left text-sm sm:text-lg transition-all cursor-pointer min-h-[50px] sm:min-h-[56px] ${stateStyle}`}
                 >
-                  <span className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-black shrink-0 transition-colors ${
+                  <span className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-black shrink-0 transition-colors mt-0.5 ${
                     isSelected
                       ? 'bg-blue-600 text-white shadow-xs'
                       : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80'
                   }`}>
                     {optionNumber}
                   </span>
-                  <span className="flex-1 leading-relaxed pt-0.5">{optionText}</span>
+                  <span className="flex-1 leading-relaxed pt-0.5 break-keep">{optionText}</span>
                   {showExplanation && mode !== 'exam' && (
                     <span className="shrink-0 pt-1">
-                      {isCorrectOpt && <Check className="w-5 h-5 text-emerald-500 stroke-[3]" />}
-                      {isSelected && !isCorrectOpt && <X className="w-5 h-5 text-rose-500 stroke-[3]" />}
+                      {isCorrectOpt && <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 stroke-[3]" />}
+                      {isSelected && !isCorrectOpt && <X className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500 stroke-[3]" />}
                     </span>
                   )}
                 </button>
@@ -427,7 +428,7 @@ export default function QuestionCard({
             {/* 정답 확인 및 사용자 '자가 채점(맞음/틀림)' 토글 (학습/검토 모드) */}
             {(showExplanation || mode !== 'exam') && isAnswered && (
               <div className="p-4 sm:p-5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50/90 dark:bg-slate-800/80 backdrop-blur-md space-y-3.5">
-                <div className="flex items-center justify-between flex-wrap gap-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">
                     자동 채점 판정: {' '}
                     <span className={`inline-flex items-center gap-1 font-black ${
@@ -439,29 +440,29 @@ export default function QuestionCard({
                   </div>
 
                   {/* 사용자 자가 채점 토글 버튼 */}
-                  <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 p-1.5 rounded-xl border border-slate-300 dark:border-slate-700">
+                  <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700">
                     <span className="text-xs font-bold text-slate-600 dark:text-slate-300 px-1">자가 채점:</span>
                     <button
                       type="button"
                       onClick={() => onToggleSelfGraded(question.id, true)}
-                      className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all cursor-pointer min-h-[36px] ${
+                      className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-black transition-all cursor-pointer min-h-[32px] sm:min-h-[36px] ${
                         isFinalCorrect 
                           ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20' 
                           : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
-                      맞음(정답)
+                      맞음
                     </button>
                     <button
                       type="button"
                       onClick={() => onToggleSelfGraded(question.id, false)}
-                      className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all cursor-pointer min-h-[36px] ${
+                      className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-black transition-all cursor-pointer min-h-[32px] sm:min-h-[36px] ${
                         !isFinalCorrect 
                           ? 'bg-rose-600 text-white shadow-md shadow-rose-500/20' 
                           : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
-                      틀림(오답)
+                      틀림
                     </button>
                   </div>
                 </div>
@@ -490,7 +491,7 @@ export default function QuestionCard({
             </div>
 
             {/* 정답 안내 */}
-            <div className="p-4 sm:p-5 bg-blue-50/90 dark:bg-blue-950/80 border border-blue-300 dark:border-blue-800 rounded-2xl text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-relaxed backdrop-blur-md">
+            <div className="p-4 sm:p-5 bg-blue-50/90 dark:bg-blue-950/80 border border-blue-300 dark:border-blue-800 rounded-2xl text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-relaxed backdrop-blur-md break-keep">
               <span className="font-black text-blue-700 dark:text-blue-300 block mb-1.5 text-base sm:text-lg">
                 정답: {question.correct_answer || question.answer} {!isSubjective && question.options?.[(question.correct_answer || question.answer) - 1] ? `(${question.options[(question.correct_answer || question.answer) - 1]})` : ''}
               </span>
@@ -499,7 +500,7 @@ export default function QuestionCard({
 
             {/* 오답 피하기 포인트 (trap_avoidance) */}
             {question.trap_avoidance && (
-              <div className="p-4 sm:p-5 bg-amber-50/90 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-800 rounded-2xl text-sm sm:text-base text-amber-950 dark:text-amber-100 leading-relaxed backdrop-blur-md">
+              <div className="p-4 sm:p-5 bg-amber-50/90 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-800 rounded-2xl text-sm sm:text-base text-amber-950 dark:text-amber-100 leading-relaxed backdrop-blur-md break-keep">
                 <div className="flex items-center gap-2 font-black text-amber-900 dark:text-amber-300 mb-1.5">
                   <AlertTriangle className="w-5 h-5 text-amber-500" />
                   <span>실전 함정 & 오답 피하기 팁</span>
@@ -510,7 +511,7 @@ export default function QuestionCard({
 
             {/* 수험 꿀팁 (tip) */}
             {question.tip && (
-              <div className="p-4 sm:p-5 bg-indigo-50/90 dark:bg-indigo-950/80 border border-indigo-300 dark:border-indigo-800 rounded-2xl text-sm sm:text-base text-indigo-950 dark:text-indigo-100 leading-relaxed backdrop-blur-md">
+              <div className="p-4 sm:p-5 bg-indigo-50/90 dark:bg-indigo-950/80 border border-indigo-300 dark:border-indigo-800 rounded-2xl text-sm sm:text-base text-indigo-950 dark:text-indigo-100 leading-relaxed backdrop-blur-md break-keep">
                 <div className="flex items-center gap-2 font-black text-indigo-900 dark:text-indigo-300 mb-1.5">
                   <Lightbulb className="w-5 h-5 text-indigo-500" />
                   <span>수험 공략 포인트</span>
@@ -522,13 +523,13 @@ export default function QuestionCard({
         )}
       </div>
 
-      {/* 하단 문제 이동 컨트롤 바 (리퀴드 글래스 - 넉넉한 모바일 터치 영역) */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 bg-slate-50/80 dark:bg-slate-900/90 border-t border-slate-200/80 dark:border-slate-800 backdrop-blur-md">
+      {/* 하단 문제 이동 컨트롤 바 (넉넉한 모바일 터치 영역) */}
+      <div className="flex items-center justify-between px-3.5 sm:px-6 py-2.5 sm:py-4 bg-slate-50/80 dark:bg-slate-900/90 border-t border-slate-200/80 dark:border-slate-800 backdrop-blur-md gap-2">
         <button
           type="button"
           onClick={onPrev}
           disabled={!hasPrev}
-          className="flex items-center gap-1.5 px-4 sm:px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer backdrop-blur-md shadow-xs min-h-[46px]"
+          className="flex items-center gap-1 sm:gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer backdrop-blur-md shadow-xs min-h-[44px] sm:min-h-[46px]"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>이전 문제</span>
@@ -538,9 +539,9 @@ export default function QuestionCard({
           <button
             type="button"
             onClick={() => setShowExplanation(true)}
-            className="text-xs sm:text-sm font-extrabold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 py-2 px-1 cursor-pointer"
+            className="text-xs sm:text-sm font-black text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 py-2 px-1 cursor-pointer truncate max-w-[120px] xs:max-w-none"
           >
-            정답/해설 미리보기
+            해설 보기
           </button>
         )}
 
@@ -548,7 +549,7 @@ export default function QuestionCard({
           type="button"
           onClick={onNext}
           disabled={!hasNext}
-          className="flex items-center gap-1.5 px-5 sm:px-6 py-3 rounded-2xl text-xs sm:text-sm font-black bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md shadow-blue-500/25 cursor-pointer min-h-[46px]"
+          className="flex items-center gap-1 sm:gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-black bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md shadow-blue-500/25 cursor-pointer min-h-[44px] sm:min-h-[46px]"
         >
           <span>다음 문제</span>
           <ChevronRight className="w-4 h-4" />

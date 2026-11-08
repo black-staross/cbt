@@ -47,7 +47,7 @@ export default function ExamTimer({
   const isWarning = secondsLeft <= 600 && secondsLeft > 300; // 10분
 
   return (
-    <div className={`flex items-center justify-between gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition-all border shrink-0 ${
+    <div className={`flex items-center justify-between gap-1.5 sm:gap-2.5 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-xl transition-all border shrink-0 min-h-[34px] sm:min-h-[38px] ${
       isUrgent 
         ? 'bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400 animate-pulse font-bold' 
         : isWarning 
