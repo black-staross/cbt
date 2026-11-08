@@ -160,19 +160,30 @@ export default function ExamHome({
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                      <span className={`px-2 sm:px-2.5 py-0.5 rounded-md sm:rounded-lg text-[10px] sm:text-[11px] font-bold tracking-tight whitespace-nowrap ${
-                        isSubjective
-                          ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20'
-                          : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/10'
-                      }`}>
-                        {isSubjective ? '주관식·실기' : '4지선다'}
-                      </span>
-                      {wrongCount > 0 && (
-                        <span className="text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-0.5 rounded-md sm:rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 whitespace-nowrap">
-                          오답 {wrongCount}
-                        </span>
-                      )}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {/* 요구사항 4: 4지선다/오답수 삭제하고 그 자리에 북마크 버튼 배치 */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onStartExam(exam.id, 'review');
+                        }}
+                        title="북마크 & 오답 복습"
+                        className={`p-1.5 sm:p-2 rounded-xl border transition-colors flex items-center justify-center cursor-pointer min-h-[34px] min-w-[34px] ${
+                          bookmarkCount > 0 || wrongCount > 0
+                            ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500/50 text-blue-600'
+                            : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+                        }`}
+                      >
+                        <Bookmark className={`w-4 h-4 transition-colors ${
+                          bookmarkCount > 0 || wrongCount > 0 ? 'fill-blue-600 text-blue-600' : ''
+                        }`} />
+                        {(bookmarkCount > 0 || wrongCount > 0) && (
+                          <span className="font-mono text-[11px] font-bold ml-1 text-blue-600 dark:text-blue-400">
+                            {bookmarkCount + wrongCount}
+                          </span>
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -334,23 +345,6 @@ export default function ExamHome({
                         <span>연습하기</span>
                       </button>
                     </div>
-
-                    {/* 오답 및 북마크 복습 */}
-                    {(wrongCount > 0 || bookmarkCount > 0) && (
-                      <button
-                        type="button"
-                        onClick={() => onStartExam(exam.id, 'review')}
-                        className="w-full py-2.5 px-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200/70 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-colors flex items-center justify-between cursor-pointer min-h-[38px]"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Bookmark className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />
-                          <span>오답 및 북마크 복습</span>
-                        </div>
-                        <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400">
-                          {wrongCount + bookmarkCount}문항
-                        </span>
-                      </button>
-                    )}
                   </div>
                 </div>
               )}

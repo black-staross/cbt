@@ -37,10 +37,8 @@ export default function QuestionCard({
   activeSubjectId = null
 }) {
   const [showExplanation, setShowExplanation] = useState(mode === 'review');
-  const [showAnswerNumberOnly, setShowAnswerNumberOnly] = useState(false);
   const [subjectiveInput, setSubjectiveInput] = useState(userAnswer || '');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAnswerPopoverOpen, setIsAnswerPopoverOpen] = useState(false);
   const inputRef = useRef(null);
 
   // 문제 변경 시 상태 동기화
@@ -50,7 +48,6 @@ export default function QuestionCard({
       setShowExplanation(true);
     } else if (mode === 'exam') {
       setShowExplanation(false);
-      setShowAnswerNumberOnly(false);
     }
   }, [question?.id, userAnswer, mode]);
 
@@ -196,9 +193,6 @@ export default function QuestionCard({
               const optionNumber = optIdx + 1;
               const isSelected = userAnswer === optionNumber;
               const isCorrectOpt = optionNumber === question.correct_answer;
-              
-              // 요구사항 5: 정답보기 모드 활성화 시 정답 번호만 파란색으로 칠해짐
-              const isAnswerNumberOnlyMode = showAnswerNumberOnly && isCorrectOpt;
 
               let cardStyle = 'border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600 text-slate-900 dark:text-slate-100';
 
@@ -223,13 +217,10 @@ export default function QuestionCard({
                   onClick={() => onAnswer(question.id, optionNumber)}
                   className={`w-full flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border text-left text-sm sm:text-base transition-colors cursor-pointer min-h-[48px] ${cardStyle}`}
                 >
-                  {/* 번호 동그라미: 정답보기 모드에서는 정답 번호만 파란색으로 칠해짐 */}
                   <span className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-mono text-xs font-black shrink-0 transition-colors mt-0.5 ${
                     isSelected
                       ? 'bg-blue-600 text-white shadow-xs'
-                      : isAnswerNumberOnlyMode
-                        ? 'bg-blue-600 text-white border-2 border-blue-600 font-black shadow-xs'
-                        : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700/80'
+                      : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700/80'
                   }`}>
                     {optionNumber}
                   </span>
@@ -268,14 +259,6 @@ export default function QuestionCard({
                 </button>
               </div>
             </form>
-
-            {/* 정답 번호/모범답안 표시 모드 */}
-            {showAnswerNumberOnly && (
-              <div className="p-3 bg-blue-50 dark:bg-blue-950/60 border border-blue-300 dark:border-blue-800 rounded-xl text-xs sm:text-sm text-blue-900 dark:text-blue-200 font-mono font-bold flex items-center gap-2">
-                <Check className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
-                <span>표준 정답: {question.correct_answer || question.answer}</span>
-              </div>
-            )}
 
             {/* 주관식 자가 채점 */}
             {(showExplanation || mode !== 'exam') && isAnswered && (
@@ -378,73 +361,20 @@ export default function QuestionCard({
             <span className="hidden sm:inline">과목·문항</span>
           </button>
 
-          {/* 2. 정답 및 해설 버튼 (클릭 시 팝오버로 정답번호만 보기 vs 해설보기 선택) */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setIsAnswerPopoverOpen(prev => !prev)}
-              title="정답 및 해설 선택"
-              className={`px-2.5 sm:px-3 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-colors flex items-center gap-1.5 min-h-[40px] cursor-pointer ${
-                showAnswerNumberOnly || showExplanation
-                  ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
-              }`}
-            >
-              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>정답 및 해설</span>
-            </button>
-
-            {/* 정답 및 해설 선택 팝오버 */}
-            {isAnswerPopoverOpen && (
-              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-48 p-1.5 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 z-50 space-y-1 animate-in fade-in zoom-in-95 duration-100">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowAnswerNumberOnly(prev => !prev);
-                    setIsAnswerPopoverOpen(false);
-                  }}
-                  className={`w-full px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between text-left transition-colors cursor-pointer ${
-                    showAnswerNumberOnly
-                      ? 'bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 font-black'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  <span>정답 번호만 보기</span>
-                  {showAnswerNumberOnly && <Check className="w-4 h-4 text-blue-600" />}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowExplanation(prev => !prev);
-                    setIsAnswerPopoverOpen(false);
-                  }}
-                  className={`w-full px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between text-left transition-colors cursor-pointer ${
-                    showExplanation
-                      ? 'bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 font-black'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  <span>상세 정답 및 해설</span>
-                  {showExplanation && <Check className="w-4 h-4 text-blue-600" />}
-                </button>
-
-                {(showAnswerNumberOnly || showExplanation) && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowAnswerNumberOnly(false);
-                      setShowExplanation(false);
-                      setIsAnswerPopoverOpen(false);
-                    }}
-                    className="w-full px-3 py-1.5 rounded-xl text-[11px] font-medium text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-center transition-colors cursor-pointer"
-                  >
-                    모두 숨기기
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+          {/* 2. 정답 및 해설 버튼 (누르면 바로 상세 정답 및 해설 토글) */}
+          <button
+            type="button"
+            onClick={() => setShowExplanation(prev => !prev)}
+            title="정답 및 상세 해설 보기"
+            className={`px-3 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-colors flex items-center gap-1.5 min-h-[40px] cursor-pointer ${
+              showExplanation
+                ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+            }`}
+          >
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span>정답 및 해설</span>
+          </button>
 
           {/* 3. 북마크 버튼 (아이콘만 남김, 북마크되면 파란색 채움) */}
           <button
@@ -476,7 +406,7 @@ export default function QuestionCard({
       </div>
 
       {/* =========================================================================
-          요구사항 3: 햄버거 메뉴 모달 (연습하기 과목 선택 & 문항 바로가기)
+          요구사항 2, 3: 햄버거 메뉴 모달 (연습하기 과목 선택 시 창 유지 & 문구 정돈)
          ========================================================================= */}
       {isMenuOpen && (
         <div className="absolute inset-0 z-40 bg-slate-950/60 backdrop-blur-xs flex flex-col justify-end animate-in fade-in duration-150">
@@ -496,17 +426,16 @@ export default function QuestionCard({
               </button>
             </div>
 
-            {/* 과목 선택 탭 (과목이 있을 경우) */}
+            {/* 과목 선택 탭 (과목이 있을 경우 - 요구사항 2: 선택 후 창 내려가지 않고 유지, 요구사항 3: 문구 삭제) */}
             {subjects && subjects.length > 0 && (
               <div className="p-3 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/60 dark:bg-slate-800/40">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">시험 과목 선택:</div>
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
                   {onFilterSubject && (
                     <button
                       type="button"
                       onClick={() => {
                         onFilterSubject(null);
-                        setIsMenuOpen(false);
+                        // 요구사항 2: 상태창 내려가지 않고 유지!
                       }}
                       className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border ${
                         activeSubjectId === null
@@ -530,7 +459,7 @@ export default function QuestionCard({
                             const firstIdx = questions.findIndex(q => q.subject_id === sub.id);
                             if (firstIdx >= 0 && onSelectIndex) onSelectIndex(firstIdx);
                           }
-                          setIsMenuOpen(false);
+                          // 요구사항 2: 상태창 내려가지 않고 유지!
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border ${
                           isSubActive
@@ -546,13 +475,12 @@ export default function QuestionCard({
               </div>
             )}
 
-            {/* 문항 번호 리스트 */}
+            {/* 문항 번호 리스트 (요구사항 3: 콜론 : 삭제하여 '문항 바로 이동') */}
             <div className="flex-1 overflow-y-auto p-4 space-y-2">
-              <div className="text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">문항 바로 이동:</div>
+              <div className="text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">문항 바로 이동</div>
               <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
                 {questions.map((q, qIdx) => {
                   const isCurrent = qIdx === index;
-                  const isQAnswered = q.id in (question ? {} : {}); // 작성 여부
                   return (
                     <button
                       key={q.id}
