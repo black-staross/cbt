@@ -868,7 +868,7 @@ def generate_eip_written_sessions():
                         "subject_id": sub_id,
                         "subject_name": sub_name,
                         "chapter": sub_name,
-                        "question": f"[{sub_name}] {item['q']}",
+                        "question": item['q'],
                         "code_snippet": item.get("code"),
                         "options": item["opts"],
                         "answer": item["ans"],

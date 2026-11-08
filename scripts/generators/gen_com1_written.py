@@ -511,7 +511,7 @@ def generate_com1_written(year=2024, session_name="2024년 상시/정기 기출 
                 "subject_id": sub_id,
                 "subject_name": sub_name,
                 "chapter": sub_name,
-                "question": f"[{sub_name}] {item['q']}",
+                "question": item['q'],
                 "code_snippet": item.get("code"),
                 "options": item["opts"],
                 "answer": item["ans"],

@@ -224,7 +224,7 @@ int main() {
             "subject_id": 1,
             "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
             "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
-            "question": f"[실기 {q_num}번] {item['q']}",
+            "question": item['q'],
             "code_snippet": item.get("code"),
             "options": [],
             "answer": item["accepted"][0],
