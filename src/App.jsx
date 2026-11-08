@@ -5,6 +5,7 @@ import ExamHome from './components/ExamHome';
 import QuestionCard from './components/QuestionCard';
 import OMRCard from './components/OMRCard';
 import ResultModal from './components/ResultModal';
+import SubjectTabBar from './components/SubjectTabBar';
 import { BookOpen, AlertCircle, ArrowLeft } from 'lucide-react';
 
 // 6종 문제 데이터 정적 import (CORS 에러 및 오프라인/단일 HTML 파일 완벽 지원)
@@ -47,6 +48,7 @@ export default function App() {
   const [currentExamId, setCurrentExamId] = useState(null);
   const [currentMode, setCurrentMode] = useState('home'); // 'home' | 'exam' | 'practice' | 'review'
   const [selectedYear, setSelectedYear] = useState('all'); // 'all' | '2024' | '2023' | ...
+  const [selectedSubjectId, setSelectedSubjectId] = useState(null); // 특정 과목 필터링
   
   // 시험 문제 및 진행 상태
   const [questions, setQuestions] = useState([]);
@@ -92,7 +94,7 @@ export default function App() {
   // 현재 선택된 시험 메타데이터
   const currentExam = examsData.find(e => e.id === currentExamId) || null;
 
-  // 시험 시작 핸들러 (연도별 필터링 연동)
+  // 시험 시작 핸들러
   const handleStartExam = (examId, mode, year = selectedYear) => {
     setIsLoading(true);
     try {
@@ -104,7 +106,7 @@ export default function App() {
 
       let targetQuestions = allQuestions;
 
-      // 특정 연도 선택 시 필터링
+      // 특정 연도 선택 시 필터링 (연도별 데이터가 나뉘어져 있을 때)
       if (year && year !== 'all') {
         const filteredByYear = allQuestions.filter(q => String(q.year) === String(year));
         if (filteredByYear.length > 0) {
@@ -120,6 +122,7 @@ export default function App() {
 
       setCurrentExamId(examId);
       setCurrentMode(mode);
+      setSelectedSubjectId(null);
       setQuestions(targetQuestions);
       setCurrentIndex(0);
       setUserAnswers({});
@@ -137,15 +140,46 @@ export default function App() {
     }
   };
 
+  // 특정 과목 집중 학습 시작 핸들러
+  const handleStartSubjectExam = (examId, subjectId) => {
+    setIsLoading(true);
+    try {
+      const allQuestions = QUESTIONS_MAP[examId] || [];
+      const savedWrong = JSON.parse(localStorage.getItem(`${examId}_wrong`) || '[]');
+      const savedBookmarks = JSON.parse(localStorage.getItem(`${examId}_bookmarks`) || '[]');
+
+      const subjectQuestions = allQuestions.filter(q => q.subject_id === subjectId);
+
+      setCurrentExamId(examId);
+      setCurrentMode('practice');
+      setSelectedSubjectId(subjectId);
+      setQuestions(subjectQuestions.length > 0 ? subjectQuestions : allQuestions);
+      setCurrentIndex(0);
+      setUserAnswers({});
+      setSelfGraded({});
+      setBookmarks(savedBookmarks);
+      setWrongNotes(savedWrong);
+      setShowResultModal(false);
+      setIsPaused(false);
+      setIsMobileOmrOpen(false);
+    } catch (err) {
+      console.error('과목 문제 로딩 실패:', err);
+      alert('과목 데이터를 로드하는 중 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // 홈으로 이동 핸들러
   const handleGoHome = () => {
     if (currentMode === 'exam' && !showResultModal) {
-      if (!window.confirm('현재 진행 중인 시험이 종료됩니다. 홈으로 이동하시겠습니까?')) {
+      if (!window.confirm('현재 진행 중인 실전 시험이 종료됩니다. 홈으로 이동하시겠습니까?')) {
         return;
       }
     }
     setCurrentExamId(null);
     setCurrentMode('home');
+    setSelectedSubjectId(null);
     setQuestions([]);
     setUserAnswers({});
     setShowResultModal(false);
@@ -304,7 +338,7 @@ export default function App() {
       <div className="fixed top-1/3 -right-40 w-96 h-96 bg-indigo-500/15 dark:bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed -bottom-40 left-1/3 w-96 h-96 bg-teal-500/10 dark:bg-teal-600/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* 글로벌 상단 헤더 (다크모드 스위치 연동) */}
+      {/* 글로벌 상단 헤더 */}
       <Header
         currentExam={currentExam}
         currentMode={currentMode}
@@ -318,6 +352,17 @@ export default function App() {
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
       />
 
+      {/* CBT 과목 바로가기 탭 바 (시험 진행 모드에서 과목이 2개 이상일 때) */}
+      {currentExam && questions.length > 0 && currentExam.subjects?.length > 1 && (
+        <SubjectTabBar
+          subjects={currentExam.subjects}
+          questions={questions}
+          currentIndex={currentIndex}
+          onSelectIndex={(newIdx) => setCurrentIndex(newIdx)}
+          answers={userAnswers}
+        />
+      )}
+
       {/* 메인 뷰 분기 */}
       <main className="flex-1 flex flex-col relative z-10">
         {isLoading ? (
@@ -325,17 +370,18 @@ export default function App() {
             CBT 시험 데이터를 준비 중입니다...
           </div>
         ) : currentMode === 'home' || !currentExam ? (
-          // 1. 홈 화면 (자격증 및 2020~2024년 회차 즉시 선택)
+          // 1. 홈 화면 (자격증 카드 및 과목별 선택기)
           <ExamHome
             exams={examsData}
             onStartExam={handleStartExam}
+            onStartSubjectExam={handleStartSubjectExam}
             wrongNotesCountByExam={wrongNotesCountByExam}
             bookmarksCountByExam={bookmarksCountByExam}
             selectedYear={selectedYear}
             onSelectYear={(yr) => setSelectedYear(yr)}
           />
         ) : questions.length === 0 ? (
-          // 오답노트/북마크 모드 등에서 문제가 없을 때의 Empty State
+          // Empty State
           <div className="flex-1 flex flex-col items-center justify-center p-8 max-w-md mx-auto text-center space-y-4">
             <div className="w-16 h-16 rounded-3xl glass-pill flex items-center justify-center text-slate-400">
               <BookOpen className="w-8 h-8 text-blue-500" />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Bookmark, AlertCircle, X, ChevronRight, FileCheck } from 'lucide-react';
+import { CheckCircle2, Bookmark, AlertCircle, X, ChevronRight, FileCheck, Layers } from 'lucide-react';
 
 export default function OMRCard({
   questions = [],
@@ -34,6 +34,93 @@ export default function OMRCard({
     return true;
   });
 
+  // 과목별 그룹핑 (과목이 2개 이상일 때)
+  const hasMultipleSubjects = new Set(questions.map(q => q.subject_id || q.subject_name)).size > 1;
+
+  // 과목별 문항 분할 매핑
+  const subjectGroups = [];
+  if (hasMultipleSubjects && filter === 'all') {
+    const map = new Map();
+    questions.forEach((q, idx) => {
+      const subKey = q.subject_id || 1;
+      const subName = q.subject_name || q.chapter || `제${subKey}과목`;
+      if (!map.has(subKey)) {
+        map.set(subKey, {
+          id: subKey,
+          name: subName,
+          items: []
+        });
+      }
+      map.get(subKey).items.push({ q, realIndex: idx });
+    });
+    subjectGroups.push(...map.values());
+  }
+
+  const renderQuestionItem = (q, realIndex) => {
+    const isCurrent = realIndex === currentIndex;
+    const hasAnswer = isQuestionAnswered(q);
+    const currentAnswer = answers[q.id];
+    const isBookmarked = bookmarks.includes(q.id);
+
+    return (
+      <div
+        key={q.id}
+        onClick={() => {
+          onSelectQuestion(realIndex);
+          if (isMobileOpen && onCloseMobile) onCloseMobile();
+        }}
+        className={`flex items-center justify-between px-3.5 py-2.5 sm:py-3 rounded-2xl cursor-pointer text-xs sm:text-sm transition-all border min-h-[46px] ${
+          isCurrent
+            ? 'bg-blue-50/95 dark:bg-blue-950/90 border-blue-600 dark:border-blue-400 text-blue-950 dark:text-blue-50 ring-2 ring-blue-500/40 font-black shadow-md'
+            : hasAnswer
+              ? 'bg-slate-50/90 dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700'
+              : 'bg-white/60 dark:bg-slate-900/60 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-slate-400'
+        }`}
+      >
+        <div className="flex items-center gap-2">
+          <span className={`w-7 text-left font-mono font-black text-xs sm:text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'}`}>
+            {String(realIndex + 1).padStart(2, '0')}
+          </span>
+          {isBookmarked && (
+            <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500" />
+          )}
+        </div>
+
+        {/* 마킹 표시 */}
+        <div className="flex items-center gap-1.5">
+          {isSubjective ? (
+            <span className={`px-2.5 py-1 rounded-lg text-xs font-bold font-mono truncate max-w-[130px] ${
+              hasAnswer 
+                ? 'bg-slate-900 dark:bg-slate-700 text-white' 
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-400 italic'
+            }`}>
+              {hasAnswer ? currentAnswer : '미작성'}
+            </span>
+          ) : (
+            // 4지선다 OMR 마킹 시각화 (손가락으로 쉽게 인지할 수 있는 크기)
+            <div className="flex items-center gap-1.5">
+              {[1, 2, 3, 4].map((num) => {
+                const isSelected = currentAnswer === num;
+                return (
+                  <span
+                    key={num}
+                    className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-mono text-xs font-black border transition-colors ${
+                      isSelected
+                        ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/30'
+                        : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 bg-white/90 dark:bg-slate-800/90'
+                    }`}
+                  >
+                    {num}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={`flex flex-col h-full glass-card rounded-3xl shadow-xl overflow-hidden select-none transition-colors ${
       isMobileOpen ? 'fixed inset-0 z-50 p-4 bg-slate-950/70 backdrop-blur-xl' : ''
@@ -52,8 +139,9 @@ export default function OMRCard({
             
             {isMobileOpen && (
               <button
+                type="button"
                 onClick={onCloseMobile}
-                className="p-1 rounded-xl text-slate-500 hover:bg-slate-200/60 dark:hover:bg-slate-800"
+                className="p-1 rounded-xl text-slate-500 hover:bg-slate-200/60 dark:hover:bg-slate-800 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -114,78 +202,43 @@ export default function OMRCard({
           </div>
         </div>
 
-        {/* 문항 번호 그리드 리스트 */}
-        <div className="flex-1 overflow-y-auto p-3 sm:p-3.5 space-y-2">
-          {filteredQuestions.length === 0 ? (
+        {/* 문항 번호 그리드 리스트 (과목별 섹션 헤더 포함) */}
+        <div className="flex-1 overflow-y-auto p-3 sm:p-3.5 space-y-3">
+          {hasMultipleSubjects && filter === 'all' ? (
+            // 과목별로 묶어서 표시
+            subjectGroups.map((group) => {
+              const subAnswered = group.items.filter(({ q }) => isQuestionAnswered(q)).length;
+              const subTotal = group.items.length;
+              const isSubDone = subAnswered >= subTotal;
+
+              return (
+                <div key={group.id} className="space-y-1.5 pt-1">
+                  {/* 과목 구분 헤더 */}
+                  <div className="flex items-center justify-between px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-slate-800/60 border border-slate-300/40 dark:border-slate-700/60 text-xs font-black text-slate-800 dark:text-slate-200">
+                    <span className="truncate">{group.name}</span>
+                    <span className={`font-mono text-[11px] px-1.5 py-0.5 rounded ${
+                      isSubDone ? 'bg-emerald-500 text-white' : 'bg-slate-300 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                    }`}>
+                      {subAnswered}/{subTotal}
+                    </span>
+                  </div>
+
+                  {/* 해당 과목 문항 리스트 */}
+                  <div className="space-y-1.5">
+                    {group.items.map(({ q, realIndex }) => renderQuestionItem(q, realIndex))}
+                  </div>
+                </div>
+              );
+            })
+          ) : filteredQuestions.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-semibold">
               <CheckCircle2 className="w-8 h-8 stroke-[1.5] mb-2 text-slate-400" />
               해당하는 문항이 없습니다.
             </div>
           ) : (
-            filteredQuestions.map((q, idx) => {
+            filteredQuestions.map((q) => {
               const realIndex = questions.findIndex(item => item.id === q.id);
-              const isCurrent = realIndex === currentIndex;
-              const hasAnswer = isQuestionAnswered(q);
-              const currentAnswer = answers[q.id];
-              const isBookmarked = bookmarks.includes(q.id);
-
-              return (
-                <div
-                  key={q.id}
-                  onClick={() => {
-                    onSelectQuestion(realIndex);
-                    if (isMobileOpen && onCloseMobile) onCloseMobile();
-                  }}
-                  className={`flex items-center justify-between px-3.5 py-2.5 sm:py-3 rounded-2xl cursor-pointer text-xs sm:text-sm transition-all border min-h-[46px] ${
-                    isCurrent
-                      ? 'bg-blue-50/95 dark:bg-blue-950/90 border-blue-600 dark:border-blue-400 text-blue-950 dark:text-blue-50 ring-2 ring-blue-500/40 font-black shadow-md'
-                      : hasAnswer
-                        ? 'bg-slate-50/90 dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700'
-                        : 'bg-white/60 dark:bg-slate-900/60 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-slate-400'
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className={`w-7 text-left font-mono font-black text-xs sm:text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'}`}>
-                      {String(realIndex + 1).padStart(2, '0')}
-                    </span>
-                    {isBookmarked && (
-                      <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    )}
-                  </div>
-
-                  {/* 마킹 표시 */}
-                  <div className="flex items-center gap-1.5">
-                    {isSubjective ? (
-                      <span className={`px-2.5 py-1 rounded-lg text-xs font-bold font-mono truncate max-w-[130px] ${
-                        hasAnswer 
-                          ? 'bg-slate-900 dark:bg-slate-700 text-white' 
-                          : 'bg-slate-100 dark:bg-slate-800 text-slate-400 italic'
-                      }`}>
-                        {hasAnswer ? currentAnswer : '미작성'}
-                      </span>
-                    ) : (
-                      // 4지선다 OMR 마킹 시각화 (손가락으로 쉽게 인지할 수 있는 크기)
-                      <div className="flex items-center gap-1.5">
-                        {[1, 2, 3, 4].map((num) => {
-                          const isSelected = currentAnswer === num;
-                          return (
-                            <span
-                              key={num}
-                              className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-mono text-xs font-black border transition-colors ${
-                                isSelected
-                                  ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/30'
-                                  : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 bg-white/90 dark:bg-slate-800/90'
-                              }`}
-                            >
-                              {num}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
+              return renderQuestionItem(q, realIndex);
             })
           )}
         </div>

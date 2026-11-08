@@ -1,1948 +1,383 @@
 [
   {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-001",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-001",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 1번] 다음 C언어로 작성된 프로그램의 실행 결과를 쓰시오.",
+    "code_snippet": "#include <stdio.h>\n\nint recursive(int n) {\n    if (n <= 1) return 1;\n    return n * recursive(n - 1);\n}\n\nint main() {\n    int res = recursive(5);\n    printf(\"%d\", res);\n    return 0;\n}",
+    "options": [],
+    "answer": "120",
+    "correct_answer": "120",
+    "accepted_answers": [
+      "120"
+    ],
+    "explanation": "recursive(5) = 5 * 4 * 3 * 2 * 1 = 120 (팩토리얼 5!)을 계산하여 출력합니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-002",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-002",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 2번] 다음 Java 언어로 작성된 프로그램의 실행 결과를 쓰시오.",
+    "code_snippet": "class Parent {\n    public void show() {\n        System.out.print(\"P\");\n    }\n}\n\nclass Child extends Parent {\n    @Override\n    public void show() {\n        System.out.print(\"C\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Parent obj = new Child();\n        obj.show();\n    }\n}",
+    "options": [],
+    "answer": "C",
+    "correct_answer": "C",
+    "accepted_answers": [
+      "C"
+    ],
+    "explanation": "동적 바인딩(다형성)에 의해 참조 변수 타입(Parent)이 아닌 실제 인스턴스 타입(Child)의 오버라이딩된 show() 메서드가 호출되어 'C'가 출력됩니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-003",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-003",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 3번] 다음 Python 언어로 작성된 프로그램의 실행 결과를 쓰시오.",
+    "code_snippet": "a = [10, 20, 30, 40, 50]\nb = [x * 2 for x in a if x > 25]\nprint(sum(b))",
+    "options": [],
+    "answer": "240",
+    "correct_answer": "240",
+    "accepted_answers": [
+      "240"
+    ],
+    "explanation": "a 리스트에서 25보다 큰 원소는 30, 40, 50입니다. 여기에 각각 2를 곱하면 [60, 80, 100]이 되고, sum(b) = 60 + 80 + 100 = 240이 됩니다."
   },
   {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-004",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-004",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 4번] 다음 C언어로 작성된 프로그램의 포인터 연산 실행 결과를 쓰시오.",
+    "code_snippet": "#include <stdio.h>\n\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *(p + 1) - *(p - 1));\n    return 0;\n}",
+    "options": [],
+    "answer": "20",
+    "correct_answer": "20",
+    "accepted_answers": [
+      "20"
+    ],
+    "explanation": "p는 arr[2](30)의 주소를 가리킵니다. *(p + 1)은 arr[3]인 40이고, *(p - 1)은 arr[1]인 20입니다. 따라서 40 - 20 = 20이 출력됩니다."
   },
   {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-005",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-005",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 5번] 다음 Java 프로그램의 실행 결과를 쓰시오.",
+    "code_snippet": "public class Main {\n    public static void main(String[] args) {\n        int a = 5, b = 2;\n        System.out.print(a / b + \" \" + a % b);\n    }\n}",
+    "options": [],
+    "answer": "2 1",
+    "correct_answer": "2 1",
+    "accepted_answers": [
+      "2 1"
+    ],
+    "explanation": "정수 나눗셈 a / b 는 몫인 2가 되고, 나머지 연산 a % b 는 1이 되므로 '2 1'이 출력됩니다."
   },
   {
-    "chapter": "소프트웨어 테스트",
+    "id": "eip-practical-006",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
+    "type": "subjective",
     "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 6번] 관계형 데이터베이스(RDBMS)에서 '사원' 테이블의 직급이 '과장'인 사원의 급여를 기존보다 10% 인상하는 SQL 문이다. 괄호 (1), (2)에 들어갈 알맞은 예약어를 쓰시오.\n\n( 1 ) 사원\n( 2 ) 급여 = 급여 * 1.1\nWHERE 직급 = '과장';",
+    "code_snippet": null,
+    "options": [],
+    "answer": "UPDATE, SET",
+    "correct_answer": "UPDATE, SET",
+    "accepted_answers": [
+      "UPDATE, SET",
+      "UPDATE SET",
+      "UPDATE / SET"
+    ],
+    "explanation": "테이블 레코드 갱신 구문은 UPDATE 테이블명 SET 컬럼명 = 값 WHERE 조건 형식입니다. 따라서 (1) UPDATE, (2) SET 입니다."
+  },
+  {
+    "id": "eip-practical-007",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
+    "type": "subjective",
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 7번] 다음 학생 테이블에서 학과별 학생 수가 3명 이상인 학과명과 학생 수를 출력하는 SQL 쿼리문이다. 괄호 (1), (2)에 들어갈 키워드를 순서대로 쓰시오.\n\nSELECT 학과, COUNT(*) \nFROM 학생 \n( 1 ) 학과 \n( 2 ) COUNT(*) >= 3;",
+    "code_snippet": null,
+    "options": [],
+    "answer": "GROUP BY, HAVING",
+    "correct_answer": "GROUP BY, HAVING",
+    "accepted_answers": [
+      "GROUP BY, HAVING",
+      "GROUP BY HAVING",
+      "GROUP BY / HAVING"
+    ],
+    "explanation": "그룹화 절은 GROUP BY 학과 이며, 그룹에 대한 집계 조건은 HAVING COUNT(*) >= 3 입니다."
+  },
+  {
+    "id": "eip-practical-008",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
+    "type": "subjective",
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 8번] 소프트웨어 테스트 원리 중 '동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾아낼 수 없으므로, 주기적으로 테스트 케이스를 점검하고 개선해야 한다'는 원리를 의미하는 용어를 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "살충제 패러독스",
     "correct_answer": "살충제 패러독스",
     "accepted_answers": [
       "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
+      "Pesticide Paradox"
     ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-006",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
+    "explanation": "살충제에 내성이 생기듯 동일한 테스트 케이스를 반복하면 새 버그를 못 잡는다는 원리는 '살충제 패러독스(Pesticide Paradox)'입니다."
   },
   {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-007",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
+    "id": "eip-practical-009",
+    "year": 2024,
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
     "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 9번] GoF 디자인 패턴 중 애플리케이션 전역에서 어떤 클래스의 인스턴스가 오직 하나만 생성되도록 보장하고, 어디서든 이 인스턴스에 접근할 수 있도록 하는 생성 패턴의 명칭을 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "싱글톤",
+    "correct_answer": "싱글톤",
     "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-008",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-009",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-010",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-011",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-012",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-013",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-014",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
       "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-015",
-    "year": 2026,
-    "session": "2026년 실기 신유형",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-016",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-017",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-018",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-019",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
+      "싱글톤 패턴",
       "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
+      "Singleton Pattern"
     ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-020",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
+    "explanation": "하나의 유일한 인스턴스를 공유하여 사용하는 디자인 패턴은 싱글톤(Singleton) 패턴입니다."
   },
   {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-021",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
-  },
-  {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-022",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-023",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-024",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-025",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-026",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-027",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-028",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-029",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-030",
-    "year": 2025,
-    "session": "2025년 최신 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-031",
+    "id": "eip-practical-010",
     "year": 2024,
-    "session": "2024년 제1회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 10번] 다음 C언어 프로그램의 비트 시프트 연산 실행 결과를 쓰시오.",
+    "code_snippet": "#include <stdio.h>\n\nint main() {\n    int x = 8;\n    int y = x << 2;\n    int z = x >> 1;\n    printf(\"%d\", y + z);\n    return 0;\n}",
+    "options": [],
+    "answer": "36",
+    "correct_answer": "36",
+    "accepted_answers": [
+      "36"
+    ],
+    "explanation": "x << 2 는 8 * 2^2 = 32 이고, x >> 1 은 8 / 2^1 = 4 입니다. y + z = 32 + 4 = 36 입니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-032",
+    "id": "eip-practical-011",
     "year": 2024,
-    "session": "2024년 제2회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 11번] 네트워크 공격 기법 중 TCP 3-Way Handshake 과정에서 출발지 IP 주소를 위조하여 서버에 다량의 SYN 패킷만을 지속적으로 보내 백로그 큐를 가득 채워 정상적인 연결 요청을 거부하게 만드는 서비스 거부(DoS) 공격의 명칭을 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "SYN Flooding",
+    "correct_answer": "SYN Flooding",
+    "accepted_answers": [
+      "SYN Flooding",
+      "SYN 플러딩",
+      "SYN 플러드"
+    ],
+    "explanation": "TCP 연결 수립 과정의 취약점을 악용하여 SYN 패킷만 보내 서버 자원을 고갈시키는 공격은 SYN Flooding(SYN 플러딩)입니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-033",
+    "id": "eip-practical-012",
     "year": 2024,
-    "session": "2024년 제3회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 12번] 네트워크에서 IP 계층(3계층)의 보안을 위해 개발된 프로토콜 군으로, 패킷의 암호화(ESP), 인증 및 무결성(AH), 키 관리(IKE)를 제공하여 VPN 구축에 널리 활용되는 프로토콜의 명칭을 영문 약어로 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "IPSec",
+    "correct_answer": "IPSec",
+    "accepted_answers": [
+      "IPSec",
+      "IPsec",
+      "IPSEC"
+    ],
+    "explanation": "IP 보안 표준 프로토콜은 IPSec(Internet Protocol Security)입니다."
   },
   {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-034",
+    "id": "eip-practical-013",
     "year": 2024,
-    "session": "2024년 제1회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 13번] 다음 Java 프로그램의 다형성 실행 결과를 쓰시오.",
+    "code_snippet": "abstract class Calc {\n    abstract int add(int a, int b);\n}\n\nclass MyCalc extends Calc {\n    int add(int a, int b) {\n        return a + b;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Calc c = new MyCalc();\n        System.out.print(c.add(15, 25));\n    }\n}",
+    "options": [],
+    "answer": "40",
+    "correct_answer": "40",
+    "accepted_answers": [
+      "40"
+    ],
+    "explanation": "추상 클래스 Calc를 상속받은 MyCalc의 add 메서드가 실행되어 15 + 25 = 40을 반환합니다."
   },
   {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-035",
+    "id": "eip-practical-014",
     "year": 2024,
-    "session": "2024년 제2회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 14번] 다음 Python 프로그램의 실행 결과를 쓰시오.",
+    "code_snippet": "text = \"INFORMATION\"\nprint(text[2:7])",
+    "options": [],
+    "answer": "FORMA",
+    "correct_answer": "FORMA",
+    "accepted_answers": [
+      "FORMA"
+    ],
+    "explanation": "Python 문자열 슬라이싱에서 0:I, 1:N, 2:F, 3:O, 4:R, 5:M, 6:A, 7:T 이며 [2:7]은 2번 인덱스부터 6번 인덱스까지이므로 'FORMA'가 출력됩니다."
   },
   {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-036",
+    "id": "eip-practical-015",
     "year": 2024,
-    "session": "2024년 제3회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 15번] 데이터베이스의 이상(Anomaly) 현상 3가지를 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "삽입이상, 삭제이상, 갱신이상",
+    "correct_answer": "삽입이상, 삭제이상, 갱신이상",
+    "accepted_answers": [
+      "삽입이상, 삭제이상, 갱신이상",
+      "삽입 이상, 삭제 이상, 갱신 이상",
+      "삽입, 삭제, 갱신"
+    ],
+    "explanation": "정규화되지 않은 릴레이션에서 발생하는 이상의 3가지는 삽입 이상(Insertion Anomaly), 삭제 이상(Deletion Anomaly), 갱신 이상(Update Anomaly)입니다."
   },
   {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-037",
+    "id": "eip-practical-016",
     "year": 2024,
-    "session": "2024년 제1회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 16번] 모듈 내의 모든 기능 요소들이 단 하나의 명확한 고유 목적을 달성하기 위해 긴밀하게 결합되어 있어, 유지보수성이 가장 높은 최상의 모듈 응집도(Cohesion) 명칭을 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "기능적 응집도",
+    "correct_answer": "기능적 응집도",
+    "accepted_answers": [
+      "기능적 응집도",
+      "기능적",
+      "Functional Cohesion"
+    ],
+    "explanation": "응집도 중 가장 바람직하고 강한 응집도는 '기능적 응집도(Functional Cohesion)'입니다."
   },
   {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-038",
+    "id": "eip-practical-017",
     "year": 2024,
-    "session": "2024년 제2회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 17번] 소프트웨어 아키텍처 모델 중 모델(Model), 뷰(View), 제어기(Controller)의 3가지 구성 요소로 애플리케이션의 역할을 분리하여 상호 영향을 최소화하는 대표적인 아키텍처 패턴의 약어를 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "MVC",
+    "correct_answer": "MVC",
+    "accepted_answers": [
+      "MVC",
+      "MVC 패턴"
+    ],
+    "explanation": "사용자 인터페이스와 비즈니스 로직을 분리하는 패턴은 MVC(Model-View-Controller) 패턴입니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-039",
+    "id": "eip-practical-018",
     "year": 2024,
-    "session": "2024년 제3회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 18번] 다음 C언어 프로그램의 구조체 포인터 접근 실행 결과를 쓰시오.",
+    "code_snippet": "#include <stdio.h>\n\nstruct Point {\n    int x;\n    int y;\n};\n\nint main() {\n    struct Point p1 = {10, 20};\n    struct Point *ptr = &p1;\n    ptr->x += 5;\n    ptr->y *= 2;\n    printf(\"%d %d\", ptr->x, ptr->y);\n    return 0;\n}",
+    "options": [],
+    "answer": "15 40",
+    "correct_answer": "15 40",
+    "accepted_answers": [
+      "15 40"
+    ],
+    "explanation": "ptr->x 는 p1.x에 5를 더해 15가 되고, ptr->y는 p1.y에 2를 곱해 40이 됩니다. 따라서 '15 40'이 출력됩니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-040",
+    "id": "eip-practical-019",
     "year": 2024,
-    "session": "2024년 제1회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
+    "subject_id": 1,
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 19번] 인터넷 서비스에서 사용자의 비밀번호를 제3자 애플리케이션에 직접 노출하지 않고도, 접근 권한을 안전하게 위임(인증 및 인가)하기 위한 개방형 표준 프로토콜의 명칭을 쓰시오. (예: 구글/카카오 계정으로 간편 로그인)",
+    "code_snippet": null,
+    "options": [],
+    "answer": "OAuth",
+    "correct_answer": "OAuth",
+    "accepted_answers": [
+      "OAuth",
+      "OAuth 2.0",
+      "OAUTH"
+    ],
+    "explanation": "토큰 기반의 제3자 인가 표준 프로토콜은 OAuth(Open Authorization)입니다."
   },
   {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-041",
+    "id": "eip-practical-020",
     "year": 2024,
-    "session": "2024년 제2회 기출복원",
+    "session": "2024년 제1회 실기 기출",
     "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
     "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
+    "subject_name": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "chapter": "실무 통합 (단답형 / SQL / 코드 추적)",
+    "question": "[실기 20번] 데이터베이스 트랜잭션의 특성(ACID) 중 '트랜잭션이 성공적으로 완료(Commit)되면 시스템에 장애가 발생하더라도 그 결과는 영구적으로 데이터베이스에 반영되어 보존되어야 한다'는 원칙을 쓰시오.",
+    "code_snippet": null,
+    "options": [],
+    "answer": "영속성",
+    "correct_answer": "영속성",
     "accepted_answers": [
-      "8"
+      "영속성",
+      "지속성",
+      "Durability"
     ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-042",
-    "year": 2024,
-    "session": "2024년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-043",
-    "year": 2024,
-    "session": "2024년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-044",
-    "year": 2024,
-    "session": "2024년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-045",
-    "year": 2024,
-    "session": "2024년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-046",
-    "year": 2023,
-    "session": "2023년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-047",
-    "year": 2023,
-    "session": "2023년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-048",
-    "year": 2023,
-    "session": "2023년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-049",
-    "year": 2023,
-    "session": "2023년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-050",
-    "year": 2023,
-    "session": "2023년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-051",
-    "year": 2023,
-    "session": "2023년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
-  },
-  {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-052",
-    "year": 2023,
-    "session": "2023년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-053",
-    "year": 2023,
-    "session": "2023년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-054",
-    "year": 2023,
-    "session": "2023년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-055",
-    "year": 2023,
-    "session": "2023년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-056",
-    "year": 2023,
-    "session": "2023년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-057",
-    "year": 2023,
-    "session": "2023년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-058",
-    "year": 2023,
-    "session": "2023년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-059",
-    "year": 2023,
-    "session": "2023년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-060",
-    "year": 2023,
-    "session": "2023년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-061",
-    "year": 2022,
-    "session": "2022년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-062",
-    "year": 2022,
-    "session": "2022년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-063",
-    "year": 2022,
-    "session": "2022년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-064",
-    "year": 2022,
-    "session": "2022년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-065",
-    "year": 2022,
-    "session": "2022년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-066",
-    "year": 2022,
-    "session": "2022년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
-  },
-  {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-067",
-    "year": 2022,
-    "session": "2022년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-068",
-    "year": 2022,
-    "session": "2022년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-069",
-    "year": 2022,
-    "session": "2022년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-070",
-    "year": 2022,
-    "session": "2022년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-071",
-    "year": 2022,
-    "session": "2022년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-072",
-    "year": 2022,
-    "session": "2022년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-073",
-    "year": 2022,
-    "session": "2022년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-074",
-    "year": 2022,
-    "session": "2022년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-075",
-    "year": 2022,
-    "session": "2022년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-076",
-    "year": 2021,
-    "session": "2021년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-077",
-    "year": 2021,
-    "session": "2021년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-078",
-    "year": 2021,
-    "session": "2021년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-079",
-    "year": 2021,
-    "session": "2021년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-080",
-    "year": 2021,
-    "session": "2021년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-081",
-    "year": 2021,
-    "session": "2021년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
-  },
-  {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-082",
-    "year": 2021,
-    "session": "2021년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-083",
-    "year": 2021,
-    "session": "2021년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-084",
-    "year": 2021,
-    "session": "2021년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-085",
-    "year": 2021,
-    "session": "2021년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-086",
-    "year": 2021,
-    "session": "2021년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-087",
-    "year": 2021,
-    "session": "2021년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-088",
-    "year": 2021,
-    "session": "2021년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-089",
-    "year": 2021,
-    "session": "2021년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-090",
-    "year": 2021,
-    "session": "2021년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-091",
-    "year": 2020,
-    "session": "2020년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-092",
-    "year": 2020,
-    "session": "2020년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-093",
-    "year": 2020,
-    "session": "2020년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-094",
-    "year": 2020,
-    "session": "2020년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-095",
-    "year": 2020,
-    "session": "2020년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
-  },
-  {
-    "chapter": "소프트웨어 테스트",
-    "subject_id": 1,
-    "question": "동일한 테스트 케이스로 반복 실행하면 더 이상 새로운 결함을 찾지 못하므로, 정기적으로 테스트 케이스를 점검하고 개선해야 한다는 원리는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "살충제 패러독스",
-    "accepted_answers": [
-      "살충제 패러독스",
-      "Pesticide Paradox",
-      "살충제패러독스"
-    ],
-    "explanation": "동일한 살충제를 계속 쓰면 해충이 내성을 갖는 현상에 빗댄 '살충제 패러독스(Pesticide Paradox)' 원리입니다.",
-    "id": "wpc-practical-096",
-    "year": 2020,
-    "session": "2020년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 테스트"
-  },
-  {
-    "chapter": "정보보안 및 암호화",
-    "subject_id": 1,
-    "question": "미국 국립표준기술연구소(NIST)에서 DES의 취약점을 보완하기 위해 발표한 대칭키 블록 암호화 알고리즘으로 128, 192, 256비트 키 길이를 지원하는 알고리즘은?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "AES",
-    "accepted_answers": [
-      "AES",
-      "aes",
-      "Advanced Encryption Standard"
-    ],
-    "explanation": "DES를 대체한 현대 표준 대칭키 암호화 알고리즘은 AES(Advanced Encryption Standard)입니다.",
-    "id": "wpc-practical-097",
-    "year": 2020,
-    "session": "2020년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "정보보안 및 암호화"
-  },
-  {
-    "chapter": "네트워크 및 운영체제",
-    "subject_id": 1,
-    "question": "IP 주소 210.120.5.0/24 네트워크를 서브넷 마스크 255.255.255.192로 분할할 때 생성되는 서브넷(Subnet)의 개수는?",
-    "options": null,
-    "answer": null,
-    "correct_answer": "4",
-    "accepted_answers": [
-      "4",
-      "4개"
-    ],
-    "explanation": "255.255.255.192는 마지막 8비트 중 상위 2비트(128+64=192)를 서브넷 비트로 사용하므로 2^2 = 4개의 서브넷이 생성됩니다.",
-    "id": "wpc-practical-098",
-    "year": 2020,
-    "session": "2020년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "네트워크 및 운영체제"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int sum = 0;\n    for(int i = 1; i <= 10; i++) {\n        if(i % 3 == 0) sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "1부터 10까지 3의 배수는 3, 6, 9입니다. 3 + 6 + 9 = 18입니다.",
-    "id": "wpc-practical-099",
-    "year": 2020,
-    "session": "2020년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 코드의 출력 결과를 쓰시오.",
-    "code_snippet": "class A {\n    int a = 10;\n    int get() { return a; }\n}\nclass B extends A {\n    int a = 20;\n    int get() { return a + 5; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.print(obj.get());\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "25",
-    "accepted_answers": [
-      "25"
-    ],
-    "explanation": "다형성에 의해 오버라이딩된 자식 클래스 B의 get() 메서드가 호출됩니다. B의 a는 20이므로 20 + 5 = 25가 출력됩니다.",
-    "id": "wpc-practical-100",
-    "year": 2020,
-    "session": "2020년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (C언어)",
-    "subject_id": 1,
-    "question": "다음 C언어 소스코드의 실행 결과로 출력되는 값을 입력하세요.",
-    "code_snippet": "#include <stdio.h>\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d\", *p + *(p + 1));\n    return 0;\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "70",
-    "accepted_answers": [
-      "70"
-    ],
-    "explanation": "arr+2는 arr[2]인 30을 가리킵니다. *(p+1)은 다음 원소인 arr[3]=40입니다. 따라서 30 + 40 = 70이 출력됩니다.",
-    "id": "wpc-practical-101",
-    "year": 2020,
-    "session": "2020년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (C언어)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Java)",
-    "subject_id": 1,
-    "question": "다음 Java 프로그램의 출력 결과를 작성하시오.",
-    "code_snippet": "class Parent {\n    int compute(int num) {\n        if (num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Parent();\n        System.out.print(p.compute(6));\n    }\n}",
-    "options": null,
-    "answer": null,
-    "correct_answer": "8",
-    "accepted_answers": [
-      "8"
-    ],
-    "explanation": "피보나치 재귀 함수입니다. F(0)=0, F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8 입니다.",
-    "id": "wpc-practical-102",
-    "year": 2020,
-    "session": "2020년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Java)"
-  },
-  {
-    "chapter": "프로그래밍 언어 활용 (Python)",
-    "subject_id": 1,
-    "question": "다음 파이썬(Python) 코드의 실행 결과를 작성하시오.",
-    "code_snippet": "a = [1, 2, 3, 4, 5]\nres = [x * 2 for x in a if x % 2 == 1]\nprint(sum(res))",
-    "options": null,
-    "answer": null,
-    "correct_answer": "18",
-    "accepted_answers": [
-      "18"
-    ],
-    "explanation": "a에서 홀수인 1, 3, 5를 추출하여 각각 2를 곱하면 [2, 6, 10]이 됩니다. 이 리스트의 합 sum은 2 + 6 + 10 = 18입니다.",
-    "id": "wpc-practical-103",
-    "year": 2020,
-    "session": "2020년 제1회 기출복원",
-    "type": "subjective",
-    "subject_name": "프로그래밍 언어 활용 (Python)"
-  },
-  {
-    "chapter": "데이터베이스 구축 (SQL)",
-    "subject_id": 1,
-    "question": "STUDENT 테이블에서 학과(DEPT)가 '컴퓨터'인 학생들의 성명(NAME)을 중복 없이 조회하는 SQL문의 빈칸을 채우시오.",
-    "code_snippet": "SELECT [ 괄호 ] NAME FROM STUDENT WHERE DEPT = '컴퓨터';",
-    "options": null,
-    "answer": null,
-    "correct_answer": "DISTINCT",
-    "accepted_answers": [
-      "DISTINCT",
-      "distinct"
-    ],
-    "explanation": "SQL에서 중복된 행을 제거하고 고유한 값만 출력할 때 사용하는 키워드는 DISTINCT입니다.",
-    "id": "wpc-practical-104",
-    "year": 2020,
-    "session": "2020년 제2회 기출복원",
-    "type": "subjective",
-    "subject_name": "데이터베이스 구축 (SQL)"
-  },
-  {
-    "chapter": "소프트웨어 공학 및 설계",
-    "subject_id": 1,
-    "question": "하나의 클래스에 오직 하나의 인스턴스만 생성되도록 보장하고, 어디서든 전역적으로 접근할 수 있도록 하는 디자인 패턴의 이름을 영문으로 쓰시오.",
-    "options": null,
-    "answer": null,
-    "correct_answer": "Singleton",
-    "accepted_answers": [
-      "Singleton",
-      "singleton",
-      "싱글톤",
-      "싱글톤 패턴"
-    ],
-    "explanation": "GoF 생성 패턴 중 싱글톤(Singleton) 패턴에 대한 설명입니다.",
-    "id": "wpc-practical-105",
-    "year": 2020,
-    "session": "2020년 제3회 기출복원",
-    "type": "subjective",
-    "subject_name": "소프트웨어 공학 및 설계"
+    "explanation": "커밋된 트랜잭션의 결과가 유실되지 않고 영구 보존되어야 한다는 특성은 영속성/지속성(Durability)입니다."
   }
 ]
