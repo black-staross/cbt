@@ -8,6 +8,7 @@ import {
   Play, 
   BookOpen, 
   Bookmark, 
+  BookX,
   Clock, 
   CheckCircle2, 
   Calendar,
@@ -161,28 +162,49 @@ export default function ExamHome({
                     </div>
 
                     <div className="flex items-center gap-1.5 shrink-0">
-                      {/* 요구사항 4: 4지선다/오답수 삭제하고 그 자리에 북마크 버튼 배치 */}
+                      {/* 요구사항 2: 오답노트 버튼을 북마크 왼쪽에 새로 만드는데 문구없이 아이콘으로 만들어 */}
+                      {/* 요구사항 3: 북마크 수나 오답노트 수를 따로 숫자로 표시하지 마 */}
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          onStartExam(exam.id, 'review');
+                          if (wrongCount === 0) {
+                            alert('저장된 오답 문제가 없습니다.');
+                            return;
+                          }
+                          onStartExam(exam.id, 'wrong');
                         }}
-                        title="북마크 & 오답 복습"
+                        title="오답노트 복습"
                         className={`p-1.5 sm:p-2 rounded-xl border transition-colors flex items-center justify-center cursor-pointer min-h-[34px] min-w-[34px] ${
-                          bookmarkCount > 0 || wrongCount > 0
+                          wrongCount > 0
+                            ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-400/50 text-rose-500'
+                            : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+                        }`}
+                      >
+                        <BookX className="w-4 h-4" />
+                      </button>
+
+                      {/* 북마크 버튼 (아이콘만 남김, 숫자 없음) */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (bookmarkCount === 0) {
+                            alert('북마크한 문제가 없습니다.');
+                            return;
+                          }
+                          onStartExam(exam.id, 'bookmark');
+                        }}
+                        title="북마크 문제 복습"
+                        className={`p-1.5 sm:p-2 rounded-xl border transition-colors flex items-center justify-center cursor-pointer min-h-[34px] min-w-[34px] ${
+                          bookmarkCount > 0
                             ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500/50 text-blue-600'
                             : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
                         }`}
                       >
                         <Bookmark className={`w-4 h-4 transition-colors ${
-                          bookmarkCount > 0 || wrongCount > 0 ? 'fill-blue-600 text-blue-600' : ''
+                          bookmarkCount > 0 ? 'fill-blue-600 text-blue-600' : ''
                         }`} />
-                        {(bookmarkCount > 0 || wrongCount > 0) && (
-                          <span className="font-mono text-[11px] font-bold ml-1 text-blue-600 dark:text-blue-400">
-                            {bookmarkCount + wrongCount}
-                          </span>
-                        )}
                       </button>
                     </div>
                   </div>

@@ -139,8 +139,22 @@ export default function App() {
         }
       }
 
-      // 3. 오답노트 & 북마크 모드인 경우 필터링
-      if (mode === 'review') {
+      // 3. 오답노트 & 북마크 모드인 경우 필터링 (요구사항 1: 구분해서 저장 및 로드)
+      if (mode === 'wrong') {
+        if (savedWrong.length === 0) {
+          alert('저장된 오답 문제가 없습니다.');
+          setIsLoading(false);
+          return;
+        }
+        targetQuestions = allQuestions.filter(q => savedWrong.includes(q.id));
+      } else if (mode === 'bookmark') {
+        if (savedBookmarks.length === 0) {
+          alert('북마크된 문제가 없습니다.');
+          setIsLoading(false);
+          return;
+        }
+        targetQuestions = allQuestions.filter(q => savedBookmarks.includes(q.id));
+      } else if (mode === 'review') {
         const targetIds = new Set([...savedWrong, ...savedBookmarks]);
         targetQuestions = allQuestions.filter(q => targetIds.has(q.id));
       }
