@@ -56,11 +56,20 @@ export default function OMRCard({
     subjectGroups.push(...map.values());
   }
 
-  const renderQuestionItem = (q, realIndex) => {
+  const getSubIndex = (q) => {
+    if (!q || q.subject_id == null) return null;
+    const sameSub = questions.filter(item => item.subject_id === q.subject_id);
+    const idx = sameSub.findIndex(item => item.id === q.id);
+    return idx >= 0 ? idx + 1 : null;
+  };
+
+  const renderQuestionItem = (q, realIndex, customSubIndex) => {
     const isCurrent = realIndex === currentIndex;
     const hasAnswer = isQuestionAnswered(q);
     const currentAnswer = answers[q.id];
     const isBookmarked = bookmarks.includes(q.id);
+    const subIdx = customSubIndex !== undefined ? customSubIndex : getSubIndex(q);
+    const displayNum = subIdx != null ? subIdx : realIndex + 1;
 
     return (
       <div
@@ -79,7 +88,7 @@ export default function OMRCard({
       >
         <div className="flex items-center gap-2">
           <span className={`w-7 text-left font-mono font-black text-xs sm:text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'}`}>
-            {String(realIndex + 1).padStart(2, '0')}
+            {String(displayNum).padStart(2, '0')}
           </span>
           {isBookmarked && (
             <Bookmark className="w-4 h-4 text-amber-500 fill-amber-500" />
@@ -129,12 +138,12 @@ export default function OMRCard({
       <div className={`flex flex-col h-full glass-card rounded-3xl overflow-hidden ${
         isMobileOpen ? 'max-w-md w-full mx-auto my-auto max-h-[90vh] shadow-2xl' : ''
       }`}>
-        {/* OMR 상단 헤더 */}
+        {/* OMR 상단 헤더 (요구사항 7: OMR과 문항 바로보기 기능 통합) */}
         <div className="p-4 bg-slate-50/60 dark:bg-slate-900/60 border-b border-slate-200/60 dark:border-slate-800 backdrop-blur-md">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm tracking-tight">OMR 실전 답안지</h3>
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm tracking-tight">OMR 답안 및 문항 바로보기</h3>
             </div>
             
             {isMobileOpen && (
@@ -223,9 +232,9 @@ export default function OMRCard({
                     </span>
                   </div>
 
-                  {/* 해당 과목 문항 리스트 */}
+                  {/* 해당 과목 문항 리스트 (과목별 1부터 문항번호 매김) */}
                   <div className="space-y-1.5">
-                    {group.items.map(({ q, realIndex }) => renderQuestionItem(q, realIndex))}
+                    {group.items.map(({ q, realIndex }, itemIdx) => renderQuestionItem(q, realIndex, itemIdx + 1))}
                   </div>
                 </div>
               );

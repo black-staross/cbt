@@ -70,16 +70,29 @@ export default function App() {
   const [wrongNotesCountByExam, setWrongNotesCountByExam] = useState({});
   const [bookmarksCountByExam, setBookmarksCountByExam] = useState({});
 
-  // 초기 홈 로드 시 각 시험별 오답 및 북마크 통계 로드
+  // 초기 홈 로드 시 각 시험별 오답 및 북마크 통계 로드 (요구사항 1: 실제 존재하는 유효 문제만 카운트 및 정리)
   const refreshStorageStats = useCallback(() => {
     const wrongMap = {};
     const bookmarkMap = {};
     examsData.forEach(exam => {
       try {
+        const allQ = QUESTIONS_MAP[exam.id] || [];
+        const validQIds = new Set(allQ.map(q => q.id));
+
         const savedWrong = JSON.parse(localStorage.getItem(`${exam.id}_wrong`) || '[]');
+        const actualWrong = Array.isArray(savedWrong) ? savedWrong.filter(id => validQIds.has(id)) : [];
+        if (Array.isArray(savedWrong) && actualWrong.length !== savedWrong.length) {
+          localStorage.setItem(`${exam.id}_wrong`, JSON.stringify(actualWrong));
+        }
+
         const savedBookmarks = JSON.parse(localStorage.getItem(`${exam.id}_bookmarks`) || '[]');
-        wrongMap[exam.id] = savedWrong.length;
-        bookmarkMap[exam.id] = savedBookmarks.length;
+        const actualBookmarks = Array.isArray(savedBookmarks) ? savedBookmarks.filter(id => validQIds.has(id)) : [];
+        if (Array.isArray(savedBookmarks) && actualBookmarks.length !== savedBookmarks.length) {
+          localStorage.setItem(`${exam.id}_bookmarks`, JSON.stringify(actualBookmarks));
+        }
+
+        wrongMap[exam.id] = actualWrong.length;
+        bookmarkMap[exam.id] = actualBookmarks.length;
       } catch (e) {
         wrongMap[exam.id] = 0;
         bookmarkMap[exam.id] = 0;
@@ -139,21 +152,25 @@ export default function App() {
         }
       }
 
-      // 3. 오답노트 & 북마크 모드인 경우 필터링 (요구사항 1: 구분해서 저장 및 로드)
+      // 3. 오답노트 & 북마크 모드인 경우 필터링 (요구사항 1: 유효한 문제만 엄격하게 매칭)
       if (mode === 'wrong') {
-        if (savedWrong.length === 0) {
+        const validWrong = Array.isArray(savedWrong) ? savedWrong.filter(id => allQuestions.some(q => q.id === id)) : [];
+        if (validWrong.length === 0) {
           alert('저장된 오답 문제가 없습니다.');
           setIsLoading(false);
+          refreshStorageStats();
           return;
         }
-        targetQuestions = allQuestions.filter(q => savedWrong.includes(q.id));
+        targetQuestions = allQuestions.filter(q => validWrong.includes(q.id));
       } else if (mode === 'bookmark') {
-        if (savedBookmarks.length === 0) {
+        const validBookmarks = Array.isArray(savedBookmarks) ? savedBookmarks.filter(id => allQuestions.some(q => q.id === id)) : [];
+        if (validBookmarks.length === 0) {
           alert('북마크된 문제가 없습니다.');
           setIsLoading(false);
+          refreshStorageStats();
           return;
         }
-        targetQuestions = allQuestions.filter(q => savedBookmarks.includes(q.id));
+        targetQuestions = allQuestions.filter(q => validBookmarks.includes(q.id));
       } else if (mode === 'review') {
         const targetIds = new Set([...savedWrong, ...savedBookmarks]);
         targetQuestions = allQuestions.filter(q => targetIds.has(q.id));
@@ -446,10 +463,11 @@ export default function App() {
                   onSelectIndex={(newIdx) => setCurrentIndex(newIdx)}
                   onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId, selectedSessionNumber)}
                   activeSubjectId={selectedSubjectId}
+                  onSubmitExam={handleSubmitExam}
                 />
               </div>
 
-              {/* 우측 35%: OMR 답안지 */}
+              {/* 우측 35%: OMR 답안지 (데스크톱) */}
               <div className="hidden md:flex md:col-span-4 flex-col h-full">
                 <OMRCard
                   questions={questions}
@@ -463,22 +481,18 @@ export default function App() {
                 />
               </div>
 
-              {/* 모바일 OMR 바텀시트 */}
-              {isMobileOmrOpen && (
-                <div className="md:hidden">
+              {/* 모바일: 실전 시험(exam) 모드일 때 문제 카드 아래에 OMR 답안지 배치 */}
+              {currentMode === 'exam' && (
+                <div className="md:hidden w-full mt-4">
                   <OMRCard
                     questions={questions}
                     currentIndex={currentIndex}
-                    onSelectQuestion={(idx) => {
-                      setCurrentIndex(idx);
-                      setIsMobileOmrOpen(false);
-                    }}
+                    onSelectQuestion={(idx) => setCurrentIndex(idx)}
                     answers={userAnswers}
                     bookmarks={bookmarks}
                     onSubmitExam={handleSubmitExam}
                     isSubjective={currentExam.question_type === 'subjective'}
-                    isMobileOpen={true}
-                    onCloseMobile={() => setIsMobileOmrOpen(false)}
+                    isMobileOpen={false}
                   />
                 </div>
               )}

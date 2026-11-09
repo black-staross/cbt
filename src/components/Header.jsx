@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Moon, Sun, FileSpreadsheet } from 'lucide-react';
+import { Sparkles, Moon, Sun } from 'lucide-react';
 import ExamTimer from './ExamTimer';
 
 export default function Header({
@@ -9,8 +9,6 @@ export default function Header({
   onTimeUp,
   isPaused,
   onTogglePause,
-  onToggleMobileOmr,
-  unansweredCount = 0,
   isDarkMode = false,
   onToggleDarkMode
 }) {
@@ -21,7 +19,7 @@ export default function Header({
       case 'practice':
         return { label: '과목별 집중 학습', color: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' };
       case 'wrong':
-        return { label: '오답노트 복습', color: 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30' };
+        return { label: '오답노트 복습', color: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30' };
       case 'bookmark':
         return { label: '북마크 복습', color: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30' };
       case 'review':
@@ -89,19 +87,6 @@ export default function Header({
                   onTogglePause={onTogglePause}
                 />
               )}
-
-              {/* 모바일 OMR 토글 버튼 */}
-              <button
-                type="button"
-                onClick={onToggleMobileOmr}
-                className="md:hidden flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black transition-all shadow-md shadow-slate-900/10 min-h-[34px] sm:min-h-[38px]"
-              >
-                <FileSpreadsheet className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span>OMR</span>
-                {unansweredCount > 0 && (
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                )}
-              </button>
             </>
           )}
         </div>

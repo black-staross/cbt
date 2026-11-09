@@ -177,7 +177,7 @@ export default function ExamHome({
                         title="오답노트 복습"
                         className={`p-1.5 sm:p-2 rounded-xl border transition-colors flex items-center justify-center cursor-pointer min-h-[34px] min-w-[34px] ${
                           wrongCount > 0
-                            ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-400/50 text-rose-500'
+                            ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500/50 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/40'
                             : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
                         }`}
                       >
