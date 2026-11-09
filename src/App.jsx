@@ -146,10 +146,17 @@ export default function App() {
 
       // 2. 과목별 필터링 (특정 과목만 골라서 학습 시)
       if (subjectId !== null && subjectId !== undefined && subjectId !== 'all') {
-        const filteredBySubject = targetQuestions.filter(q => q.subject_id === subjectId);
+        const filteredBySubject = targetQuestions.filter(q => 
+          Number(q.subject_id) === Number(subjectId) || String(q.subject_id) === String(subjectId)
+        );
         if (filteredBySubject.length > 0) {
           targetQuestions = filteredBySubject;
         }
+      }
+
+      // 안전 fallback: 만약 필터 결과가 비어있다면 전체 문제로 fallback
+      if (targetQuestions.length === 0 && allQuestions.length > 0) {
+        targetQuestions = allQuestions;
       }
 
       // 3. 오답노트 & 북마크 모드인 경우 필터링 (요구사항 1: 유효한 문제만 엄격하게 매칭)
