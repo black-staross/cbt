@@ -52,10 +52,10 @@ export default function ExamTimer({
         ? 'bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400 animate-pulse font-bold' 
         : isWarning 
           ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400 font-bold' 
-          : 'bg-slate-900 dark:bg-slate-900/90 border-slate-700/80 text-white shadow-md'
+          : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 shadow-xs'
     }`}>
       <div className="flex items-center gap-1.5 sm:gap-2">
-        <Clock className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isUrgent ? 'text-rose-500' : isWarning ? 'text-amber-500' : 'text-blue-400'}`} />
+        <Clock className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isUrgent ? 'text-rose-500' : isWarning ? 'text-amber-500' : 'text-blue-600 dark:text-blue-400'}`} />
         <span className="text-[11px] sm:text-xs font-bold tracking-wide uppercase opacity-90 hidden xs:inline">
           {isExamMode ? '남은 시간' : '시험 시간'}
         </span>

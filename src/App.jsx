@@ -377,19 +377,7 @@ export default function App() {
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
       />
 
-      {/* 상단 과목 탭 바: 실전 모의고사(exam) 모드일 때만 표시 (연습하기 모드는 하단 햄버거 메뉴로 통합) */}
-      {currentMode === 'exam' && currentExam && questions.length > 0 && currentExam.subjects?.length > 1 && (
-        <SubjectTabBar
-          subjects={currentExam.subjects}
-          questions={questions}
-          currentIndex={currentIndex}
-          onSelectIndex={(newIdx) => setCurrentIndex(newIdx)}
-          answers={userAnswers}
-          selectedYear={selectedYear}
-          activeFilterSubjectId={selectedSubjectId}
-          onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId, selectedSessionNumber)}
-        />
-      )}
+      {/* 요구사항 3: 시험볼 때 문제 위에 전체 풀세트, 1과목 등의 버튼(SubjectTabBar) 완전 삭제 */}
 
       {/* 메인 뷰 (가로 넘침 방지 고정) */}
       <main className="flex-1 flex flex-col relative z-10 w-full max-w-full overflow-x-hidden">
@@ -424,7 +412,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleStartExam(currentExam.id, 'practice', selectedYear, null, selectedSessionNumber)}
-                className="px-4 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-xs font-bold transition-all shadow-md"
+                className="px-4 py-2.5 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl text-xs font-bold transition-all shadow-xs bg-blue-50/50 dark:bg-blue-950/40"
               >
                 전체 문제 학습
               </button>
@@ -438,65 +426,29 @@ export default function App() {
             </div>
           </div>
         ) : (
-          // CBT 시험장 화면
-          <div className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 min-h-[640px]">
-              {/* 좌측 65%: 문제 카드 */}
-              <div className="md:col-span-8 flex flex-col h-full w-full max-w-full">
-                <QuestionCard
-                  question={questions[currentIndex]}
-                  index={currentIndex}
-                  totalCount={questions.length}
-                  userAnswer={userAnswers[questions[currentIndex]?.id]}
-                  onAnswer={handleAnswer}
-                  mode={currentMode}
-                  isBookmarked={bookmarks.includes(questions[currentIndex]?.id)}
-                  onToggleBookmark={handleToggleBookmark}
-                  onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
-                  onNext={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
-                  hasPrev={currentIndex > 0}
-                  hasNext={currentIndex < questions.length - 1}
-                  selfGraded={selfGraded[questions[currentIndex]?.id]}
-                  onToggleSelfGraded={handleToggleSelfGraded}
-                  subjects={currentExam?.subjects || []}
-                  questions={questions}
-                  onSelectIndex={(newIdx) => setCurrentIndex(newIdx)}
-                  onFilterSubject={(subId) => handleStartExam(currentExam.id, currentMode, selectedYear, subId, selectedSessionNumber)}
-                  activeSubjectId={selectedSubjectId}
-                  onSubmitExam={handleSubmitExam}
-                />
-              </div>
-
-              {/* 우측 35%: OMR 답안지 (데스크톱) */}
-              <div className="hidden md:flex md:col-span-4 flex-col h-full">
-                <OMRCard
-                  questions={questions}
-                  currentIndex={currentIndex}
-                  onSelectQuestion={(idx) => setCurrentIndex(idx)}
-                  answers={userAnswers}
-                  bookmarks={bookmarks}
-                  onSubmitExam={handleSubmitExam}
-                  isSubjective={currentExam.question_type === 'subjective'}
-                  isMobileOpen={false}
-                />
-              </div>
-
-              {/* 모바일: 실전 시험(exam) 모드일 때 문제 카드 아래에 OMR 답안지 배치 */}
-              {currentMode === 'exam' && (
-                <div className="md:hidden w-full mt-4">
-                  <OMRCard
-                    questions={questions}
-                    currentIndex={currentIndex}
-                    onSelectQuestion={(idx) => setCurrentIndex(idx)}
-                    answers={userAnswers}
-                    bookmarks={bookmarks}
-                    onSubmitExam={handleSubmitExam}
-                    isSubjective={currentExam.question_type === 'subjective'}
-                    isMobileOpen={false}
-                  />
-                </div>
-              )}
-            </div>
+          // CBT 시험장 화면 (요구사항 2: OMR을 하단바 메뉴 안에 넣고 왼쪽에서 열리게 함)
+          <div className="flex-1 max-w-4xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col min-h-[640px]">
+            <QuestionCard
+              question={questions[currentIndex]}
+              index={currentIndex}
+              totalCount={questions.length}
+              userAnswer={userAnswers[questions[currentIndex]?.id]}
+              userAnswers={userAnswers}
+              onAnswer={handleAnswer}
+              mode={currentMode}
+              isBookmarked={bookmarks.includes(questions[currentIndex]?.id)}
+              bookmarks={bookmarks}
+              onToggleBookmark={handleToggleBookmark}
+              onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
+              onNext={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
+              hasPrev={currentIndex > 0}
+              hasNext={currentIndex < questions.length - 1}
+              selfGraded={selfGraded[questions[currentIndex]?.id]}
+              onToggleSelfGraded={handleToggleSelfGraded}
+              subjects={currentExam?.subjects || []}
+              questions={questions}
+              onSubmitExam={handleSubmitExam}
+            />
           </div>
         )}
       </main>

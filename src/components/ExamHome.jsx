@@ -95,13 +95,13 @@ export default function ExamHome({
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] sm:min-h-[38px] break-keep ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-colors cursor-pointer min-h-[36px] sm:min-h-[38px] break-keep border ${
                   isActive
-                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-950/40 shadow-xs'
+                    : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-blue-400 dark:text-blue-600' : 'text-slate-400'}`} />
+                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400'}`} />
                 <span>{cat.label}</span>
               </button>
             );
@@ -361,9 +361,9 @@ export default function ExamHome({
                           currentSubject === 'all' ? null : currentSubject, 
                           currentSession
                         )}
-                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] break-keep text-center"
+                        className="py-3 sm:py-3.5 px-3.5 sm:px-4 border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 hover:border-blue-500 hover:text-blue-600 text-slate-700 dark:text-slate-200 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] break-keep text-center"
                       >
-                        <BookOpen className="w-4 h-4 shrink-0" />
+                        <BookOpen className="w-4 h-4 shrink-0 text-slate-500" />
                         <span>연습하기</span>
                       </button>
                     </div>

@@ -11,7 +11,9 @@ import {
   CheckCircle2,
   Menu,
   Eye,
-  EyeOff
+  EyeOff,
+  FileSpreadsheet,
+  FileCheck
 } from 'lucide-react';
 
 export default function QuestionCard({
@@ -19,9 +21,11 @@ export default function QuestionCard({
   index,
   totalCount,
   userAnswer,
+  userAnswers = {},
   onAnswer,
   mode = 'practice', // 'practice' | 'exam' | 'review' | 'wrong' | 'bookmark'
   isBookmarked = false,
+  bookmarks = [],
   onToggleBookmark,
   onPrev,
   onNext,
@@ -29,20 +33,16 @@ export default function QuestionCard({
   hasNext = false,
   selfGraded,
   onToggleSelfGraded,
-  // 햄버거 메뉴 연동 props
   subjects = [],
   questions = [],
-  onSelectIndex,
-  onFilterSubject,
-  activeSubjectId = null,
   onSubmitExam
 }) {
   const isReviewMode = mode === 'review' || mode === 'wrong' || mode === 'bookmark';
   const [showExplanation, setShowExplanation] = useState(isReviewMode);
   const [subjectiveInput, setSubjectiveInput] = useState(userAnswer || '');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // 메뉴 모달 내 선택된 과목 ID (기본값: 현재 문제의 subject_id)
-  const [modalSubjectId, setModalSubjectId] = useState(question?.subject_id || 1);
+  // 요구사항 2: 하단바 메뉴 누르면 왼쪽에서 열리는 OMR 드로어 상태
+  const [isOmrOpen, setIsOmrOpen] = useState(false);
+  const [omrFilter, setOmrFilter] = useState('all'); // 'all' | 'unanswered' | 'bookmarks'
   const inputRef = useRef(null);
 
   // 문제 변경 시 상태 동기화
@@ -124,6 +124,37 @@ export default function QuestionCard({
     onAnswer(question.id, subjectiveInput.trim());
     setShowExplanation(true);
   };
+
+  // OMR 마킹 상태 계산 (요구사항 2: 하단바 메뉴 안에 OMR 답안지 탑재)
+  const isQuestionAnswered = (q) => {
+    const ans = userAnswers ? userAnswers[q.id] : undefined;
+    if (ans === undefined || ans === null) return false;
+    if (typeof ans === 'string') return ans.trim().length > 0;
+    return true;
+  };
+
+  const answeredCount = questions.filter(isQuestionAnswered).length;
+  const unansweredCount = questions.length - answeredCount;
+
+  // 과목별 문항 그룹핑 (과목별 1부터 번호 매김)
+  const hasMultipleSubjects = new Set(questions.map(q => q.subject_id || q.subject_name)).size > 1;
+  const subjectGroups = [];
+  if (hasMultipleSubjects) {
+    const map = new Map();
+    questions.forEach((q, qIdx) => {
+      const subKey = q.subject_id || 1;
+      const subName = q.subject_name || q.chapter || `${subKey}과목`;
+      if (!map.has(subKey)) {
+        map.set(subKey, {
+          id: subKey,
+          name: subName,
+          items: []
+        });
+      }
+      map.get(subKey).items.push({ q, realIndex: qIdx, subIndex: map.get(subKey).items.length + 1 });
+    });
+    subjectGroups.push(...map.values());
+  }
 
   return (
     <div className="flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 shadow-xs overflow-hidden transition-colors relative">
@@ -370,30 +401,30 @@ export default function QuestionCard({
       </div>
 
       {/* =========================================================================
-          요구사항 3, 4, 6: 바닥에서 띄운 둥근 플로팅 캡슐 상태창 바
-          - 시험 모드(exam): 햄버거 메뉴 제거, 정답해설 제거, 과목별 문항번호(1부터)
-          - 연습 모드: 햄버거 메뉴 및 정답해설 제공
+          요구사항 2, 4: 바닥에서 띄운 둥근 플로팅 캡슐 상태창 바
+          [≡ OMR] | [<] 1 / 20 [>] | [정답 및 해설] [북마크]
          ========================================================================= */}
       <div className="p-2.5 sm:p-4 bg-transparent flex justify-center items-center shrink-0 z-20">
         <div className="w-fit max-w-[calc(100%-0.5rem)] sm:max-w-[calc(100%-1rem)] px-2 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/90 dark:border-white/10 shadow-xl shadow-slate-900/10 dark:shadow-black/40 flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
-          {/* 1. 햄버거 메뉴 버튼 (요구사항 6: 시험볼때는 과목 및 문항 바로보기 없애) */}
-          {mode !== 'exam' && (
-            <>
-              <button
-                type="button"
-                onClick={() => setIsMenuOpen(prev => !prev)}
-                title="과목 및 문항 바로보기"
-                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer transition-colors shrink-0 ${
-                  isMenuOpen
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200'
-                }`}
-              >
-                <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
-              <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
-            </>
-          )}
+          {/* 1. OMR 메뉴 버튼 (하단바 메뉴 누르면 왼쪽에서 OMR 답안지 창 열림) */}
+          <button
+            type="button"
+            onClick={() => setIsOmrOpen(prev => !prev)}
+            title="OMR 실전 답안지 열기"
+            className={`px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-1.5 cursor-pointer transition-all shrink-0 text-xs font-bold border ${
+              isOmrOpen
+                ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
+                : 'border-slate-300 dark:border-slate-700 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200'
+            }`}
+          >
+            <Menu className="w-4 h-4 shrink-0" />
+            <span className="font-bold">OMR</span>
+            {unansweredCount > 0 && mode === 'exam' && (
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+            )}
+          </button>
+
+          <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
 
           {/* 2. < 이전 버튼 */}
           <button
@@ -429,7 +460,7 @@ export default function QuestionCard({
               type="button"
               onClick={onSubmitExam}
               title="시험 답안 최종 제출"
-              className="px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-black bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 cursor-pointer shrink-0 transition-all active:scale-95"
+              className="px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-black border-2 border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-500/20 cursor-pointer shrink-0 transition-all active:scale-95"
             >
               <span>시험 제출</span>
             </button>
@@ -445,7 +476,7 @@ export default function QuestionCard({
             </button>
           )}
 
-          {/* 5. 정답 및 해설 버튼 (요구사항 3: 시험볼때는 하단 바에 정답해설을 없앰) */}
+          {/* 5. 정답 및 해설 버튼 (시험 모드 아닐 때만) */}
           {mode !== 'exam' && (
             <>
               <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
@@ -455,8 +486,8 @@ export default function QuestionCard({
                 title="정답 및 상세 해설 보기"
                 className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                   showExplanation
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                    : 'bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border-blue-200/80 dark:border-blue-800/80 hover:bg-blue-100 dark:hover:bg-blue-900/50'
+                    ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
+                    : 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/50'
                 }`}
               >
                 <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -465,10 +496,9 @@ export default function QuestionCard({
             </>
           )}
 
-          {/* 세로 구분선 */}
           <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
 
-          {/* 6. 북마크 버튼 (둥근 원형) */}
+          {/* 6. 북마크 버튼 */}
           <button
             type="button"
             onClick={() => onToggleBookmark(question.id)}
@@ -487,98 +517,219 @@ export default function QuestionCard({
       </div>
 
       {/* =========================================================================
-          요구사항 5, 7: 과목 및 문항 바로보기 모달 (과목별 1부터 문항번호 매김 + OMR 일체화)
+          요구사항 2: 버튼 눌렀을 때 하단에서 올라오지 않고 왼쪽에서 열리는 OMR 드로어
+          (문항 바로가기 기능 모두 제거, 순수 OMR 답안 마킹 현황 확인용)
          ========================================================================= */}
-      {isMenuOpen && mode !== 'exam' && (() => {
-        // 현재 선택된 과목 탭의 문제 목록 필터링
-        const activeSubQuestions = subjects && subjects.length > 1
-          ? questions.map((q, realIdx) => ({ q, realIdx })).filter(item => item.q.subject_id === modalSubjectId)
-          : questions.map((q, realIdx) => ({ q, realIdx }));
+      {isOmrOpen && (
+        <div className="fixed inset-0 z-50">
+          {/* 어두운 배경 오버레이 (클릭 시 닫힘) */}
+          <div 
+            className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity duration-200 animate-in fade-in"
+            onClick={() => setIsOmrOpen(false)}
+          />
 
-        return (
-          <div className="absolute inset-0 z-40 bg-slate-950/60 backdrop-blur-xs flex flex-col justify-end animate-in fade-in duration-150">
-            <div className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 rounded-t-3xl max-h-[80%] flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-200">
-              {/* 메뉴 헤더 */}
-              <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Menu className="w-4 h-4 text-blue-600" />
-                  <span className="font-black text-sm text-slate-900 dark:text-white">과목 및 문항 바로보기</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+          {/* 왼쪽에서 슬라이드 인되는 OMR 답안지 패널 */}
+          <div className="fixed inset-y-0 left-0 z-50 w-80 sm:w-96 max-w-[85vw] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col animate-in slide-in-from-left duration-250 select-none">
+            {/* 드로어 상단 헤더 */}
+            <div className="p-4 bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileSpreadsheet className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <h3 className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">OMR 실전 답안지</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsOmrOpen(false)}
+                className="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 마킹 진행률 요약 & 필터 */}
+            <div className="p-3.5 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-800/20 space-y-2">
+              <div className="flex justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span>작성 완료: <strong className="text-blue-600 dark:text-blue-400">{answeredCount}</strong> / {questions.length}</span>
+                <span className={unansweredCount > 0 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"}>
+                  {unansweredCount > 0 ? `미표기 ${unansweredCount}문항` : '전 문항 표기완료'}
+                </span>
+              </div>
+              <div className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                  style={{ width: `${questions.length > 0 ? (answeredCount / questions.length) * 100 : 0}%` }}
+                />
               </div>
 
-              {/* 과목 선택 탭 (요구사항 5: 과목 문항 안에서 '전체보기'는 없고 과목들만 나열) */}
-              {subjects && subjects.length > 0 && (
-                <div className="p-3 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/60 dark:bg-slate-800/40">
-                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-                    {subjects.map((sub, sIdx) => {
-                      const isSubActive = modalSubjectId === sub.id;
-                      return (
-                        <button
-                          key={sub.id}
-                          type="button"
-                          onClick={() => {
-                            setModalSubjectId(sub.id);
-                            // 요구사항 2: 상태창 내려가지 않고 유지!
-                          }}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border ${
-                            isSubActive
-                              ? 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black bg-blue-50/50 dark:bg-blue-950/40'
-                              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
-                          }`}
-                        >
-                          {sIdx + 1}과목. {sub.name.replace(/^[0-9제]+\s*과목\s*/, '')}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* 문항 번호 리스트 (요구사항 5: 과목별로 1부터 새로 매겨서 표시 + 답안 현황 통합) */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-400">
-                    문항 바로 이동 (과목 내 문항 1번 ~ {activeSubQuestions.length}번)
-                  </div>
-                  <div className="text-[11px] text-slate-400 font-mono">
-                    총 {activeSubQuestions.length}문항
-                  </div>
-                </div>
-                <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
-                  {activeSubQuestions.map((item, itemIdx) => {
-                    const isCurrent = item.realIdx === index;
-                    const hasAnswer = userAnswer !== undefined; // 작성 여부 확인
-                    return (
-                      <button
-                        key={item.q.id}
-                        type="button"
-                        onClick={() => {
-                          if (onSelectIndex) onSelectIndex(item.realIdx);
-                          setIsMenuOpen(false);
-                        }}
-                        className={`h-10 rounded-xl font-mono text-xs font-bold transition-all flex flex-col items-center justify-center cursor-pointer border ${
-                          isCurrent
-                            ? 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-black bg-blue-50 dark:bg-blue-950/60 shadow-xs ring-1 ring-blue-500/30'
-                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-blue-400'
-                        }`}
-                      >
-                        <span className="text-xs font-bold">{itemIdx + 1}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+              {/* 필터 탭 (검은색 쓰지 않고 테두리선으로 표시) */}
+              <div className="grid grid-cols-3 gap-1 mt-2.5 p-1 bg-slate-200/60 dark:bg-slate-800/60 rounded-xl text-xs font-bold">
+                {[
+                  { id: 'all', label: `전체 (${questions.length})` },
+                  { id: 'unanswered', label: `미표기 (${unansweredCount})` },
+                  { id: 'bookmarks', label: `북마크 (${bookmarks?.length || 0})` }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setOmrFilter(tab.id)}
+                    className={`py-1 rounded-lg transition-all text-center cursor-pointer border ${
+                      omrFilter === tab.id
+                        ? 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-700 font-black shadow-xs'
+                        : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
               </div>
             </div>
+
+            {/* OMR 마킹 시트 (스크롤 영역 - 문항 바로가기 기능 없이 순수 마킹 확인) */}
+            <div className="flex-1 overflow-y-auto p-3 space-y-3">
+              {hasMultipleSubjects && omrFilter === 'all' ? (
+                subjectGroups.map((group) => {
+                  const subAnswered = group.items.filter(({ q }) => isQuestionAnswered(q)).length;
+                  return (
+                    <div key={group.id} className="space-y-1.5 pt-1">
+                      {/* 과목 구분 헤더 */}
+                      <div className="flex items-center justify-between px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-black text-slate-800 dark:text-slate-200">
+                        <span className="truncate">{group.name}</span>
+                        <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                          {subAnswered}/{group.items.length}
+                        </span>
+                      </div>
+
+                      {/* 문항 마킹 행 리스트 (과목별 1부터 번호 매김, 문항 점프 없음) */}
+                      <div className="space-y-1">
+                        {group.items.map(({ q, realIndex, subIndex }) => {
+                          const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
+                          const isQBookmarked = bookmarks?.includes(q.id);
+
+                          return (
+                            <div
+                              key={q.id}
+                              className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
+                            >
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-mono font-bold text-slate-700 dark:text-slate-300 w-6 text-left">
+                                  {String(subIndex).padStart(2, '0')}
+                                </span>
+                                {isQBookmarked && (
+                                  <Bookmark className="w-3.5 h-3.5 text-blue-600 fill-blue-600" />
+                                )}
+                              </div>
+
+                              {/* 4지선다 OMR 마킹 시각화 */}
+                              <div className="flex items-center gap-1.5">
+                                {[1, 2, 3, 4].map((num) => {
+                                  const isSelected = currentAnswer === num;
+                                  return (
+                                    <span
+                                      key={num}
+                                      className={`w-5 h-5 rounded-full flex items-center justify-center font-mono text-[10px] font-bold border transition-colors ${
+                                        isSelected
+                                          ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
+                                          : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800'
+                                      }`}
+                                    >
+                                      {num}
+                                    </span>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                // 필터링 적용 목록 (미표기 또는 북마크)
+                <div className="space-y-1">
+                  {questions
+                    .filter((q) => {
+                      if (omrFilter === 'unanswered') return !isQuestionAnswered(q);
+                      if (omrFilter === 'bookmarks') return bookmarks?.includes(q.id);
+                      return true;
+                    })
+                    .map((q) => {
+                      const sameSubQs = q.subject_id != null ? questions.filter(item => item.subject_id === q.subject_id) : [];
+                      const subIdx = sameSubQs.length > 0 ? sameSubQs.findIndex(item => item.id === q.id) + 1 : questions.findIndex(item => item.id === q.id) + 1;
+                      const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
+                      const isQBookmarked = bookmarks?.includes(q.id);
+
+                      return (
+                        <div
+                          key={q.id}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-mono font-bold text-slate-700 dark:text-slate-300 w-10 text-left">
+                              {q.subject_id ? `${q.subject_id}과목-${subIdx}` : `${subIdx}번`}
+                            </span>
+                            {isQBookmarked && (
+                              <Bookmark className="w-3.5 h-3.5 text-blue-600 fill-blue-600" />
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-1.5">
+                            {[1, 2, 3, 4].map((num) => {
+                              const isSelected = currentAnswer === num;
+                              return (
+                                <span
+                                  key={num}
+                                  className={`w-5 h-5 rounded-full flex items-center justify-center font-mono text-[10px] font-bold border transition-colors ${
+                                    isSelected
+                                      ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
+                                      : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800'
+                                  }`}
+                                >
+                                  {num}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+
+            {/* OMR 하단 푸터 (시험 제출 버튼) */}
+            <div className="p-3.5 bg-slate-50/80 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 space-y-2">
+              {mode === 'exam' && onSubmitExam ? (
+                <>
+                  {unansweredCount > 0 && (
+                    <div className="text-[11px] font-bold text-amber-600 dark:text-amber-400 text-center">
+                      미표기 문항이 {unansweredCount}개 남아있습니다.
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOmrOpen(false);
+                      onSubmitExam();
+                    }}
+                    className="w-full py-3 px-4 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700 text-white text-sm font-black rounded-xl shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <FileCheck className="w-4 h-4" />
+                    <span>최종 답안 제출하기</span>
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsOmrOpen(false)}
+                  className="w-full py-2.5 px-4 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
+                >
+                  닫기
+                </button>
+              )}
+            </div>
           </div>
-        );
-      })()}
+        </div>
+      )}
     </div>
   );
 }
