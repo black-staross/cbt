@@ -467,8 +467,8 @@ export default function QuestionCard({
           <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
 
           {/* 5. 우측 액션 버튼들 */}
-          {/* 시험 모드 마지막 문제일 때: 시험 제출 버튼 */}
-          {mode === 'exam' && !hasNext && onSubmitExam && (
+          {/* 시험 모드: 마지막 문제이거나 모든 문항 마킹 완료 시 시험 제출 버튼 노출 */}
+          {mode === 'exam' && onSubmitExam && (!hasNext || unansweredCount === 0) && (
             <button
               type="button"
               onClick={onSubmitExam}

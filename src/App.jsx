@@ -474,7 +474,7 @@ export default function App() {
           }}
           onGoToWrongNotes={() => {
             setShowResultModal(false);
-            handleStartExam(currentExam.id, 'review');
+            handleStartExam(currentExam.id, 'wrong');
           }}
           onGoHome={handleGoHome}
         />

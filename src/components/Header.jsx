@@ -59,9 +59,20 @@ export default function Header({
           )}
         </div>
 
-        {/* 우측 영역: 타이머, 다크모드 스위치 및 모바일 컨트롤 */}
+        {/* 우측 영역: 타이머, 다크모드 스위치 (요구사항 1: 시험볼 때 다크모드 버튼은 타이머 오른쪽에 배치) */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* 다크모드 토글 스위치 */}
+          {/* 타이머: 시험보기(exam) 모드일 때만 자동 실행 및 노출 */}
+          {currentExam && currentMode === 'exam' && (
+            <ExamTimer
+              initialMinutes={currentExam.time_limit}
+              onTimeUp={onTimeUp}
+              isExamMode={true}
+              isPaused={isPaused}
+              onTogglePause={onTogglePause}
+            />
+          )}
+
+          {/* 다크모드 토글 스위치 (타이머 오른쪽에 배치) */}
           <button
             type="button"
             onClick={onToggleDarkMode}
@@ -74,21 +85,6 @@ export default function Header({
               <Moon className="w-4 h-4 text-slate-700" />
             )}
           </button>
-
-          {currentExam && (
-            <>
-              {/* 타이머: 시험보기(exam) 모드일 때만 자동 실행 및 노출, 연습하기 모드는 타이머 없는 버전 */}
-              {currentMode === 'exam' && (
-                <ExamTimer
-                  initialMinutes={currentExam.time_limit}
-                  onTimeUp={onTimeUp}
-                  isExamMode={true}
-                  isPaused={isPaused}
-                  onTogglePause={onTogglePause}
-                />
-              )}
-            </>
-          )}
         </div>
       </div>
     </header>
