@@ -42,7 +42,7 @@ export default function QuestionCard({
   const [subjectiveInput, setSubjectiveInput] = useState(userAnswer || '');
   // 요구사항 2: 하단바 메뉴 누르면 왼쪽에서 열리는 OMR 드로어 상태
   const [isOmrOpen, setIsOmrOpen] = useState(false);
-  const [omrFilter, setOmrFilter] = useState('all'); // 'all' | 'unanswered' | 'bookmarks'
+  const [omrFilter, setOmrFilter] = useState('all'); // 'all' | 'unanswered'
   const inputRef = useRef(null);
 
   // 문제 변경 시 상태 동기화
@@ -140,7 +140,8 @@ export default function QuestionCard({
     const map = new Map();
     questions.forEach((q, qIdx) => {
       const subKey = q.subject_id || 1;
-      const subName = q.subject_name || q.chapter || `${subKey}과목`;
+      const matchedSubject = subjects.find(s => Number(s.id) === Number(subKey));
+      const subName = matchedSubject?.name || q.subject_name || q.chapter || `${subKey}과목`;
       if (!map.has(subKey)) {
         map.set(subKey, {
           id: subKey,
@@ -557,18 +558,17 @@ export default function QuestionCard({
                 />
               </div>
 
-              {/* 필터 탭 (검은색 쓰지 않고 테두리선으로 표시) */}
-              <div className="grid grid-cols-3 gap-1 mt-2.5 p-1 bg-slate-200/60 dark:bg-slate-800/60 rounded-xl text-xs font-bold">
+              {/* 필터 탭 (전체, 미표기 2개로 간결화 / 북마크 제거) */}
+              <div className="grid grid-cols-2 gap-1.5 mt-2.5 p-1 bg-slate-200/60 dark:bg-slate-800/60 rounded-xl text-xs font-bold">
                 {[
                   { id: 'all', label: `전체 (${questions.length})` },
-                  { id: 'unanswered', label: `미표기 (${unansweredCount})` },
-                  { id: 'bookmarks', label: `북마크 (${bookmarks?.length || 0})` }
+                  { id: 'unanswered', label: `미표기 (${unansweredCount})` }
                 ].map((tab) => (
                   <button
                     key={tab.id}
                     type="button"
                     onClick={() => setOmrFilter(tab.id)}
-                    className={`py-1 rounded-lg transition-all text-center cursor-pointer border ${
+                    className={`py-1.5 rounded-lg transition-all text-center cursor-pointer border ${
                       omrFilter === tab.id
                         ? 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-700 font-black shadow-xs'
                         : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -582,37 +582,53 @@ export default function QuestionCard({
 
             {/* OMR 마킹 시트 (스크롤 영역 - 문항 바로가기 기능 없이 순수 마킹 확인) */}
             <div className="flex-1 overflow-y-auto p-3 space-y-3">
-              {hasMultipleSubjects && omrFilter === 'all' ? (
+              {omrFilter === 'unanswered' && unansweredCount === 0 ? (
+                <div className="py-12 flex flex-col items-center justify-center text-center space-y-2 text-slate-400">
+                  <CheckCircle2 className="w-8 h-8 text-emerald-500" />
+                  <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    모든 문항의 답안이 표기되었습니다!
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    {mode === 'exam' ? '하단의 최종 답안 제출하기 버튼을 누르시면 시험이 완료됩니다.' : '모든 문제 풀이가 완료되었습니다.'}
+                  </p>
+                </div>
+              ) : hasMultipleSubjects ? (
                 subjectGroups.map((group) => {
+                  const filteredItems = group.items.filter(({ q }) => {
+                    if (omrFilter === 'unanswered') return !isQuestionAnswered(q);
+                    return true;
+                  });
+
+                  if (filteredItems.length === 0) return null;
+
                   const subAnswered = group.items.filter(({ q }) => isQuestionAnswered(q)).length;
+
                   return (
                     <div key={group.id} className="space-y-1.5 pt-1">
                       {/* 과목 구분 헤더 */}
-                      <div className="flex items-center justify-between px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-black text-slate-800 dark:text-slate-200">
+                      <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-black text-slate-800 dark:text-slate-200">
                         <span className="truncate">{group.name}</span>
-                        <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-                          {subAnswered}/{group.items.length}
+                        <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 shrink-0 ml-2">
+                          {omrFilter === 'unanswered'
+                            ? `미표기 ${filteredItems.length}문항`
+                            : `${subAnswered}/${group.items.length}`}
                         </span>
                       </div>
 
-                      {/* 문항 마킹 행 리스트 (과목별 1부터 번호 매김, 문항 점프 없음) */}
+                      {/* 문항 마킹 행 리스트 (과목별 1부터 번호 매김, 북마크 아이콘 제거, 줄바꿈 방지) */}
                       <div className="space-y-1">
-                        {group.items.map(({ q, realIndex, subIndex }) => {
+                        {filteredItems.map(({ q, realIndex, subIndex }) => {
                           const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
-                          const isQBookmarked = bookmarks?.includes(q.id);
 
                           return (
                             <div
                               key={q.id}
                               className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
                             >
-                              <div className="flex items-center gap-1.5">
-                                <span className="font-mono font-bold text-slate-700 dark:text-slate-300 w-6 text-left">
-                                  {String(subIndex).padStart(2, '0')}
+                              <div className="flex items-center gap-1.5 shrink-0">
+                                <span className="font-mono font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap text-xs">
+                                  {String(subIndex).padStart(2, '0')}번
                                 </span>
-                                {isQBookmarked && (
-                                  <Bookmark className="w-3.5 h-3.5 text-blue-600 fill-blue-600" />
-                                )}
                               </div>
 
                               {/* 4지선다 OMR 마킹 시각화 */}
@@ -641,32 +657,26 @@ export default function QuestionCard({
                   );
                 })
               ) : (
-                // 필터링 적용 목록 (미표기 또는 북마크)
+                // 단일 과목 시험일 때
                 <div className="space-y-1">
                   {questions
-                    .filter((q) => {
+                    .map((q, qIdx) => ({ q, qIdx }))
+                    .filter(({ q }) => {
                       if (omrFilter === 'unanswered') return !isQuestionAnswered(q);
-                      if (omrFilter === 'bookmarks') return bookmarks?.includes(q.id);
                       return true;
                     })
-                    .map((q) => {
-                      const sameSubQs = q.subject_id != null ? questions.filter(item => item.subject_id === q.subject_id) : [];
-                      const subIdx = sameSubQs.length > 0 ? sameSubQs.findIndex(item => item.id === q.id) + 1 : questions.findIndex(item => item.id === q.id) + 1;
+                    .map(({ q, qIdx }) => {
                       const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
-                      const isQBookmarked = bookmarks?.includes(q.id);
 
                       return (
                         <div
                           key={q.id}
                           className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
                         >
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-mono font-bold text-slate-700 dark:text-slate-300 w-10 text-left">
-                              {q.subject_id ? `${q.subject_id}과목-${subIdx}` : `${subIdx}번`}
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="font-mono font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap text-xs">
+                              {String(qIdx + 1).padStart(2, '0')}번
                             </span>
-                            {isQBookmarked && (
-                              <Bookmark className="w-3.5 h-3.5 text-blue-600 fill-blue-600" />
-                            )}
                           </div>
 
                           <div className="flex items-center gap-1.5">
