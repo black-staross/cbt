@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { 
   Bookmark, 
+  BookmarkCheck,
   Check, 
   X, 
   HelpCircle, 
@@ -31,6 +32,7 @@ export default function QuestionCard({
   onNext,
   hasPrev = false,
   hasNext = false,
+  onSelectIndex,
   selfGraded,
   onToggleSelfGraded,
   subjects = [],
@@ -43,6 +45,8 @@ export default function QuestionCard({
   // 요구사항 2: 하단바 메뉴 누르면 왼쪽에서 열리는 OMR 드로어 상태
   const [isOmrOpen, setIsOmrOpen] = useState(false);
   const [omrFilter, setOmrFilter] = useState('all'); // 'all' | 'unanswered'
+  // 요구사항: 북마크된 문제를 볼 수 있는 창 상태
+  const [isBookmarkListOpen, setIsBookmarkListOpen] = useState(false);
   const inputRef = useRef(null);
 
   // 문제 변경 시 상태 동기화
@@ -154,6 +158,9 @@ export default function QuestionCard({
     subjectGroups.push(...map.values());
   }
 
+  // 요구사항: 북마크된 문제 목록 계산
+  const bookmarkedQuestions = questions.filter(q => bookmarks?.includes(q.id));
+
   return (
     <div className="flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 shadow-xs overflow-hidden transition-colors relative">
       {/* 상단 문항 메타 정보 바 (요구사항 6: 과목별 몇 번째 문항인지 명확히 구분 표시) */}
@@ -188,14 +195,32 @@ export default function QuestionCard({
 
       {/* 문항 본문 (스크롤 영역) */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
-        {/* 요구사항 4: 과목별로 1부터 새로 매겨서 문항번호 매김 */}
-        <div className="flex items-start gap-2.5 sm:gap-3 text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
-          <span className="font-mono font-black text-blue-600 dark:text-blue-400 shrink-0 text-lg sm:text-2xl leading-relaxed">
-            Q{isSubjectGrouped ? subjectQuestionIndex : index + 1}.
-          </span>
-          <span className="flex-1 leading-relaxed">
-            {question.question}
-          </span>
+        {/* 요구사항: 문제 번호, 지문 및 우측 북마크 저장 버튼 배치 */}
+        <div className="flex items-start justify-between gap-3 sm:gap-4">
+          <div className="flex items-start gap-2.5 sm:gap-3 flex-1 min-w-0 text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
+            <span className="font-mono font-black text-blue-600 dark:text-blue-400 shrink-0 text-lg sm:text-2xl leading-relaxed">
+              Q{isSubjectGrouped ? subjectQuestionIndex : index + 1}.
+            </span>
+            <span className="flex-1 leading-relaxed">
+              {question.question}
+            </span>
+          </div>
+
+          {/* 문제 지문 오른쪽 북마크 저장/해제 버튼 */}
+          <button
+            type="button"
+            onClick={() => onToggleBookmark(question.id)}
+            title={isBookmarked ? "북마크 해제" : "이 문제 북마크 저장"}
+            className={`p-2 sm:p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 mt-0.5 ${
+              isBookmarked
+                ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
+                : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+            }`}
+          >
+            <Bookmark className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform active:scale-90 ${
+              isBookmarked ? 'fill-blue-600 text-blue-600' : ''
+            }`} />
+          </button>
         </div>
 
         {/* 데이터 테이블 (존재할 경우) */}
@@ -496,20 +521,25 @@ export default function QuestionCard({
             </button>
           )}
 
-          {/* 6. 북마크 버튼 (원형 아이콘 버튼, 파란색 하이라이트) */}
+          {/* 6. 요구사항: 북마크된 문제를 볼 수 있는 창을 여는 버튼 (현재 북마크 저장버튼 자리에 배치) */}
           <button
             type="button"
-            onClick={() => onToggleBookmark(question.id)}
-            title={isBookmarked ? "북마크 해제" : "북마크 추가"}
-            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 ${
-              isBookmarked
-                ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600'
-                : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+            onClick={() => setIsBookmarkListOpen(prev => !prev)}
+            title="북마크된 문제 목록 보기"
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 relative ${
+              isBookmarkListOpen || (bookmarks && bookmarks.length > 0)
+                ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
+                : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
             }`}
           >
-            <Bookmark className={`w-4 h-4 transition-colors ${
-              isBookmarked ? 'fill-blue-600 text-blue-600' : ''
+            <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 transition-colors ${
+              bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : ''
             }`} />
+            {bookmarks && bookmarks.length > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-blue-600 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs">
+                {bookmarks.length}
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -733,6 +763,145 @@ export default function QuestionCard({
                   닫기
                 </button>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          요구사항: 북마크된 문제를 볼 수 있는 창 (오른쪽 슬라이드 드로어)
+         ========================================================================= */}
+      {isBookmarkListOpen && (
+        <div className="fixed inset-0 z-50">
+          {/* 어두운 배경 오버레이 (클릭 시 닫힘) */}
+          <div 
+            className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity duration-200 animate-in fade-in"
+            onClick={() => setIsBookmarkListOpen(false)}
+          />
+
+          {/* 오른쪽에서 슬라이드 인되는 북마크 패널 */}
+          <div className="fixed inset-y-0 right-0 z-50 w-80 sm:w-96 max-w-[88vw] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col animate-in slide-in-from-right duration-250 select-none">
+            {/* 드로어 상단 헤더 */}
+            <div className="p-4 bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bookmark className="w-5 h-5 text-blue-600 dark:text-blue-400 fill-blue-600" />
+                <h3 className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">북마크된 문제</h3>
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                  {bookmarkedQuestions.length}개
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsBookmarkListOpen(false)}
+                className="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 북마크 문항 목록 리스트 (스크롤 영역) */}
+            <div className="flex-1 overflow-y-auto p-3 space-y-2.5">
+              {bookmarkedQuestions.length === 0 ? (
+                <div className="py-16 flex flex-col items-center justify-center text-center space-y-3 text-slate-400 px-4">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                    <Bookmark className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                      북마크한 문제가 없습니다
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                      문제 지문 오른쪽의 북마크 아이콘을 눌러<br />중요한 문제를 저장해 보세요.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                bookmarkedQuestions.map((q) => {
+                  const realIndex = questions.findIndex(item => item.id === q.id);
+                  const isCurrent = realIndex === index;
+                  
+                  // 과목 정보
+                  const sameSubQs = q.subject_id != null ? questions.filter(item => item.subject_id === q.subject_id) : [];
+                  const subIdx = sameSubQs.length > 0 ? sameSubQs.findIndex(item => item.id === q.id) + 1 : realIndex + 1;
+                  const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
+                  const isAnswered = currentAnswer !== undefined && currentAnswer !== null && currentAnswer !== '';
+
+                  return (
+                    <div
+                      key={q.id}
+                      onClick={() => {
+                        if (onSelectIndex && realIndex >= 0) {
+                          onSelectIndex(realIndex);
+                        }
+                        setIsBookmarkListOpen(false);
+                      }}
+                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer group ${
+                        isCurrent
+                          ? 'border-2 border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 shadow-xs'
+                          : 'border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 hover:border-blue-400 dark:hover:border-blue-700 hover:bg-white dark:hover:bg-slate-800/70'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-mono font-black text-xs text-blue-600 dark:text-blue-400">
+                            {q.subject_id ? `${q.subject_id}과목-${subIdx}` : `Q${realIndex + 1}`}
+                          </span>
+                          <span className="text-[11px] text-slate-400">
+                            (전체 {realIndex + 1}번)
+                          </span>
+                          {isCurrent && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-600 text-white">
+                              현재
+                            </span>
+                          )}
+                        </div>
+
+                        {/* 북마크 해제 버튼 (이벤트 버블링 방지) */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onToggleBookmark(q.id);
+                          }}
+                          title="북마크 해제"
+                          className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-blue-600 dark:text-blue-400 transition-colors"
+                        >
+                          <Bookmark className="w-3.5 h-3.5 fill-current" />
+                        </button>
+                      </div>
+
+                      {/* 지문 미리보기 */}
+                      <p className="text-xs font-bold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed break-keep">
+                        {q.question}
+                      </p>
+
+                      <div className="mt-2 pt-1.5 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>
+                          {isAnswered ? (
+                            <span className="text-blue-600 dark:text-blue-400 font-bold">답안 표기완료</span>
+                          ) : (
+                            <span className="text-amber-600 dark:text-amber-400">미표기</span>
+                          )}
+                        </span>
+                        <span className="text-blue-600 dark:text-blue-400 group-hover:underline font-bold">
+                          이동 →
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* 드로어 푸터 */}
+            <div className="p-3 bg-slate-50/80 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800">
+              <button
+                type="button"
+                onClick={() => setIsBookmarkListOpen(false)}
+                className="w-full py-2.5 px-4 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
+              >
+                닫기
+              </button>
             </div>
           </div>
         </div>

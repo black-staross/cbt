@@ -450,6 +450,7 @@ export default function App() {
               onNext={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
               hasPrev={currentIndex > 0}
               hasNext={currentIndex < questions.length - 1}
+              onSelectIndex={(idx) => setCurrentIndex(idx)}
               selfGraded={selfGraded[questions[currentIndex]?.id]}
               onToggleSelfGraded={handleToggleSelfGraded}
               subjects={currentExam?.subjects || []}
