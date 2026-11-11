@@ -17,7 +17,7 @@ export default function Header({
       case 'exam':
         return { label: '실전 CBT 모의고사', color: 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30' };
       case 'practice':
-        return { label: '과목별 집중 학습', color: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' };
+        return { label: '', color: '' }; // 요구사항: 연습하기에서 과목별 집중학습 문구 제거
       case 'wrong':
         return { label: '오답노트 복습', color: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30' };
       case 'bookmark':
@@ -52,9 +52,11 @@ export default function Header({
               <span className="font-extrabold text-slate-900 dark:text-slate-100 text-xs sm:text-sm truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[220px]">
                 {currentExam.name}
               </span>
-              <span className={`text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full border hidden md:inline shrink-0 ${modeInfo.color}`}>
-                {modeInfo.label}
-              </span>
+              {modeInfo.label && (
+                <span className={`text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full border hidden md:inline shrink-0 ${modeInfo.color}`}>
+                  {modeInfo.label}
+                </span>
+              )}
             </div>
           )}
         </div>
