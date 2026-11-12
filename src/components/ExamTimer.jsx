@@ -6,24 +6,28 @@ export default function ExamTimer({
   onTimeUp, 
   isExamMode = true,
   isPaused = false,
-  onTogglePause 
+  onTogglePause,
+  secondsLeft: externalSecondsLeft
 }) {
-  const [secondsLeft, setSecondsLeft] = useState(initialMinutes * 60);
+  const [internalSecondsLeft, setInternalSecondsLeft] = useState(initialMinutes * 60);
 
   useEffect(() => {
-    setSecondsLeft(initialMinutes * 60);
-  }, [initialMinutes]);
+    if (externalSecondsLeft === undefined) {
+      setInternalSecondsLeft(initialMinutes * 60);
+    }
+  }, [initialMinutes, externalSecondsLeft]);
 
   useEffect(() => {
+    if (externalSecondsLeft !== undefined) return; // 외부에서 secondsLeft를 제어할 경우 내부 인터벌 비활성화
     if (!isExamMode || isPaused) return;
 
-    if (secondsLeft <= 0) {
+    if (internalSecondsLeft <= 0) {
       if (onTimeUp) onTimeUp();
       return;
     }
 
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => {
+      setInternalSecondsLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
           if (onTimeUp) onTimeUp();
@@ -34,17 +38,18 @@ export default function ExamTimer({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [secondsLeft, isExamMode, isPaused, onTimeUp]);
+  }, [internalSecondsLeft, isExamMode, isPaused, onTimeUp, externalSecondsLeft]);
 
-  const hours = Math.floor(secondsLeft / 3600);
-  const minutes = Math.floor((secondsLeft % 3600) / 60);
-  const seconds = secondsLeft % 60;
+  const currentSeconds = externalSecondsLeft !== undefined ? externalSecondsLeft : internalSecondsLeft;
+  const hours = Math.floor(currentSeconds / 3600);
+  const minutes = Math.floor((currentSeconds % 3600) / 60);
+  const seconds = currentSeconds % 60;
 
   const formattedTime = `${hours > 0 ? String(hours).padStart(2, '0') + ':' : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
   // 10분 이하: 주황색, 5분 이하: 빨간색 및 점멸
-  const isUrgent = secondsLeft <= 300; // 5분
-  const isWarning = secondsLeft <= 600 && secondsLeft > 300; // 10분
+  const isUrgent = currentSeconds <= 300; // 5분
+  const isWarning = currentSeconds <= 600 && currentSeconds > 300; // 10분
 
   return (
     <div className={`flex items-center justify-between gap-1.5 sm:gap-2.5 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-xl transition-all border shrink-0 min-h-[34px] sm:min-h-[38px] ${

@@ -10,7 +10,8 @@ export default function Header({
   isPaused,
   onTogglePause,
   isDarkMode = false,
-  onToggleDarkMode
+  onToggleDarkMode,
+  examSecondsLeft
 }) {
   const getModeLabel = () => {
     switch (currentMode) {
@@ -73,6 +74,7 @@ export default function Header({
               isExamMode={true}
               isPaused={isPaused}
               onTogglePause={onTogglePause}
+              secondsLeft={examSecondsLeft}
             />
           )}
 

@@ -65,6 +65,14 @@ export default function App() {
   const [showResultModal, setShowResultModal] = useState(false);
   const [isMobileOmrOpen, setIsMobileOmrOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [examSecondsLeft, setExamSecondsLeft] = useState(0);
+
+  // 모바일 및 데스크톱에서 모드 또는 문제 변경 시 언제나 상단 헤더(제목, 다크모드 버튼)부터 보이도록 스크롤 초기화
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }, [currentMode, currentIndex]);
 
   // 로컬스토리지 통계 집계 상태 (홈 화면 배지 표시용)
   const [wrongNotesCountByExam, setWrongNotesCountByExam] = useState({});
@@ -205,6 +213,19 @@ export default function App() {
       setShowResultModal(false);
       setIsPaused(false);
       setIsMobileOmrOpen(false);
+
+      // 시험 모드일 경우 남은 시간(초) 설정
+      const examMeta = examsData.find(e => e.id === examId);
+      if (mode === 'exam' && examMeta) {
+        setExamSecondsLeft((examMeta.time_limit || 60) * 60);
+      } else {
+        setExamSecondsLeft(0);
+      }
+
+      // 화면 진입 시 상단 헤더(제목, 다크모드 버튼)가 바로 보이도록 스크롤 즉시 맨 위로 이동
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
     } catch (err) {
       console.error('문제 로딩 실패:', err);
       alert('문제 데이터를 로드하는 중 오류가 발생했습니다.');
@@ -371,6 +392,24 @@ export default function App() {
     handleSubmitExam();
   };
 
+  // 실전 CBT 모의고사 타이머 1초 인터벌 카운트다운
+  useEffect(() => {
+    if (currentMode !== 'exam' || isPaused || examSecondsLeft <= 0 || showResultModal) return;
+
+    const timer = setInterval(() => {
+      setExamSecondsLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleTimeUp();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [currentMode, isPaused, examSecondsLeft, showResultModal]);
+
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 relative transition-colors duration-300 font-sans antialiased selection:bg-blue-500 selection:text-white box-border">
       {/* 유러피안 리퀴드 글래스 앰비언트 글로우 오브젝트 (스크롤 성능 최적화: 독립 GPU 가속 레이어 격리) */}
@@ -392,6 +431,7 @@ export default function App() {
         unansweredCount={questions.filter(q => !userAnswers[q.id]).length}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
+        examSecondsLeft={examSecondsLeft}
       />
 
       {/* 요구사항 3: 시험볼 때 문제 위에 전체 풀세트, 1과목 등의 버튼(SubjectTabBar) 완전 삭제 */}
@@ -466,6 +506,7 @@ export default function App() {
               subjects={currentExam?.subjects || []}
               questions={questions}
               onSubmitExam={handleSubmitExam}
+              examSecondsLeft={examSecondsLeft}
             />
           </div>
         )}

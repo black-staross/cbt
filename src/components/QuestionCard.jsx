@@ -14,7 +14,8 @@ import {
   Eye,
   EyeOff,
   FileSpreadsheet,
-  FileCheck
+  FileCheck,
+  Clock
 } from 'lucide-react';
 
 export default function QuestionCard({
@@ -37,7 +38,8 @@ export default function QuestionCard({
   onToggleSelfGraded,
   subjects = [],
   questions = [],
-  onSubmitExam
+  onSubmitExam,
+  examSecondsLeft = 0
 }) {
   const isReviewMode = mode === 'review' || mode === 'wrong' || mode === 'bookmark';
   const [showExplanation, setShowExplanation] = useState(isReviewMode);
@@ -48,8 +50,9 @@ export default function QuestionCard({
   // 요구사항: 북마크된 문제를 볼 수 있는 창 상태
   const [isBookmarkListOpen, setIsBookmarkListOpen] = useState(false);
   const inputRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
-  // 문제 변경 시 상태 동기화
+  // 문제 변경 시 상태 동기화 및 모바일/PC 스크롤 최상단 리셋 (헤더 탭이 바로 보이도록 보장)
   useEffect(() => {
     setSubjectiveInput(userAnswer || '');
     if (isReviewMode) {
@@ -57,6 +60,13 @@ export default function QuestionCard({
     } else if (mode === 'exam') {
       setShowExplanation(false);
     }
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
   }, [question?.id, question?.subject_id, userAnswer, mode, isReviewMode]);
 
   // 객관식 1, 2, 3, 4 키보드 단축키 지원
@@ -161,6 +171,14 @@ export default function QuestionCard({
   // 요구사항: 북마크된 문제 목록 계산
   const bookmarkedQuestions = questions.filter(q => bookmarks?.includes(q.id));
 
+  // 실전 시험 타이머 계산 (시험 모드일 때 하단 바 중앙에 표시)
+  const examHours = Math.floor(examSecondsLeft / 3600);
+  const examMinutes = Math.floor((examSecondsLeft % 3600) / 60);
+  const examSeconds = examSecondsLeft % 60;
+  const formattedExamTime = `${examHours > 0 ? String(examHours).padStart(2, '0') + ':' : ''}${String(examMinutes).padStart(2, '0')}:${String(examSeconds).padStart(2, '0')}`;
+  const isExamUrgent = examSecondsLeft <= 300; // 5분 이하
+  const isExamWarning = examSecondsLeft <= 600 && examSecondsLeft > 300; // 10분 이하
+
   return (
     <div className="flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 shadow-xs overflow-hidden transition-colors relative">
       {/* 상단 문항 메타 정보 바 (요구사항 6: 과목별 몇 번째 문항인지 명확히 구분 표시) */}
@@ -172,14 +190,14 @@ export default function QuestionCard({
             </span>
           )}
           <span>•</span>
-          <span className="font-bold text-blue-600 dark:text-blue-400">
+          <span className="font-bold text-slate-900 dark:text-white">
             {subjectLabel || '기본 과목'}
           </span>
         </div>
         <div className="font-mono font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 text-xs sm:text-sm">
           {isSubjectGrouped ? (
             <>
-              <span className="text-blue-600 dark:text-blue-400 font-black">
+              <span className="text-slate-900 dark:text-white font-black">
                 {subjectPrefix ? `${subjectPrefix} ` : ''}{subjectQuestionIndex}번
               </span>
               <span className="text-slate-400 font-normal">/ {subjectQuestionTotal}문항</span>
@@ -194,11 +212,11 @@ export default function QuestionCard({
       </div>
 
       {/* 문항 본문 (스크롤 영역) */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
         {/* 요구사항: 문제 번호, 지문 및 우측 북마크 저장 버튼 배치 */}
         <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div className="flex items-start gap-2.5 sm:gap-3 flex-1 min-w-0 text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
-            <span className="font-mono font-black text-blue-600 dark:text-blue-400 shrink-0 text-lg sm:text-2xl leading-relaxed">
+            <span className="font-mono font-black text-slate-900 dark:text-white shrink-0 text-lg sm:text-2xl leading-relaxed">
               Q{isSubjectGrouped ? subjectQuestionIndex : index + 1}.
             </span>
             <span className="flex-1 leading-relaxed">
@@ -396,12 +414,12 @@ export default function QuestionCard({
         )}
 
         {/* =========================================================================
-            하단 바: 이전/다음 화살표를 양 끝에 배치, 페이지 수 숫자 제거, 
-            가운데에 OMR, 정답 및 해설, 북마크 목록 모음
-            < | [OMR] [정답 및 해설] [북마크 목록] | >
+            하단 바: 이전/다음 화살표를 양 끝에 배치, 구분선 제거, 테두리 진하게
+            - 시험 모드: < [OMR] [⏱️ 남은시간] [제출(조건부)] [북마크목록] >
+            - 연습 모드: < [OMR] [정답 및 해설] [북마크목록] >
            ========================================================================= */}
         <div className="py-2.5 sm:py-3.5 flex justify-center items-center">
-          <div className="w-fit max-w-[calc(100%-0.5rem)] sm:max-w-[calc(100%-1rem)] px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200/90 dark:border-white/10 shadow-lg shadow-slate-900/5 dark:shadow-black/25 flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
+          <div className="w-fit max-w-[calc(100%-0.5rem)] sm:max-w-[calc(100%-1rem)] px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-full bg-slate-50 dark:bg-slate-800/90 border-2 border-slate-300 dark:border-slate-700 shadow-lg shadow-slate-900/5 dark:shadow-black/25 flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
             {/* 1. 왼쪽 끝: < 이전 버튼 */}
             <button
               type="button"
@@ -413,10 +431,7 @@ export default function QuestionCard({
               <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            {/* 세로 구분선 | */}
-            <div className="w-px h-4 bg-slate-200 dark:bg-slate-700 mx-0.5 shrink-0" />
-
-            {/* 2. 가운데 영역: OMR, 정답 및 해설, 북마크 목록 모음 */}
+            {/* 2. 가운데 영역: OMR, (타이머 또는 정답 및 해설), 북마크 목록 */}
             <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               {/* OMR ( ≡ ) 원형 햄버거 메뉴 버튼 */}
               <button
@@ -434,6 +449,23 @@ export default function QuestionCard({
                   <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-slate-900"></span>
                 )}
               </button>
+
+              {/* 시험 모드: 하단바 가운데에 타이머 배치 */}
+              {mode === 'exam' && (
+                <div 
+                  title="시험 남은 시간"
+                  className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-mono font-black border transition-all shrink-0 ${
+                    isExamUrgent
+                      ? 'bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400 animate-pulse'
+                      : isExamWarning
+                        ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
+                        : 'bg-white dark:bg-slate-700/80 border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-100 shadow-xs'
+                  }`}
+                >
+                  <Clock className={`w-3.5 h-3.5 shrink-0 ${isExamUrgent ? 'text-rose-500' : isExamWarning ? 'text-amber-500' : 'text-blue-600 dark:text-blue-400'}`} />
+                  <span>{formattedExamTime}</span>
+                </div>
+              )}
 
               {/* 시험 모드: 마지막 문제이거나 모든 문항 마킹 완료 시 시험 제출 버튼 노출 */}
               {mode === 'exam' && onSubmitExam && (!hasNext || unansweredCount === 0) && (
@@ -485,9 +517,6 @@ export default function QuestionCard({
                 )}
               </button>
             </div>
-
-            {/* 세로 구분선 | */}
-            <div className="w-px h-4 bg-slate-200 dark:bg-slate-700 mx-0.5 shrink-0" />
 
             {/* 3. 오른쪽 끝: > 다음 버튼 */}
             <button
