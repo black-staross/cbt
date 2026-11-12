@@ -645,18 +645,31 @@ export default function QuestionCard({
                         </span>
                       </div>
 
-                      {/* 문항 마킹 행 리스트 (과목별 1부터 번호 매김, 북마크 아이콘 제거, 줄바꿈 방지) */}
+                      {/* 문항 마킹 행 리스트 (누르면 해당 문항으로 바로 이동, 문구 추가 없음) */}
                       <div className="space-y-1">
                         {filteredItems.map(({ q, realIndex, subIndex }) => {
                           const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
+                          const isCurrent = realIndex === index;
 
                           return (
                             <div
                               key={q.id}
-                              className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
+                              onClick={() => {
+                                if (onSelectIndex && realIndex >= 0) {
+                                  onSelectIndex(realIndex);
+                                }
+                                setIsOmrOpen(false);
+                              }}
+                              className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs border transition-colors cursor-pointer min-h-[38px] ${
+                                isCurrent
+                                  ? 'border-2 border-blue-600 bg-blue-50/60 dark:bg-blue-950/40 shadow-xs'
+                                  : 'border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                              }`}
                             >
                               <div className="flex items-center gap-1.5 shrink-0">
-                                <span className="font-mono font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap text-xs">
+                                <span className={`font-mono font-bold whitespace-nowrap text-xs ${
+                                  isCurrent ? 'text-blue-600 dark:text-blue-400 font-black' : 'text-slate-700 dark:text-slate-300'
+                                }`}>
                                   {String(subIndex).padStart(2, '0')}번
                                 </span>
                               </div>
@@ -697,14 +710,27 @@ export default function QuestionCard({
                     })
                     .map(({ q, qIdx }) => {
                       const currentAnswer = userAnswers ? userAnswers[q.id] : undefined;
+                      const isCurrent = qIdx === index;
 
                       return (
                         <div
                           key={q.id}
-                          className="flex items-center justify-between px-3 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 min-h-[38px]"
+                          onClick={() => {
+                            if (onSelectIndex && qIdx >= 0) {
+                              onSelectIndex(qIdx);
+                            }
+                            setIsOmrOpen(false);
+                          }}
+                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs border transition-colors cursor-pointer min-h-[38px] ${
+                            isCurrent
+                              ? 'border-2 border-blue-600 bg-blue-50/60 dark:bg-blue-950/40 shadow-xs'
+                              : 'border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                          }`}
                         >
                           <div className="flex items-center gap-1.5 shrink-0">
-                            <span className="font-mono font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap text-xs">
+                            <span className={`font-mono font-bold whitespace-nowrap text-xs ${
+                              isCurrent ? 'text-blue-600 dark:text-blue-400 font-black' : 'text-slate-700 dark:text-slate-300'
+                            }`}>
                               {String(qIdx + 1).padStart(2, '0')}번
                             </span>
                           </div>
