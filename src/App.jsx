@@ -127,8 +127,8 @@ export default function App() {
 
       let targetQuestions = allQuestions;
 
-      // 1. 연도 및 회차 필터링
-      if (year && year !== 'all') {
+      // 1. 연도 및 회차 필터링 (무제한 연습 모드일 때는 모든 연도/회차 기출을 합침)
+      if (mode !== 'unlimited' && year && year !== 'all') {
         const filteredByYearSess = allQuestions.filter(q => 
           String(q.year) === String(year) && 
           Number(q.session_number || 1) === Number(sessionNumber || 1)

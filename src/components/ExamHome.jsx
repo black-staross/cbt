@@ -13,7 +13,8 @@ import {
   CheckCircle2, 
   Calendar,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Infinity
 } from 'lucide-react';
 
 export default function ExamHome({
@@ -332,7 +333,7 @@ export default function ExamHome({
                     </div>
                   </div>
 
-                  {/* 4단계: 과목 아래로 시험보기 / 연습하기 액션 버튼 */}
+                  {/* 4단계: 과목 아래로 시험보기 / 연습하기 / 무제한 연습 액션 버튼 */}
                   <div className="space-y-2.5 pt-3 border-t border-slate-100 dark:border-white/10">
                     <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                       {/* 시험보기 버튼 (타이머 자동 시작) */}
@@ -367,6 +368,25 @@ export default function ExamHome({
                         <span>연습하기</span>
                       </button>
                     </div>
+
+                    {/* 요구사항: '무제한 연습' 버튼 (과목별/전체 모든 시험 문제를 합쳐서 연습하는 모드) */}
+                    <button
+                      type="button"
+                      onClick={() => onStartExam(
+                        exam.id, 
+                        'unlimited', 
+                        'all', 
+                        currentSubject === 'all' ? null : currentSubject, 
+                        null
+                      )}
+                      className="w-full py-3 sm:py-3.5 px-4 border-2 border-indigo-500/50 hover:border-indigo-600 dark:border-indigo-500/40 bg-indigo-50/70 hover:bg-indigo-100/80 dark:bg-indigo-950/40 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] text-center"
+                    >
+                      <Infinity className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-indigo-600 dark:text-indigo-400" />
+                      <span>무제한 연습</span>
+                      <span className="text-[11px] font-medium opacity-80 hidden xs:inline">
+                        • {currentSubject === 'all' ? '전체 과목 모든 기출 합치기' : `${exam.subjects?.find(s => s.id === currentSubject)?.name?.replace(/^[0-9제]+\s*과목\s*/, '') || `${currentSubject}과목`} 모든 기출 합치기`}
+                      </span>
+                    </button>
                   </div>
                 </div>
               )}
