@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sparkles, Moon, Sun } from 'lucide-react';
-import ExamTimer from './ExamTimer';
 
 export default function Header({
   currentExam,
@@ -64,21 +63,9 @@ export default function Header({
           )}
         </div>
 
-        {/* 우측 영역: 타이머, 다크모드 스위치 (요구사항 1: 시험볼 때 다크모드 버튼은 타이머 오른쪽에 배치) */}
+        {/* 우측 영역: 다크모드 스위치 (요구사항: 상단 타이머는 제거하고 하단 바에만 배치) */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* 타이머: 시험보기(exam) 모드일 때만 자동 실행 및 노출 */}
-          {currentExam && currentMode === 'exam' && (
-            <ExamTimer
-              initialMinutes={currentExam.time_limit}
-              onTimeUp={onTimeUp}
-              isExamMode={true}
-              isPaused={isPaused}
-              onTogglePause={onTogglePause}
-              secondsLeft={examSecondsLeft}
-            />
-          )}
-
-          {/* 다크모드 토글 스위치 (타이머 오른쪽에 배치) */}
+          {/* 다크모드 토글 스위치 */}
           <button
             type="button"
             onClick={onToggleDarkMode}
