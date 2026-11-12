@@ -203,8 +203,8 @@ export default function QuestionCard({
         </div>
       </div>
 
-      {/* 문항 본문 (플로팅 바에 가려지지 않도록 하단 1/3 여백 확보) */}
-      <div ref={scrollContainerRef} className="p-4 sm:p-6 md:p-8 pb-48 sm:pb-52 space-y-4 sm:space-y-6">
+      {/* 문항 본문 (플로팅 바에 가려지지 않도록 하단 여백 확보) */}
+      <div ref={scrollContainerRef} className="p-4 sm:p-6 md:p-8 pb-40 sm:pb-44 space-y-4 sm:space-y-6">
         {/* 요구사항: 문제 번호, 지문 및 우측 북마크 저장 버튼 배치 */}
         <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div className="flex items-start gap-2.5 sm:gap-3 flex-1 min-w-0 text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
@@ -434,13 +434,13 @@ export default function QuestionCard({
       </div>
 
       {/* =========================================================================
-          화면 기준 하단 1/3 지점 고정 플로팅 컨트롤 바
-          - 문제 위치나 길이에 따라 움직이지 않고 화면(디스플레이) 기준 하단 1/3 지점에 고정
-          - 하단중앙(left-1/2 -translate-x-1/2), bottom-[28vh]
+          화면 기준 하단 고정 플로팅 컨트롤 바
+          - 문제 위치나 길이에 따라 움직이지 않고 화면(디스플레이) 기준 하단 지점에 안정 고정
+          - 하단중앙(left-1/2 -translate-x-1/2), bottom-[22vh] (살짝 아래로 조정)
           - 시험 모드: < [OMR] [⏱️ 남은시간] [제출(조건부)] [북마크목록] >
           - 연습 모드: < [OMR] [정답 및 해설] [북마크목록] >
          ========================================================================= */}
-      <div className="fixed bottom-[28vh] sm:bottom-[14vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center items-center w-full max-w-[calc(100%-1rem)] sm:max-w-fit px-2">
+      <div className="fixed bottom-[22vh] sm:bottom-[10vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center items-center w-full max-w-[calc(100%-1rem)] sm:max-w-fit px-2">
         <div className="pointer-events-auto w-fit max-w-full px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-2 border-slate-300 dark:border-slate-700 shadow-xl shadow-slate-900/15 dark:shadow-black/50 flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar">
           {/* 1. 왼쪽 끝: < 이전 버튼 */}
           <button
