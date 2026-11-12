@@ -518,7 +518,7 @@ export default function QuestionCard({
               </button>
             )}
 
-            {/* 북마크된 문제를 볼 수 있는 창을 여는 버튼 (진한 아이콘 스타일 적용) */}
+            {/* 북마크된 문제를 볼 수 있는 창을 여는 버튼 */}
             <button
               type="button"
               onClick={() => setIsBookmarkListOpen(prev => !prev)}
@@ -526,12 +526,15 @@ export default function QuestionCard({
               className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 relative ${
                 isBookmarkListOpen || (bookmarks && bookmarks.length > 0)
                   ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
-                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-100'
+                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 border-slate-200/90 dark:border-slate-600/80 text-slate-600 dark:text-slate-300'
               }`}
             >
-              <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5] transition-colors ${
-                bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-100'
-              }`} />
+              <BookmarkCheck
+                strokeWidth={2.2}
+                className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2] transition-colors ${
+                  bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-300'
+                }`}
+              />
               {bookmarks && bookmarks.length > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-blue-600 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs">
                   {bookmarks.length}
