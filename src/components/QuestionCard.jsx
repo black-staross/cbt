@@ -194,17 +194,9 @@ export default function QuestionCard({
             {subjectLabel || '기본 과목'}
           </span>
         </div>
-        <div className="font-mono font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 text-xs sm:text-sm">
+        <div className="font-mono font-bold text-slate-700 dark:text-slate-300 text-xs sm:text-sm">
           {isSubjectGrouped ? (
-            <>
-              <span className="text-slate-900 dark:text-white font-black">
-                {subjectPrefix ? `${subjectPrefix} ` : ''}{subjectQuestionIndex}번
-              </span>
-              <span className="text-slate-400 font-normal">/ {subjectQuestionTotal}문항</span>
-              <span className="text-slate-400 font-normal text-[11px] ml-1 hidden xs:inline">
-                (전체 {index + 1}/{totalCount})
-              </span>
-            </>
+            <span>{subjectQuestionIndex} / {subjectQuestionTotal}</span>
           ) : (
             <span>{index + 1} / {totalCount}</span>
           )}
