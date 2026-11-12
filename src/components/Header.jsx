@@ -19,7 +19,7 @@ export default function Header({
       case 'practice':
         return { label: '', color: '' }; // 요구사항: 연습하기에서 과목별 집중학습 문구 제거
       case 'unlimited':
-        return { label: '무제한 연습', color: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30' };
+        return { label: '무제한 연습', color: 'bg-blue-50/70 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400 border-blue-500/30' };
       case 'wrong':
         return { label: '오답노트 복습', color: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30' };
       case 'bookmark':

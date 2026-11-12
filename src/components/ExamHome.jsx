@@ -369,7 +369,7 @@ export default function ExamHome({
                       </button>
                     </div>
 
-                    {/* 요구사항: '무제한 연습' 버튼 (과목별/전체 모든 시험 문제를 합쳐서 연습하는 모드) */}
+                    {/* 요구사항: '무제한 연습' 버튼 (보랏빛/그라데이션 제거, 파란색 단색 플랫 테두리 스타일) */}
                     <button
                       type="button"
                       onClick={() => onStartExam(
@@ -379,11 +379,11 @@ export default function ExamHome({
                         currentSubject === 'all' ? null : currentSubject, 
                         null
                       )}
-                      className="w-full py-3 sm:py-3.5 px-4 border-2 border-indigo-500/50 hover:border-indigo-600 dark:border-indigo-500/40 bg-indigo-50/70 hover:bg-indigo-100/80 dark:bg-indigo-950/40 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] text-center"
+                      className="w-full py-3 sm:py-3.5 px-4 border-2 border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 text-blue-600 dark:text-blue-400 active:scale-[0.99] rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer min-h-[46px] text-center"
                     >
-                      <Infinity className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-indigo-600 dark:text-indigo-400" />
+                      <Infinity className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-blue-600 dark:text-blue-400" />
                       <span>무제한 연습</span>
-                      <span className="text-[11px] font-medium opacity-80 hidden xs:inline">
+                      <span className="text-[11px] font-bold text-blue-500 dark:text-blue-300 opacity-90 hidden xs:inline">
                         • {currentSubject === 'all' ? '전체 과목 모든 기출 합치기' : `${exam.subjects?.find(s => s.id === currentSubject)?.name?.replace(/^[0-9제]+\s*과목\s*/, '') || `${currentSubject}과목`} 모든 기출 합치기`}
                       </span>
                     </button>
