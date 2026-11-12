@@ -36,7 +36,7 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/10 transition-colors duration-300 select-none">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-        {/* 좌측: 간결한 '언제나 CBT' 메인 제목 (클릭 시 첫 화면 전체 자격증으로 복귀) */}
+        {/* 좌측: 간결한 '어디서나 CBT' 메인 제목 (클릭 시 첫 화면 전체 자격증으로 복귀) */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             type="button"
@@ -45,7 +45,7 @@ export default function Header({
             className="text-slate-900 dark:text-white hover:opacity-70 transition-opacity cursor-pointer shrink-0 py-1"
           >
             <span className="font-black text-base sm:text-lg tracking-tight leading-none">
-              언제나 CBT
+              어디서나 CBT
             </span>
           </button>
 
