@@ -395,6 +395,127 @@ export default function QuestionCard({
           </div>
         )}
 
+        {/* =========================================================================
+            하단 바를 선택지 바로 아래 중앙에 위치 (모바일에서 바닥 고정으로 인한 불편 완벽 해소)
+            ( ≡ ) | <  1 / 12  > | [정답 및 해설] [북마크]
+           ========================================================================= */}
+        <div className="py-2.5 sm:py-3.5 flex justify-center items-center">
+          <div className="w-fit max-w-[calc(100%-0.5rem)] sm:max-w-[calc(100%-1rem)] px-2 sm:px-3 py-1.5 sm:py-2 rounded-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200/90 dark:border-white/10 shadow-lg shadow-slate-900/5 dark:shadow-black/25 flex items-center gap-1 sm:gap-2.5 overflow-x-auto no-scrollbar">
+            {/* 1. ( ≡ ) 원형 햄버거 메뉴 버튼 (누르면 왼쪽에서 OMR 답안지 드로어 오픈) */}
+            <button
+              type="button"
+              onClick={() => setIsOmrOpen(prev => !prev)}
+              title="OMR 실전 답안지 메뉴 열기"
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center cursor-pointer transition-colors shrink-0 relative ${
+                isOmrOpen
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-600'
+              }`}
+            >
+              <Menu className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              {unansweredCount > 0 && mode === 'exam' && (
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-slate-900"></span>
+              )}
+            </button>
+
+            {/* 세로 구분선 | */}
+            <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
+
+            {/* 2. < 이전 버튼 */}
+            <button
+              type="button"
+              onClick={onPrev}
+              disabled={!hasPrev}
+              title="이전 문제"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer shrink-0 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            {/* 3. 문항 표시 (사진처럼 깔끔하고 굵은 1 / 12 스타일) */}
+            <div className="font-mono font-bold text-xs sm:text-sm text-slate-900 dark:text-white px-1 sm:px-2 whitespace-nowrap select-none">
+              {isSubjectGrouped ? (
+                <span title={`전체 ${index + 1} / ${totalCount}`}>
+                  <span className="text-blue-600 dark:text-blue-400">{subjectQuestionIndex}</span>
+                  <span className="text-slate-400 mx-1.5 font-normal">/</span>
+                  <span>{subjectQuestionTotal}</span>
+                </span>
+              ) : (
+                <span>
+                  <span className="text-blue-600 dark:text-blue-400">{index + 1}</span>
+                  <span className="text-slate-400 mx-1.5 font-normal">/</span>
+                  <span>{totalCount}</span>
+                </span>
+              )}
+            </div>
+
+            {/* 4. > 다음 버튼 */}
+            <button
+              type="button"
+              onClick={onNext}
+              disabled={!hasNext}
+              title="다음 문제"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer shrink-0 transition-colors"
+            >
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            {/* 세로 구분선 | */}
+            <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
+
+            {/* 5. 우측 액션 버튼들 */}
+            {/* 시험 모드: 마지막 문제이거나 모든 문항 마킹 완료 시 시험 제출 버튼 노출 */}
+            {mode === 'exam' && onSubmitExam && (!hasNext || unansweredCount === 0) && (
+              <button
+                type="button"
+                onClick={onSubmitExam}
+                title="시험 답안 최종 제출"
+                className="px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-black border-2 border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-500/20 cursor-pointer shrink-0 transition-all active:scale-95"
+              >
+                <span>제출</span>
+              </button>
+            )}
+
+            {/* 연습 모드일 때: 정답 및 해설 알약 버튼 */}
+            {mode !== 'exam' && (
+              <button
+                type="button"
+                onClick={() => setShowExplanation(prev => !prev)}
+                title="정답 및 상세 해설 보기"
+                className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
+                  showExplanation
+                    ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
+                    : 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/50'
+                }`}
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                <span>정답 및 해설</span>
+              </button>
+            )}
+
+            {/* 6. 요구사항: 북마크된 문제를 볼 수 있는 창을 여는 버튼 */}
+            <button
+              type="button"
+              onClick={() => setIsBookmarkListOpen(prev => !prev)}
+              title="북마크된 문제 목록 보기"
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 relative ${
+                isBookmarkListOpen || (bookmarks && bookmarks.length > 0)
+                  ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
+                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 border-slate-200/80 dark:border-slate-600 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+              }`}
+            >
+              <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 transition-colors ${
+                bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : ''
+              }`} />
+              {bookmarks && bookmarks.length > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-blue-600 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs">
+                  {bookmarks.length}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
         {/* 상세 해설 섹션 (하단 바에서 '정답 및 해설' 열었을 때 표시) */}
         {showExplanation && (
           <div className="pt-4 space-y-3 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm animate-in fade-in duration-150">
@@ -421,127 +542,6 @@ export default function QuestionCard({
             )}
           </div>
         )}
-      </div>
-
-      {/* =========================================================================
-          요구사항: 첨부 사진과 1:1 완벽 일치하는 바닥에서 띄운 둥근 플로팅 캡슐 상태창 바
-          ( ≡ ) | <  1 / 12  > | [정답 및 해설] [북마크]
-         ========================================================================= */}
-      <div className="p-2 sm:p-3 sm:pb-4 bg-transparent flex justify-center items-center shrink-0 z-20">
-        <div className="w-fit max-w-[calc(100%-0.5rem)] sm:max-w-[calc(100%-1rem)] px-2 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 shadow-xl shadow-slate-900/10 dark:shadow-black/40 flex items-center gap-1 sm:gap-2.5 overflow-x-auto no-scrollbar">
-          {/* 1. ( ≡ ) 원형 햄버거 메뉴 버튼 (누르면 왼쪽에서 OMR 답안지 드로어 오픈) */}
-          <button
-            type="button"
-            onClick={() => setIsOmrOpen(prev => !prev)}
-            title="OMR 실전 답안지 메뉴 열기"
-            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center cursor-pointer transition-colors shrink-0 relative ${
-              isOmrOpen
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200'
-            }`}
-          >
-            <Menu className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-            {unansweredCount > 0 && mode === 'exam' && (
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-slate-900"></span>
-            )}
-          </button>
-
-          {/* 세로 구분선 | */}
-          <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
-
-          {/* 2. < 이전 버튼 */}
-          <button
-            type="button"
-            onClick={onPrev}
-            disabled={!hasPrev}
-            title="이전 문제"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer shrink-0 transition-colors"
-          >
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-
-          {/* 3. 문항 표시 (사진처럼 깔끔하고 굵은 1 / 12 스타일) */}
-          <div className="font-mono font-bold text-xs sm:text-sm text-slate-900 dark:text-white px-1 sm:px-2 whitespace-nowrap select-none">
-            {isSubjectGrouped ? (
-              <span title={`전체 ${index + 1} / ${totalCount}`}>
-                <span className="text-blue-600 dark:text-blue-400">{subjectQuestionIndex}</span>
-                <span className="text-slate-400 mx-1.5 font-normal">/</span>
-                <span>{subjectQuestionTotal}</span>
-              </span>
-            ) : (
-              <span>
-                <span className="text-blue-600 dark:text-blue-400">{index + 1}</span>
-                <span className="text-slate-400 mx-1.5 font-normal">/</span>
-                <span>{totalCount}</span>
-              </span>
-            )}
-          </div>
-
-          {/* 4. > 다음 버튼 */}
-          <button
-            type="button"
-            onClick={onNext}
-            disabled={!hasNext}
-            title="다음 문제"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer shrink-0 transition-colors"
-          >
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-
-          {/* 세로 구분선 | */}
-          <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5 sm:mx-1 shrink-0" />
-
-          {/* 5. 우측 액션 버튼들 */}
-          {/* 시험 모드: 마지막 문제이거나 모든 문항 마킹 완료 시 시험 제출 버튼 노출 */}
-          {mode === 'exam' && onSubmitExam && (!hasNext || unansweredCount === 0) && (
-            <button
-              type="button"
-              onClick={onSubmitExam}
-              title="시험 답안 최종 제출"
-              className="px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-black border-2 border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-500/20 cursor-pointer shrink-0 transition-all active:scale-95"
-            >
-              <span>제출</span>
-            </button>
-          )}
-
-          {/* 연습 모드일 때: 정답 및 해설 알약 버튼 */}
-          {mode !== 'exam' && (
-            <button
-              type="button"
-              onClick={() => setShowExplanation(prev => !prev)}
-              title="정답 및 상세 해설 보기"
-              className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-                showExplanation
-                  ? 'border-2 border-blue-600 bg-blue-600 text-white shadow-xs'
-                  : 'border-2 border-blue-600 text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/50'
-              }`}
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-              <span>정답 및 해설</span>
-            </button>
-          )}
-
-          {/* 6. 요구사항: 북마크된 문제를 볼 수 있는 창을 여는 버튼 (현재 북마크 저장버튼 자리에 배치) */}
-          <button
-            type="button"
-            onClick={() => setIsBookmarkListOpen(prev => !prev)}
-            title="북마크된 문제 목록 보기"
-            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 relative ${
-              isBookmarkListOpen || (bookmarks && bookmarks.length > 0)
-                ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
-                : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
-            }`}
-          >
-            <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 transition-colors ${
-              bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : ''
-            }`} />
-            {bookmarks && bookmarks.length > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-blue-600 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs">
-                {bookmarks.length}
-              </span>
-            )}
-          </button>
-        </div>
       </div>
 
       {/* =========================================================================

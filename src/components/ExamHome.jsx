@@ -87,7 +87,7 @@ export default function ExamHome({
     <div className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-4 overflow-x-hidden box-border">
       {/* 상단 유형별 필터 바 (간결하고 심플한 플랫 탭) */}
       <div className="w-full overflow-x-auto no-scrollbar flex justify-start sm:justify-center py-1">
-        <div className="inline-flex p-1 rounded-xl sm:rounded-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xs shrink-0">
+        <div className="inline-flex p-1 rounded-xl sm:rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xs shrink-0">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isActive = selectedCategory === cat.id;

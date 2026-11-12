@@ -373,10 +373,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 relative transition-colors duration-300 font-sans antialiased selection:bg-blue-500 selection:text-white box-border">
-      {/* 유러피안 리퀴드 글래스 앰비언트 글로우 오브젝트 */}
-      <div className="fixed -top-48 -left-48 w-[500px] h-[500px] bg-gradient-to-br from-indigo-500/12 to-blue-500/10 dark:from-indigo-600/10 dark:to-blue-600/8 rounded-full blur-[100px] pointer-events-none" />
-      <div className="fixed top-1/4 -right-48 w-[550px] h-[550px] bg-gradient-to-bl from-teal-500/10 to-emerald-500/8 dark:from-teal-600/8 dark:to-emerald-600/6 rounded-full blur-[120px] pointer-events-none" />
-      <div className="fixed -bottom-48 left-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-amber-500/8 to-rose-500/6 dark:from-amber-600/5 dark:to-rose-600/5 rounded-full blur-[130px] pointer-events-none" />
+      {/* 유러피안 리퀴드 글래스 앰비언트 글로우 오브젝트 (스크롤 성능 최적화: 독립 GPU 가속 레이어 격리) */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 transform-gpu will-change-transform contain-strict">
+        <div className="absolute -top-48 -left-48 w-[450px] h-[450px] bg-gradient-to-br from-indigo-500/12 to-blue-500/10 dark:from-indigo-600/10 dark:to-blue-600/8 rounded-full blur-[80px]" />
+        <div className="absolute top-1/4 -right-48 w-[480px] h-[480px] bg-gradient-to-bl from-teal-500/10 to-emerald-500/8 dark:from-teal-600/8 dark:to-emerald-600/6 rounded-full blur-[90px]" />
+        <div className="absolute -bottom-48 left-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-amber-500/8 to-rose-500/6 dark:from-amber-600/5 dark:to-rose-600/5 rounded-full blur-[90px]" />
+      </div>
 
       {/* 헤더 */}
       <Header
@@ -442,7 +444,7 @@ export default function App() {
           </div>
         ) : (
           // CBT 시험장 화면 (요구사항 2: OMR을 하단바 메뉴 안에 넣고 왼쪽에서 열리게 함)
-          <div className="flex-1 max-w-4xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col min-h-[640px]">
+          <div className="flex-1 max-w-4xl w-full mx-auto p-3 sm:p-4 md:p-6 flex flex-col min-h-0 sm:min-h-[520px]">
             <QuestionCard
               question={questions[currentIndex]}
               index={currentIndex}
