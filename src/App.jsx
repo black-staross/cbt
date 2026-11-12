@@ -152,6 +152,14 @@ export default function App() {
         if (filteredBySubject.length > 0) {
           targetQuestions = filteredBySubject;
         }
+      } else if (mode === 'unlimited') {
+        // 요구사항: 무제한 연습에서 특정 과목이 아닌 전체 과목을 선택하고 들어갔을 때 문제 순서를 과목별로 순서대로 배치
+        // (1과목 전 회차 전체 -> 2과목 전 회차 전체 -> 3과목 전 회차 전체 ...)
+        targetQuestions = [...targetQuestions].sort((a, b) => {
+          const subA = Number(a.subject_id) || 0;
+          const subB = Number(b.subject_id) || 0;
+          return subA - subB;
+        });
       }
 
       // 안전 fallback: 만약 필터 결과가 비어있다면 전체 문제로 fallback
