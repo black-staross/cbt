@@ -441,7 +441,7 @@ export default function QuestionCard({
           - 연습 모드: < [OMR] [정답 및 해설] [북마크목록] >
          ========================================================================= */}
       <div className="fixed bottom-[22vh] sm:bottom-[10vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center items-center w-full max-w-[calc(100%-1rem)] sm:max-w-fit px-2">
-        <div className="pointer-events-auto w-fit max-w-full px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-2 border-slate-300 dark:border-slate-700 shadow-xl shadow-slate-900/15 dark:shadow-black/50 flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="pointer-events-auto w-fit max-w-full px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/90 dark:border-white/10 shadow-xl shadow-slate-900/10 dark:shadow-black/40 flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar">
           {/* 1. 왼쪽 끝: < 이전 버튼 */}
           <button
             type="button"
@@ -518,7 +518,7 @@ export default function QuestionCard({
               </button>
             )}
 
-            {/* 북마크된 문제를 볼 수 있는 창을 여는 버튼 */}
+            {/* 북마크된 문제를 볼 수 있는 창을 여는 버튼 (진한 아이콘 스타일 적용) */}
             <button
               type="button"
               onClick={() => setIsBookmarkListOpen(prev => !prev)}
@@ -526,11 +526,11 @@ export default function QuestionCard({
               className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border transition-all flex items-center justify-center cursor-pointer shrink-0 relative ${
                 isBookmarkListOpen || (bookmarks && bookmarks.length > 0)
                   ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 shadow-xs'
-                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 border-slate-200/80 dark:border-slate-600 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
+                  : 'bg-white hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-100'
               }`}
             >
-              <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 transition-colors ${
-                bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : ''
+              <BookmarkCheck className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5] transition-colors ${
+                bookmarks && bookmarks.length > 0 ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-100'
               }`} />
               {bookmarks && bookmarks.length > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-blue-600 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-xs">
