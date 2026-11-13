@@ -222,38 +222,38 @@ def run_pipeline():
             "targets": ["adsp.json"]
         },
         {
-            "name": "정보처리기사 필기 (wpc-written)",
+            "name": "정보처리기사 필기 (eip-written)",
             "file": RAW_DIR / "wpc_written_raw.txt",
             "type": "comcbt",
             "prefix": "wpc-written",
             "subject_id": 1,
             "chapter": "소프트웨어 설계 및 응용",
-            "targets": ["eip_written.json", "wpc_written.json", "wpc-written.json"]
+            "targets": ["eip_written.json"]
         },
         {
-            "name": "컴퓨터활용능력 1급 (com-study)",
+            "name": "컴퓨터활용능력 1급 (com1-written)",
             "file": RAW_DIR / "com_study_raw.txt",
             "type": "comcbt",
             "prefix": "com-study",
             "subject_id": 1,
             "chapter": "컴퓨터 일반 및 스프레드시트",
-            "targets": ["com1_written.json", "com_study.json", "com-study.json"]
+            "targets": ["com1_written.json"]
         },
         {
-            "name": "산업안전기사 필기 (safety)",
+            "name": "산업안전기사 필기 (ind-safety-written)",
             "file": RAW_DIR / "safety_raw.txt",
             "type": "comcbt",
             "prefix": "safety",
             "subject_id": 1,
             "chapter": "안전관리론 및 시스템안전공학",
-            "targets": ["ind_safety_written.json", "safety.json", "ind_safety.json"]
+            "targets": ["ind_safety_written.json"]
         },
         {
-            "name": "정보처리기사 실기 (wpc-practical)",
+            "name": "정보처리기사 실기 (eip-practical)",
             "file": RAW_DIR / "wpc_practical_raw.md",
             "type": "markdown",
             "prefix": "wpc-practical",
-            "targets": ["eip_practical.json", "wpc_practical.json", "wpc-practical.json"]
+            "targets": ["eip_practical.json"]
         }
     ]
 

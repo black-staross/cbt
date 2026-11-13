@@ -85,10 +85,6 @@ def main():
     eip_written = generate_eip_written_sessions()
     with open(OUTPUT_DIR / "eip_written.json", "w", encoding="utf-8") as f:
         json.dump(eip_written, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "wpc_written.json", "w", encoding="utf-8") as f:
-        json.dump(eip_written, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "wpc-written.json", "w", encoding="utf-8") as f:
-        json.dump(eip_written, f, ensure_ascii=False, indent=2)
     print(f"✔ 1. 정보처리기사 필기: {len(eip_written)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
     # 2. 컴퓨터활용능력 1급 (7개 연도 x 3회차 x 60문항 = 1,260문항)
@@ -101,10 +97,6 @@ def main():
     )
     with open(OUTPUT_DIR / "com1_written.json", "w", encoding="utf-8") as f:
         json.dump(com1, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "com_study.json", "w", encoding="utf-8") as f:
-        json.dump(com1, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "com-study.json", "w", encoding="utf-8") as f:
-        json.dump(com1, f, ensure_ascii=False, indent=2)
     print(f"✔ 2. 컴퓨터활용능력 1급: {len(com1)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
     # 3. 산업안전기사 필기 (7개 연도 x 3회차 x 100문항 = 2,100문항)
@@ -116,10 +108,6 @@ def main():
         session_name_fmt="{year}년 정기 제{session}회 기출"
     )
     with open(OUTPUT_DIR / "ind_safety_written.json", "w", encoding="utf-8") as f:
-        json.dump(safety, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "ind_safety.json", "w", encoding="utf-8") as f:
-        json.dump(safety, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "safety.json", "w", encoding="utf-8") as f:
         json.dump(safety, f, ensure_ascii=False, indent=2)
     print(f"✔ 3. 산업안전기사 필기: {len(safety)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
@@ -156,10 +144,6 @@ def main():
         session_name_fmt="{year}년 정기 실기 제{session}회 기출"
     )
     with open(OUTPUT_DIR / "eip_practical.json", "w", encoding="utf-8") as f:
-        json.dump(practical, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "wpc_practical.json", "w", encoding="utf-8") as f:
-        json.dump(practical, f, ensure_ascii=False, indent=2)
-    with open(OUTPUT_DIR / "wpc-practical.json", "w", encoding="utf-8") as f:
         json.dump(practical, f, ensure_ascii=False, indent=2)
     print(f"✔ 6. 정보처리기사 실기: {len(practical)}문항 완료 (2020~2026 연도별 1~3회차 주관식 풀세트)")
 

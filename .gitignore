@@ -14,6 +14,7 @@ yarn-error.log*
 # Temp & Scratch
 temp_script.jsx
 .gemini/
+.impeccable/
 
 # Vite build cache (dist는 빌드 재생성 가능하나, pass_cbt.html은 단일 실행본으로 보존)
 dist/

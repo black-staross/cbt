@@ -1007,10 +1007,10 @@ def main():
     tasks = [
         ("SQLD", get_sqld_questions(), ["sqld.json"]),
         ("ADsP", get_adsp_questions(), ["adsp.json"]),
-        ("정보처리기사 필기", get_wpc_written_questions(), ["eip_written.json", "wpc_written.json", "wpc-written.json"]),
-        ("컴퓨터활용능력 1급", get_com1_questions(), ["com1_written.json", "com_study.json", "com-study.json"]),
-        ("산업안전기사 필기", get_safety_questions(), ["ind_safety_written.json", "safety.json", "ind_safety.json"]),
-        ("정보처리기사 실기", get_wpc_practical_questions(), ["eip_practical.json", "wpc_practical.json", "wpc-practical.json"]),
+        ("정보처리기사 필기", get_wpc_written_questions(), ["eip_written.json"]),
+        ("컴퓨터활용능력 1급", get_com1_questions(), ["com1_written.json"]),
+        ("산업안전기사 필기", get_safety_questions(), ["ind_safety_written.json"]),
+        ("정보처리기사 실기", get_wpc_practical_questions(), ["eip_practical.json"]),
     ]
 
     total_count = 0
