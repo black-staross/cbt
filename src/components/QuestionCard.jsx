@@ -203,8 +203,8 @@ export default function QuestionCard({
         </div>
       </div>
 
-      {/* 문항 본문 (플로팅 바에 가려지지 않도록 하단 여백 확보) */}
-      <div ref={scrollContainerRef} className="p-4 sm:p-6 md:p-8 pb-40 sm:pb-44 space-y-4 sm:space-y-6">
+      {/* 문항 본문 */}
+      <div ref={scrollContainerRef} className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
         {/* 요구사항: 문제 번호, 지문 및 우측 북마크 저장 버튼 배치 */}
         <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div className="flex items-start gap-2.5 sm:gap-3 flex-1 min-w-0 text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50 leading-relaxed tracking-tight break-keep">
