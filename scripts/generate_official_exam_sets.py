@@ -8,6 +8,7 @@
 
 import sys
 import json
+import random
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,11 +20,53 @@ from generators.gen_ind_safety import generate_ind_safety
 from generators.gen_sqld import generate_sqld
 from generators.gen_adsp import generate_adsp
 from generators.gen_eip_practical import generate_eip_practical
+from generators.gen_semi_equip_craftsman import generate_semi_equip_craftsman_sessions
+from generators.gen_equip_maint_ind_eng import generate_equip_maint_ind_eng_sessions
+from generators.gen_equip_maint_craftsman import generate_equip_maint_craftsman_sessions
+from generators.gen_hvac_ind_eng import generate_hvac_ind_eng_sessions
+from generators.gen_elec_craftsman import generate_elec_craftsman_sessions
+from generators.gen_ind_safety_ind_eng import generate_ind_safety_ind_eng_sessions
+from generators.gen_hazmat_craftsman import generate_hazmat_craftsman_sessions
+from generators.gen_gas_craftsman import generate_gas_craftsman_sessions
 
 OUTPUT_DIR = BASE_DIR / "src" / "data" / "questions"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020]
+
+
+def rebalance_options(questions, seed_prefix):
+    """
+    기존 객관식 문항의 정답 번호(1~4) 쏠림을 방지하기 위해
+    보기 순서를 결정론적으로 재배치하고 answer(0-based)/correct_answer(1-based)를 동기화한다.
+    """
+    order_sensitive_keywords = ("모두", "위의", "아래의", "해당 없음", "해당없음", "없음", "①", "②", "③", "④")
+    for idx, q in enumerate(questions):
+        opts = q.get("options")
+        if q.get("type") != "multiple_choice" or not isinstance(opts, list) or len(opts) != 4:
+            continue
+        if any(any(kw in str(opt) for kw in order_sensitive_keywords) for opt in opts):
+            continue
+
+        ca = q.get("correct_answer") if q.get("correct_answer") is not None else q.get("answer")
+        if ca is None:
+            continue
+        ans_idx = int(ca) - 1
+        if not (0 <= ans_idx < 4):
+            continue
+
+        correct_text = opts[ans_idx]
+        wrongs = [opt for i, opt in enumerate(opts) if i != ans_idx]
+        rng = random.Random(f"{seed_prefix}-{q.get('id', idx)}")
+        rng.shuffle(wrongs)
+
+        # 전체 균등 분포 보장을 위해 idx % 4 기반으로 배치
+        target_pos = idx % 4
+        new_opts = wrongs[:target_pos] + [correct_text] + wrongs[target_pos:]
+        q["options"] = new_opts
+        q["answer"] = target_pos + 1
+        q["correct_answer"] = target_pos + 1
+    return questions
 
 def build_multi_session_dataset(base_generator_func, exam_key, subject_counts, session_count=3, session_name_fmt="{year}년 제{session}회 기출 풀세트"):
     """
@@ -82,55 +125,55 @@ def main():
     print("=== [PASS] 2020~2026년 다중 회차 CBT 문제 은행 구축 시작 ===")
 
     # 1. 정보처리기사 필기 (7개 연도 x 3회차 x 100문항 = 2,100문항)
-    eip_written = generate_eip_written_sessions()
+    eip_written = rebalance_options(generate_eip_written_sessions(), "eip_written")
     with open(OUTPUT_DIR / "eip_written.json", "w", encoding="utf-8") as f:
         json.dump(eip_written, f, ensure_ascii=False, indent=2)
     print(f"✔ 1. 정보처리기사 필기: {len(eip_written)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
     # 2. 컴퓨터활용능력 1급 (7개 연도 x 3회차 x 60문항 = 1,260문항)
-    com1 = build_multi_session_dataset(
+    com1 = rebalance_options(build_multi_session_dataset(
         generate_com1_written,
         "com1-written",
         [(1, 20), (2, 20), (3, 20)],
         session_count=3,
         session_name_fmt="{year}년 상시/정기 제{session}회 기출"
-    )
+    ), "com1_written")
     with open(OUTPUT_DIR / "com1_written.json", "w", encoding="utf-8") as f:
         json.dump(com1, f, ensure_ascii=False, indent=2)
     print(f"✔ 2. 컴퓨터활용능력 1급: {len(com1)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
     # 3. 산업안전기사 필기 (7개 연도 x 3회차 x 100문항 = 2,100문항)
-    safety = build_multi_session_dataset(
+    safety = rebalance_options(build_multi_session_dataset(
         generate_ind_safety,
         "ind-safety",
         [(1, 20), (2, 20), (3, 20), (4, 20), (5, 20)],
         session_count=3,
         session_name_fmt="{year}년 정기 제{session}회 기출"
-    )
+    ), "ind_safety")
     with open(OUTPUT_DIR / "ind_safety_written.json", "w", encoding="utf-8") as f:
         json.dump(safety, f, ensure_ascii=False, indent=2)
     print(f"✔ 3. 산업안전기사 필기: {len(safety)}문항 완료 (2020~2026 연도별 1~3회차 풀세트)")
 
     # 4. SQLD (7개 연도 x 4회차 x 50문항 = 1,400문항)
-    sqld = build_multi_session_dataset(
+    sqld = rebalance_options(build_multi_session_dataset(
         generate_sqld,
         "sqld",
         [(1, 10), (2, 40)],
         session_count=4,
         session_name_fmt="{year}년 정기 검정 제{session}회 기출"
-    )
+    ), "sqld")
     with open(OUTPUT_DIR / "sqld.json", "w", encoding="utf-8") as f:
         json.dump(sqld, f, ensure_ascii=False, indent=2)
     print(f"✔ 4. SQLD (SQL 개발자): {len(sqld)}문항 완료 (2020~2026 연도별 1~4회차 풀세트)")
 
     # 5. ADsP (7개 연도 x 4회차 x 50문항 = 1,400문항)
-    adsp = build_multi_session_dataset(
+    adsp = rebalance_options(build_multi_session_dataset(
         generate_adsp,
         "adsp",
         [(1, 10), (2, 10), (3, 30)],
         session_count=4,
         session_name_fmt="{year}년 정기 검정 제{session}회 기출"
-    )
+    ), "adsp")
     with open(OUTPUT_DIR / "adsp.json", "w", encoding="utf-8") as f:
         json.dump(adsp, f, ensure_ascii=False, indent=2)
     print(f"✔ 5. ADsP (데이터분석 준전문가): {len(adsp)}문항 완료 (2020~2026 연도별 1~4회차 풀세트)")
@@ -147,8 +190,27 @@ def main():
         json.dump(practical, f, ensure_ascii=False, indent=2)
     print(f"✔ 6. 정보처리기사 실기: {len(practical)}문항 완료 (2020~2026 연도별 1~3회차 주관식 풀세트)")
 
-    total_all = len(eip_written) + len(com1) + len(safety) + len(sqld) + len(adsp) + len(practical)
-    print(f"\n🎉 총 {total_all}문항의 다중 회차 정규 문제 은행 구축 성공!")
+    # 7~14. 신규 8종 국가기술자격증 (2020~2026년 1~3회차)
+    new_specs = [
+        ("7. 반도체설비보전기능사", "semi_equip_craftsman.json", generate_semi_equip_craftsman_sessions),
+        ("8. 설비보전산업기사", "equip_maint_ind_eng.json", generate_equip_maint_ind_eng_sessions),
+        ("9. 설비보전기능사", "equip_maint_craftsman.json", generate_equip_maint_craftsman_sessions),
+        ("10. 공조냉동기계산업기사", "hvac_ind_eng.json", generate_hvac_ind_eng_sessions),
+        ("11. 전기기능사", "elec_craftsman.json", generate_elec_craftsman_sessions),
+        ("12. 산업안전산업기사", "ind_safety_ind_eng.json", generate_ind_safety_ind_eng_sessions),
+        ("13. 위험물기능사", "hazmat_craftsman.json", generate_hazmat_craftsman_sessions),
+        ("14. 가스기능사", "gas_craftsman.json", generate_gas_craftsman_sessions),
+    ]
+    new_total = 0
+    for label, filename, gen_fn in new_specs:
+        qs = gen_fn()
+        with open(OUTPUT_DIR / filename, "w", encoding="utf-8") as f:
+            json.dump(qs, f, ensure_ascii=False, indent=2)
+        new_total += len(qs)
+        print(f"✔ {label}: {len(qs)}문항 완료 ({filename})")
+
+    total_all = len(eip_written) + len(com1) + len(safety) + len(sqld) + len(adsp) + len(practical) + new_total
+    print(f"\n🎉 총 14종 자격증 {total_all:,}문항의 다중 회차 정규 문제 은행 구축 성공!")
 
 if __name__ == "__main__":
     main()

@@ -14,7 +14,8 @@ import {
   Calendar,
   Layers,
   ArrowRight,
-  Infinity
+  Infinity,
+  Wrench
 } from 'lucide-react';
 
 export default function ExamHome({
@@ -36,11 +37,13 @@ export default function ExamHome({
   // 각 자격증별 선택된 과목 상태 (기본 'all' 전체)
   const [selectedSubjects, setSelectedSubjects] = useState({});
 
+  const countByCat = (catId) => exams.filter(e => e.category === catId).length;
   const categories = [
-    { id: 'all', label: '전체 자격증 (6)', icon: Sparkles },
-    { id: 'it', label: 'IT / 개발 (3)', icon: Cpu },
-    { id: 'data', label: '데이터 (2)', icon: Database },
-    { id: 'engineer', label: '기사 / 산업기사 (1)', icon: ShieldCheck }
+    { id: 'all', label: `전체 자격증 (${exams.length})`, icon: Sparkles },
+    { id: 'craftsman', label: `기능사 (${countByCat('craftsman')})`, icon: Wrench },
+    { id: 'engineer', label: `기사 / 산업기사 (${countByCat('engineer')})`, icon: ShieldCheck },
+    { id: 'it', label: `IT / 개발 (${countByCat('it')})`, icon: Cpu },
+    { id: 'data', label: `데이터 (${countByCat('data')})`, icon: Database }
   ];
 
   const availableYears = ['2026', '2025', '2024', '2023', '2022', '2021', '2020'];
@@ -144,7 +147,7 @@ export default function ExamHome({
                       ? 'bg-blue-600 text-white' 
                       : 'bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 group-hover:bg-slate-200 dark:group-hover:bg-white/15'
                   }`}>
-                    0{idx + 1}
+                    {String(idx + 1).padStart(2, '0')}
                   </span>
 
                   {/* 자격증 이름 및 메타 태그 */}

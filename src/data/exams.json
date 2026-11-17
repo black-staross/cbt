@@ -264,5 +264,365 @@
         "points_per_question": 5
       }
     ]
+  },
+  {
+    "id": "semi_equip_craftsman",
+    "name": "반도체설비보전기능사 (필기)",
+    "english_name": "Craftsman Semiconductor Equipment Maintenance",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "craftsman",
+    "category_label": "기능사",
+    "badge_color": "cyan",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 60,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": false,
+    "fail_criteria_description": "총점 60점 이상 (과락 없음)",
+    "description": "반도체 팹(FAB) 진공·공유압·센서·PLC 제어 설비 보전 및 클린룸 안전관리 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 반도체설비보전",
+        "question_count": 30,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 3.33
+      },
+      {
+        "id": 2,
+        "name": "2과목 운영 및 요소기술",
+        "question_count": 30,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 3.33
+      }
+    ]
+  },
+  {
+    "id": "equip_maint_ind_eng",
+    "name": "설비보전산업기사 (필기)",
+    "english_name": "Industrial Engineer Equipment Maintenance",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "engineer",
+    "category_label": "기사/산업기사",
+    "badge_color": "blue",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 90,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": true,
+    "fail_criteria_description": "전 과목 평균 60점 이상 (과목당 40점 미만 과락)",
+    "description": "공유압 및 자동제어, 진동·소음 설비진단, 기계요소 보전 및 용접·안전관리 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 공유압 및 자동제어",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 설비진단 및 관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 기계보전·용접 및 안전",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      }
+    ]
+  },
+  {
+    "id": "equip_maint_craftsman",
+    "name": "설비보전기능사 (필기)",
+    "english_name": "Craftsman Equipment Maintenance",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "craftsman",
+    "category_label": "기능사",
+    "badge_color": "sky",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 60,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": false,
+    "fail_criteria_description": "총점 60점 이상 (과락 없음)",
+    "description": "기계구동장치, 공유압장치, 전기전자장치 및 용접·현장 안전관리 실무 이론 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 기계구동장치",
+        "question_count": 15,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 6.67
+      },
+      {
+        "id": 2,
+        "name": "2과목 공유압장치",
+        "question_count": 15,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 6.67
+      },
+      {
+        "id": 3,
+        "name": "3과목 전기전자장치",
+        "question_count": 15,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 6.67
+      },
+      {
+        "id": 4,
+        "name": "4과목 용접 및 안전관리",
+        "question_count": 15,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 6.67
+      }
+    ]
+  },
+  {
+    "id": "hvac_ind_eng",
+    "name": "공조냉동기계산업기사 (필기)",
+    "english_name": "Industrial Engineer Air-Conditioning & Refrigerating Machinery",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "engineer",
+    "category_label": "기사/산업기사",
+    "badge_color": "indigo",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 90,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": true,
+    "fail_criteria_description": "전 과목 평균 60점 이상 (과목당 40점 미만 과락)",
+    "description": "습공기선도·부하계산 공기조화, 냉동사이클·p-h선도, 배관·자동제어 설비 운영 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 공기조화 설비",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 냉동냉장 설비",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 공조냉동 설치·운영",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      }
+    ]
+  },
+  {
+    "id": "elec_craftsman",
+    "name": "전기기능사 (필기)",
+    "english_name": "Craftsman Electrician",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "craftsman",
+    "category_label": "기능사",
+    "badge_color": "amber",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 60,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": false,
+    "fail_criteria_description": "총점 60점 이상 (과락 없음)",
+    "description": "직류·교류 회로 전기이론, 변압기·전동기 전기기기 및 KEC 한국전기설비규정 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 전기이론",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 전기기기",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 전기설비",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      }
+    ]
+  },
+  {
+    "id": "ind_safety_ind_eng",
+    "name": "산업안전산업기사 (필기)",
+    "english_name": "Industrial Engineer Industrial Safety",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "engineer",
+    "category_label": "기사/산업기사",
+    "badge_color": "orange",
+    "question_type": "multiple_choice",
+    "question_count": 100,
+    "time_limit": 150,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": true,
+    "fail_criteria_description": "전 과목 평균 60점 이상 (과목당 40점 미만 과락)",
+    "description": "재해예방·안전보건교육, 위험성평가·인간공학, 기계·전기·화학·건설 안전관리 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 산업재해 예방 및 안전보건교육",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 인간공학 및 위험성 평가·관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 기계·기구 및 설비 안전 관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 4,
+        "name": "4과목 전기 및 화학설비 안전 관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      },
+      {
+        "id": 5,
+        "name": "5과목 건설공사 안전 관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 40,
+        "points_per_question": 5
+      }
+    ]
+  },
+  {
+    "id": "hazmat_craftsman",
+    "name": "위험물기능사 (필기)",
+    "english_name": "Craftsman Hazardous Materials",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "craftsman",
+    "category_label": "기능사",
+    "badge_color": "rose",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 60,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": false,
+    "fail_criteria_description": "총점 60점 이상 (과락 없음)",
+    "description": "연소·소화이론, 제1~6류 위험물 화학적 성질 및 위험물안전관리법령 제조소 기준 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 화재예방과 소화방법",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 위험물의 화학적 성질 및 취급",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 위험물안전관리법령 및 제조소 기준",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      }
+    ]
+  },
+  {
+    "id": "gas_craftsman",
+    "name": "가스기능사 (필기)",
+    "english_name": "Craftsman Gas",
+    "issuer": "한국산업인력공단 (Q-Net)",
+    "category": "craftsman",
+    "category_label": "기능사",
+    "badge_color": "emerald",
+    "question_type": "multiple_choice",
+    "question_count": 60,
+    "time_limit": 60,
+    "total_score": 100,
+    "pass_score": 60,
+    "has_fail_criteria": false,
+    "fail_criteria_description": "총점 60점 이상 (과락 없음)",
+    "description": "고압가스안전관리법·용기안전, 압축기·밸브·계측기기 및 기체법칙·가스특성 검정",
+    "subjects": [
+      {
+        "id": 1,
+        "name": "1과목 가스안전관리",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 2,
+        "name": "2과목 가스장치 및 기기",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      },
+      {
+        "id": 3,
+        "name": "3과목 가스일반",
+        "question_count": 20,
+        "max_score": 100,
+        "fail_score": 0,
+        "points_per_question": 5
+      }
+    ]
   }
 ]

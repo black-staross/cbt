@@ -8,13 +8,21 @@ import ResultModal from './components/ResultModal';
 import SubjectTabBar from './components/SubjectTabBar';
 import { BookOpen } from 'lucide-react';
 
-// 6종 문제 데이터 정적 import (2020~2026년 다중 회차 대규모 문제 은행)
+// 14종 문제 데이터 정적 import (2020~2026년 다중 회차 대규모 문제 은행)
 import sqldQuestions from './data/questions/sqld.json';
 import adspQuestions from './data/questions/adsp.json';
 import eipWrittenQuestions from './data/questions/eip_written.json';
 import com1WrittenQuestions from './data/questions/com1_written.json';
 import indSafetyQuestions from './data/questions/ind_safety_written.json';
 import eipPracticalQuestions from './data/questions/eip_practical.json';
+import semiEquipCraftsmanQuestions from './data/questions/semi_equip_craftsman.json';
+import equipMaintIndEngQuestions from './data/questions/equip_maint_ind_eng.json';
+import equipMaintCraftsmanQuestions from './data/questions/equip_maint_craftsman.json';
+import hvacIndEngQuestions from './data/questions/hvac_ind_eng.json';
+import elecCraftsmanQuestions from './data/questions/elec_craftsman.json';
+import indSafetyIndEngQuestions from './data/questions/ind_safety_ind_eng.json';
+import hazmatCraftsmanQuestions from './data/questions/hazmat_craftsman.json';
+import gasCraftsmanQuestions from './data/questions/gas_craftsman.json';
 
 const QUESTIONS_MAP = {
   sqld: sqldQuestions,
@@ -23,7 +31,15 @@ const QUESTIONS_MAP = {
   com1_written: com1WrittenQuestions,
   ind_safety_written: indSafetyQuestions,
   safety: indSafetyQuestions,
-  eip_practical: eipPracticalQuestions
+  eip_practical: eipPracticalQuestions,
+  semi_equip_craftsman: semiEquipCraftsmanQuestions,
+  equip_maint_ind_eng: equipMaintIndEngQuestions,
+  equip_maint_craftsman: equipMaintCraftsmanQuestions,
+  hvac_ind_eng: hvacIndEngQuestions,
+  elec_craftsman: elecCraftsmanQuestions,
+  ind_safety_ind_eng: indSafetyIndEngQuestions,
+  hazmat_craftsman: hazmatCraftsmanQuestions,
+  gas_craftsman: gasCraftsmanQuestions
 };
 
 export default function App() {
@@ -167,6 +183,17 @@ export default function App() {
           const subA = Number(a.subject_id) || 0;
           const subB = Number(b.subject_id) || 0;
           return subA - subB;
+        });
+      }
+
+      // 무제한 연습 모드에서는 동일 지문 중복 출제 방지 (회차 간 중복 문항 제거)
+      if (mode === 'unlimited') {
+        const seenQuestions = new Set();
+        targetQuestions = targetQuestions.filter(q => {
+          const key = (q.question || '').trim();
+          if (!key || seenQuestions.has(key)) return false;
+          seenQuestions.add(key);
+          return true;
         });
       }
 
